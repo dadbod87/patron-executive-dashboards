@@ -1,0 +1,5 @@
+# This is an internal-facing executive dashboard. Discourage search-engine
+# indexing. Note: robots.txt asks compliant crawlers not to index; it does not
+# restrict access. The site is publicly reachable by URL.
+User-agent: *
+Disallow: /
