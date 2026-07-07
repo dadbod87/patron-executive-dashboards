@@ -363,22 +363,24 @@ const DATA = {
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
     asOf:"2026-07-07",
     phase:"POCC · Sprint 1 & 1.5 COMPLETE → Validation & Real-World Usage",
-    version:"v1.5 (2026-07-07)",
-    currentFocus:"Sprint 1 & 1.5 complete — POCC is now a working, polished executive-operations app. Validate it on real data and gather John/Chance/Riley feedback."
+    version:"v1.6 (2026-07-07)",
+    currentFocus:"Next major POCC feature: the Reserve Funds Module (monthly reserve replenishment). Jess & Chance intake 2026-07-08. Continue validating POCC on real data."
   },
   cards:[
     {num:"✅", label:"Sprint 1 & Sprint 1.5", sub:"Core Operations Platform + Executive Experience Polish — COMPLETE"},
     {num:"Validation", label:"Current phase", sub:"Real-world usage; validated improvements over new features"},
-    {num:"Sprint 2", label:"Next: Projects Module", sub:"Planned on finalized architecture; not started"},
+    {num:"Reserve Funds", label:"Next major POCC feature", sub:"Monthly reserve replenishment; Jess/Chance intake 2026-07-08"},
     {num:"July 24", label:"Riley handoff deadline", sub:"Time-sensitive knowledge transfer"}
   ],
-  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer, and as of 2026-07-07 its Google Sheets workbook has completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish): an Executive-Attention-Management Dashboard with a Today's Work Queue, an Operational Health Engine, an Executive Brief, and standardized operational alerts (the W-9 Payment Hold is the first validated one). The product has shifted from feature invention into refinement, and now enters Validation & Real-World Usage. Value so far is real but qualitative — dollar and hour savings are not claimed until baselines exist. Full detail is in the tabs below.",
+  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer, and as of 2026-07-07 its Google Sheets workbook has completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish): an Executive-Attention-Management Dashboard with a Today's Work Queue, an Operational Health Engine, an Executive Brief, and standardized operational alerts (the W-9 Payment Hold is the first validated one). The product has shifted from feature invention into refinement and entered Validation & Real-World Usage. This dashboard itself became an evidence-based reporting system (the Work Impact Baseline Protocol + four honest value categories) and is now published to a permanent public URL, updated automatically at each daily closeout. The next major POCC feature is the Reserve Funds Module — a lightweight, auditable monthly reserve-replenishment workflow (Jess & Chance intake 2026-07-08). Value so far is real but qualitative — dollar and hour savings are not claimed until baselines exist. Full detail is in the tabs below.",
   today:[
     "Completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish).",
     "POCC workbook (Gemini-built): Operational Health Engine, Today's Work Queue, Executive Brief, a functional Dashboard Control Panel, and the validated W-9 Payment Hold alert.",
     "Redesigned Bank Transactions as financial events; simplified Work Orders; unified the workspace visual language; added time-aware default views.",
     "Adopted a permanent POCC UI/UX standard and recorded the product's shift from feature invention into product refinement.",
-    "Finalized the data model: Projects becomes a future module (Sprint 2); budget rollups deferred. Added Backup Strategy and Product Debt governance."
+    "Turned this dashboard into an evidence-based reporting system: the Work Impact Baseline Protocol + four honest value categories (Verified · Estimated · Risk Avoided · Strategic).",
+    "Stood up the executive publishing pipeline — the dashboard is now public on GitHub Pages (allowlist + safety scan), auto-published at each daily closeout.",
+    "Designed the Reserve Funds Module (next major POCC feature) — the monthly reserve-replenishment workflow; Jess & Chance intake set for 2026-07-08."
   ],
   priority:[
     "Verify the workbook after today's UI polish.",
@@ -412,7 +414,10 @@ const DATA = {
     {name:"POCC subsystem catalog", type:"Architecture", audience:"Atlas", purpose:"Name and organize Atlas's primary Application layer and its subsystems", status:"complete", label:"fact"},
     {name:"POCC Google Sheets workbook (Sprint 1 & 1.5)", type:"Application", audience:"John / Leadership", purpose:"Working executive-operations app: Dashboard (attention management), Today's Work Queue, Operational Health Engine, Executive Brief, Work Orders, Bank Transactions, operational alerts", status:"complete", label:"report"},
     {name:"POCC UI/UX Guidelines", type:"Architecture", audience:"Atlas / POCC", purpose:"Permanent UX standard every future enhancement is evaluated against", status:"complete", label:"fact"},
-    {name:"Operational Alerts Framework", type:"Architecture", audience:"Atlas / POCC", purpose:"Reusable standard to surface operational blockers (W-9 hold is the first validated alert)", status:"complete", label:"fact"}
+    {name:"Operational Alerts Framework", type:"Architecture", audience:"Atlas / POCC", purpose:"Reusable standard to surface operational blockers (W-9 hold is the first validated alert)", status:"complete", label:"fact"},
+    {name:"Work Impact Baseline Protocol", type:"Methodology", audience:"Atlas / Leadership", purpose:"Official measurement methodology: how workflow time becomes defensible, evidence-labeled impact", status:"complete", label:"fact"},
+    {name:"Executive publishing pipeline (public Pages)", type:"Infrastructure", audience:"Leadership", purpose:"Two-repo, allowlisted, safety-scanned publish of the dashboard to a permanent public URL; automatic in the daily closeout", status:"complete", label:"fact"},
+    {name:"Reserve Funds Module — design", type:"Architecture", audience:"POCC / Jess", purpose:"Next major POCC feature: auditable monthly reserve replenishment (Bank Transactions = source of truth; derived Outstanding; append-only log)", status:"progress", label:"report"}
   ],
   discoveries:[
     {workflow:"John's daily operations", label:"report", detail:"John's follow-up work is largely reactive; his day can swing from little to do to ~60 vendor/status calls. He finds Zoho confusing and asks Riley for remaining budget before proceeding.", implication:"A simple daily view of budget, work, and follow-ups could create value quickly."},
@@ -483,7 +488,10 @@ const DATA = {
     {name:"Dashboard = Executive Attention Management; Operational Alerts Framework; W-9 Payment Hold validated", date:"2026-07-07", mile:true},
     {name:"Permanent POCC UI/UX standard adopted; product maturity shift (features → refinement)", date:"2026-07-07", mile:true},
     {name:"Sprint 1 (Core Operations Platform) COMPLETE", date:"2026-07-07", mile:true},
-    {name:"Sprint 1.5 (Executive Experience Polish) COMPLETE → Validation & Real-World Usage", date:"2026-07-07", mile:true}
+    {name:"Sprint 1.5 (Executive Experience Polish) COMPLETE → Validation & Real-World Usage", date:"2026-07-07", mile:true},
+    {name:"Work Impact Baseline Protocol adopted; dashboard redesigned into an evidence-based reporting system (four value categories)", date:"2026-07-07", mile:true},
+    {name:"Executive publishing pipeline LIVE — dashboard public on GitHub Pages (allowlist + safety scan); publishing folded into the Daily Closeout", date:"2026-07-07", mile:true},
+    {name:"Reserve Funds Module designed — next major POCC feature (monthly reserve replenishment); Jess/Chance intake 2026-07-08", date:"2026-07-07", mile:true}
   ],
   questions:[
     "Automatic Budget Left: how is it computed given transaction-level budget rollups are deferred to the Projects module?",
@@ -495,12 +503,12 @@ const DATA = {
     "Where are vendor W-9s stored today, and who confirms receipt before a vendor is paid?"
   ],
   next:[
-    "Verify the workbook after today's UI polish.",
-    "Use POCC with real operational data.",
-    "Collect stakeholder feedback (John, Chance, Riley).",
-    "Validate workflows before introducing new functionality.",
-    "Continue capturing Riley's workflow before July 24; keep Sprint 2 (Projects Module) planned, not started.",
-    "Keep this dashboard current as new deliverables and discoveries land."
+    "Run the Jess & Chance Reserve Funds intake (2026-07-08); resolve the five policy questions, then Gemini builds the module.",
+    "Continue using POCC with real operational data; collect John/Chance/Riley feedback.",
+    "Capture the first workflow baselines (before/after durations) per the Baseline Protocol.",
+    "Validate workflows before introducing new functionality; keep POCC simple/intuitive.",
+    "Continue capturing Riley's workflow before July 24.",
+    "Keep this dashboard current — it auto-publishes to the public URL at each closeout."
   ]
 };
 
