@@ -361,31 +361,31 @@ const DATA = {
     sub:"Making behind-the-scenes operational work visible — evidence-based, no exaggeration.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-07-07",
-    phase:"POCC · Sprint 1 & 1.5 COMPLETE → Validation & Real-World Usage",
-    version:"v1.6 (2026-07-07)",
-    currentFocus:"Next major POCC feature: the Reserve Funds Module (monthly reserve replenishment). Jess & Chance intake 2026-07-08. Continue validating POCC on real data."
+    asOf:"2026-07-08",
+    phase:"POCC · Validation & Real-World Usage (MVP build week)",
+    version:"v1.7 (2026-07-08)",
+    currentFocus:"Finish the POCC MVP this week; begin production validation Monday. Immediate priority: the executive Portfolio Improvement Report for the investor meeting. Tomorrow's build: Projects → Reserve Funds → Admin Panel."
   },
   cards:[
     {num:"✅", label:"Sprint 1 & Sprint 1.5", sub:"Core Operations Platform + Executive Experience Polish — COMPLETE"},
-    {num:"Validation", label:"Current phase", sub:"Real-world usage; validated improvements over new features"},
-    {num:"Reserve Funds", label:"Next major POCC feature", sub:"Monthly reserve replenishment; Jess/Chance intake 2026-07-08"},
+    {num:"MVP week", label:"Current phase", sub:"Finish the POCC MVP; production validation begins Monday"},
+    {num:"Report v1", label:"Portfolio Improvement Report", sub:"Executive package complete & stable; reviewed very positively"},
     {num:"July 24", label:"Riley handoff deadline", sub:"Time-sensitive knowledge transfer"}
   ],
-  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer, and as of 2026-07-07 its Google Sheets workbook has completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish): an Executive-Attention-Management Dashboard with a Today's Work Queue, an Operational Health Engine, an Executive Brief, and standardized operational alerts (the W-9 Payment Hold is the first validated one). The product has shifted from feature invention into refinement and entered Validation & Real-World Usage. This dashboard itself became an evidence-based reporting system (the Work Impact Baseline Protocol + four honest value categories) and is now published to a permanent public URL, updated automatically at each daily closeout. The next major POCC feature is the Reserve Funds Module — a lightweight, auditable monthly reserve-replenishment workflow (Jess & Chance intake 2026-07-08). Value so far is real but qualitative — dollar and hour savings are not claimed until baselines exist. Full detail is in the tabs below.",
+  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer; its Google Sheets workbook has completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish) and is now in an MVP build week within Validation & Real-World Usage. On 2026-07-08 — an architecture day — POCC gained an Admin Console v1 (a workbook maintenance console whose Health Check already caught and fixed a real data-integrity issue), an initialized Projects/Budget module, and a finalized financial source-of-truth model (Projects own budgets; Bank Transactions own actual spend; Work Orders operational; Dashboard reporting), which resolves the earlier budget-rollup question; Funding Source became a first-class field. Separately, the Portfolio Improvement Report — the polished executive reporting artifact for leadership and partners, built on a single authoritative KPI source — reached Version 1 (stable), and the COO reviewed both products very positively. A future Executive Report Generator (auto-produce leadership reports from POCC data) was approved as a gated Admin Console capability. Value so far is real but qualitative — dollar and hour savings are not claimed until baselines exist. Full detail is in the tabs below.",
   today:[
-    "Completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish).",
-    "POCC workbook (Gemini-built): Operational Health Engine, Today's Work Queue, Executive Brief, a functional Dashboard Control Panel, and the validated W-9 Payment Hold alert.",
-    "Redesigned Bank Transactions as financial events; simplified Work Orders; unified the workspace visual language; added time-aware default views.",
-    "Adopted a permanent POCC UI/UX standard and recorded the product's shift from feature invention into product refinement.",
-    "Turned this dashboard into an evidence-based reporting system: the Work Impact Baseline Protocol + four honest value categories (Verified · Estimated · Risk Avoided · Strategic).",
-    "Stood up the executive publishing pipeline — the dashboard is now public on GitHub Pages (allowlist + safety scan), auto-published at each daily closeout.",
-    "Designed the Reserve Funds Module (next major POCC feature) — the monthly reserve-replenishment workflow; Jess & Chance intake set for 2026-07-08."
+    "POCC Admin Console v1 (Gemini-built) — the workbook maintenance console: protected Admin tab, POCC Admin menu, Generate/Clear Test Data, and a Health Check that caught and fixed a real data-integrity issue.",
+    "Initialized the POCC Projects/Budget module — project budgets separate from Work Orders; spend rolls up from Bank Transactions.",
+    "Finalized the POCC financial source-of-truth model (Projects = budget, Bank Transactions = financial, Work Orders = operational, Dashboard = reporting) — resolving the budget-rollup question; made Funding Source a first-class field.",
+    "Dashboard usability: grouped filter sections, an active-filter summary, Today's Work Queue expanded to Top 15, and multi-alert Action Required logic.",
+    "Portfolio Improvement Report reached Version 1 (complete & stable) — a polished executive package on a single authoritative KPI source, validated against reconciled historicals.",
+    "Approved a future Executive Report Generator (Admin Console) to auto-produce partner-ready reports — gated behind stable Projects, Reserve Funds, and Admin tooling.",
+    "Stakeholder validation: the COO reviewed both the operational system and the executive report very positively (qualitative; no savings claimed)."
   ],
   priority:[
-    "Verify the workbook after today's UI polish.",
-    "Use POCC with real operational data and gather feedback from John, Chance, and Riley.",
-    "Let validated workflow improvements — not speculative features — drive development. Keep advancing the Riley handoff before July 24."
+    "Deliver the executive Portfolio Improvement Report for the investor meeting, then resume POCC.",
+    "Tomorrow: build the Projects Module, then Reserve Funds (pending requirements confirmation), then the Admin Panel.",
+    "Finish the POCC MVP this week; begin production validation Monday (record friction rather than expanding scope). Keep advancing the Riley handoff before July 24."
   ],
   week:[
     "POCC named and documented as Atlas's primary Application layer; foundation merged to main.",
@@ -491,22 +491,26 @@ const DATA = {
     {name:"Sprint 1.5 (Executive Experience Polish) COMPLETE → Validation & Real-World Usage", date:"2026-07-07", mile:true},
     {name:"Work Impact Baseline Protocol adopted; dashboard redesigned into an evidence-based reporting system (four value categories)", date:"2026-07-07", mile:true},
     {name:"Executive publishing pipeline LIVE — dashboard public on GitHub Pages (allowlist + safety scan); publishing folded into the Daily Closeout", date:"2026-07-07", mile:true},
-    {name:"Reserve Funds Module designed — next major POCC feature (monthly reserve replenishment); Jess/Chance intake 2026-07-08", date:"2026-07-07", mile:true}
+    {name:"Reserve Funds Module designed — next major POCC feature (monthly reserve replenishment); Jess/Chance intake 2026-07-08", date:"2026-07-07", mile:true},
+    {name:"POCC Admin Console v1 — workbook maintenance console; Health Check caught & fixed a real data-integrity issue", date:"2026-07-08", mile:true},
+    {name:"POCC Projects/Budget module initialized; financial source-of-truth architecture finalized; Funding Source made a first-class field", date:"2026-07-08", mile:true},
+    {name:"Portfolio Improvement Report reached v1 (complete & stable); COO reviewed both products very positively", date:"2026-07-08", mile:true},
+    {name:"Future Executive Report Generator approved (gated Admin Console capability)", date:"2026-07-08", mile:true}
   ],
   questions:[
-    "Automatic Budget Left: how is it computed given transaction-level budget rollups are deferred to the Projects module?",
+    "Reserve Funds policy: confirm live-balance vs. reimbursement-only and fixed-target vs. exactly-spent top-off before building (requirements confirmation pending).",
     "Does an 'Unsure / Needs Review' state remain alongside the two Expense Type values (Project / Non-Project)?",
     "Does every Property map to exactly one Entity (so a transaction's Entity can auto-derive)?",
     "Which operational alerts are MVP vs future (Missing Invoice / Receipt / Insurance need source fields + owners)?",
-    "What business rules should govern Project ↔ Work Order ↔ Bank Transaction when the Projects module is designed?",
+    "Portfolio Improvement Report cleanup: confirm every KPI references the single authoritative source; remove obsolete metrics; final PASS/FAIL executive certification.",
     "Which of Riley's responsibilities are highest-risk to lose before July 24?",
     "Where are vendor W-9s stored today, and who confirms receipt before a vendor is paid?"
   ],
   next:[
-    "Run the Jess & Chance Reserve Funds intake (2026-07-08); resolve the five policy questions, then Gemini builds the module.",
-    "Continue using POCC with real operational data; collect John/Chance/Riley feedback.",
+    "Deliver the executive Portfolio Improvement Report for the investor meeting, then resume POCC.",
+    "Tomorrow: build the Projects Module, then Reserve Funds (pending requirements confirmation), then the Admin Panel.",
+    "Finish the POCC MVP this week; begin production validation Monday (import historical data; enter live operational records; record friction, don't expand scope).",
     "Capture the first workflow baselines (before/after durations) per the Baseline Protocol.",
-    "Validate workflows before introducing new functionality; keep POCC simple/intuitive.",
     "Continue capturing Riley's workflow before July 24.",
     "Keep this dashboard current — it auto-publishes to the public URL at each closeout."
   ]
