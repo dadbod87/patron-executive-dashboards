@@ -361,31 +361,31 @@ const DATA = {
     sub:"Making behind-the-scenes operational work visible — evidence-based, no exaggeration.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-07-08",
-    phase:"POCC · Validation & Real-World Usage (MVP build week)",
-    version:"v1.7 (2026-07-08)",
-    currentFocus:"Finish the POCC MVP this week; begin production validation Monday. Immediate priority: the executive Portfolio Improvement Report for the investor meeting. Tomorrow's build: Projects → Reserve Funds → Admin Panel."
+    asOf:"2026-07-09",
+    phase:"POCC · MVP feature-complete → Production Hardening",
+    version:"v1.8 (2026-07-09)",
+    currentFocus:"POCC MVP is feature-complete and entering Production Hardening: a Data Integrity Audit (protect the workbook so users edit only true input fields), then Friday stress testing, then the Riley transition — shadow Riley, transition operations, and capture her institutional knowledge before she departs July 24 — then live production. Feature freeze during the transition."
   },
   cards:[
-    {num:"✅", label:"Sprint 1 & Sprint 1.5", sub:"Core Operations Platform + Executive Experience Polish — COMPLETE"},
-    {num:"MVP week", label:"Current phase", sub:"Finish the POCC MVP; production validation begins Monday"},
-    {num:"Report v1", label:"Portfolio Improvement Report", sub:"Executive package complete & stable; reviewed very positively"},
-    {num:"July 24", label:"Riley handoff deadline", sub:"Time-sensitive knowledge transfer"}
+    {num:"#001", label:"Atlas Milestone", sub:"POCC MVP feature-complete → Production Hardening / Production Validation"},
+    {num:"Platform", label:"Current phase", sub:"POCC is now an operational finance platform; Reserve Funds = its first finance subsystem"},
+    {num:"Hardening", label:"Next steps", sub:"Data Integrity Audit → Fri stress testing → Riley transition → live"},
+    {num:"July 24", label:"Riley transition", sub:"Shadow Riley + capture institutional knowledge before departure"}
   ],
-  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer; its Google Sheets workbook has completed Sprint 1 (Core Operations Platform) and Sprint 1.5 (Executive Experience Polish) and is now in an MVP build week within Validation & Real-World Usage. On 2026-07-08 — an architecture day — POCC gained an Admin Console v1 (a workbook maintenance console whose Health Check already caught and fixed a real data-integrity issue), an initialized Projects/Budget module, and a finalized financial source-of-truth model (Projects own budgets; Bank Transactions own actual spend; Work Orders operational; Dashboard reporting), which resolves the earlier budget-rollup question; Funding Source became a first-class field. Separately, the Portfolio Improvement Report — the polished executive reporting artifact for leadership and partners, built on a single authoritative KPI source — reached Version 1 (stable), and the COO reviewed both products very positively. A future Executive Report Generator (auto-produce leadership reports from POCC data) was approved as a gated Admin Console capability. Value so far is real but qualitative — dollar and hour savings are not claimed until baselines exist. Full detail is in the tabs below.",
+  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer. As of 2026-07-09 its MVP is feature-complete and has entered Production Hardening (Atlas Milestone #001): the core operational modules — Executive Dashboard, Work Orders, Bank Transactions, Projects, Reserve Funds (with a visible reimbursement ledger), Vendors, Properties, entity mapping, executive alerts, and dashboard KPIs — are in place, and POCC has grown into an operational finance platform. Today also established POCC's durable product foundation: a Constitution, a documentation hierarchy, engineering and implementation standards, expanded design principles, a Dashboard Responsibility Model (the dashboard shows live state; reports become a separate module), and an executive dashboard design language. A leadership meeting with the COO and Operations lead scheduled the production transition, prioritized capturing the departing team member's institutional knowledge during her final week, and shifted the discussion toward expanding Nick's responsibilities. Remaining work is protection, stress testing, and the operational transition — under a feature freeze — before real daily use. Value so far is real but qualitative; dollar and hour savings are not claimed until baselines exist. Full detail is in the tabs below.",
   today:[
-    "POCC Admin Console v1 (Gemini-built) — the workbook maintenance console: protected Admin tab, POCC Admin menu, Generate/Clear Test Data, and a Health Check that caught and fixed a real data-integrity issue.",
-    "Initialized the POCC Projects/Budget module — project budgets separate from Work Orders; spend rolls up from Bank Transactions.",
-    "Finalized the POCC financial source-of-truth model (Projects = budget, Bank Transactions = financial, Work Orders = operational, Dashboard = reporting) — resolving the budget-rollup question; made Funding Source a first-class field.",
-    "Dashboard usability: grouped filter sections, an active-filter summary, Today's Work Queue expanded to Top 15, and multi-alert Action Required logic.",
-    "Portfolio Improvement Report reached Version 1 (complete & stable) — a polished executive package on a single authoritative KPI source, validated against reconciled historicals.",
-    "Approved a future Executive Report Generator (Admin Console) to auto-produce partner-ready reports — gated behind stable Projects, Reserve Funds, and Admin tooling.",
-    "Stakeholder validation: the COO reviewed both the operational system and the executive report very positively (qualitative; no savings claimed)."
+    "Established POCC's product foundation: a Constitution and a documentation hierarchy (Constitution → Design Principles → Engineering Standards → Implementation Standards → Architecture → Functional Specs → Implementation).",
+    "Created engineering and implementation standards (validate before automating; extend don't replace; dynamic headers; Apps Script source management; sheet/field protection) and expanded the design principles.",
+    "Completed the Reserve Funds subsystem architecture — POCC's first operational finance subsystem: a balance dashboard, a visible reimbursement ledger, and a Dashboard Reserve Fund Health section, all derived from Bank Transactions.",
+    "Adopted the Dashboard Responsibility Model (the dashboard shows live state; reporting becomes a separate module) and an Executive Dashboard Design Language.",
+    "Leadership meeting scheduled the production transition and made capturing the departing team member's institutional knowledge a strategic priority for her final week; recorded two future systems as modular and separate from POCC.",
+    "Adopted a Production Hardening & Data Integrity Audit, a permanent Atlas Milestones log (Milestone #001 = POCC MVP), and an MVP feature freeze for the transition.",
+    "Leadership confidence is high — discussion has shifted toward expanding Nick's responsibilities (qualitative; no savings claimed)."
   ],
   priority:[
-    "Deliver the executive Portfolio Improvement Report for the investor meeting, then resume POCC.",
-    "Tomorrow: build the Projects Module, then Reserve Funds (pending requirements confirmation), then the Admin Panel.",
-    "Finish the POCC MVP this week; begin production validation Monday (record friction rather than expanding scope). Keep advancing the Riley handoff before July 24."
+    "Complete Reserve Funds and run the Data Integrity Audit (protect formulas, helpers, and system sheets so users edit only true input fields).",
+    "Friday: stress-test formulas, filters, dropdowns, protections, reserve calculations, project rollups, dashboard KPIs, and realistic workflows to decide MVP readiness for real data.",
+    "Next week: shadow the departing team member, transition operations, and capture institutional knowledge; hold the MVP feature freeze during the transition."
   ],
   week:[
     "POCC named and documented as Atlas's primary Application layer; foundation merged to main.",
@@ -495,7 +495,13 @@ const DATA = {
     {name:"POCC Admin Console v1 — workbook maintenance console; Health Check caught & fixed a real data-integrity issue", date:"2026-07-08", mile:true},
     {name:"POCC Projects/Budget module initialized; financial source-of-truth architecture finalized; Funding Source made a first-class field", date:"2026-07-08", mile:true},
     {name:"Portfolio Improvement Report reached v1 (complete & stable); COO reviewed both products very positively", date:"2026-07-08", mile:true},
-    {name:"Future Executive Report Generator approved (gated Admin Console capability)", date:"2026-07-08", mile:true}
+    {name:"Future Executive Report Generator approved (gated Admin Console capability)", date:"2026-07-08", mile:true},
+    {name:"Atlas Milestone #001 — POCC MVP feature-complete → Production Hardening; POCC became an operational finance platform", date:"2026-07-09", mile:true},
+    {name:"POCC product foundation established — Constitution, documentation hierarchy, Engineering + Implementation Standards, expanded Design Principles", date:"2026-07-09", mile:true},
+    {name:"Reserve Funds subsystem architecture complete — balance dashboard + visible reimbursement ledger + Dashboard Reserve Fund Health", date:"2026-07-09", mile:true},
+    {name:"Dashboard Responsibility Model (live state vs. Reports) + Reports = independent Atlas module + Executive Dashboard Design Language", date:"2026-07-09", mile:true},
+    {name:"Strategic Direction Update (leadership meeting) — production transition scheduled; institutional-knowledge capture prioritized; Atlas → operating system + institutional knowledge platform", date:"2026-07-09", mile:true},
+    {name:"Production Hardening & Data Integrity Audit + Checkpoint Closeout process + permanent Atlas Milestones log + MVP feature freeze", date:"2026-07-09", mile:true}
   ],
   questions:[
     "Reserve Funds policy: confirm live-balance vs. reimbursement-only and fixed-target vs. exactly-spent top-off before building (requirements confirmation pending).",
@@ -507,11 +513,11 @@ const DATA = {
     "Where are vendor W-9s stored today, and who confirms receipt before a vendor is paid?"
   ],
   next:[
-    "Deliver the executive Portfolio Improvement Report for the investor meeting, then resume POCC.",
-    "Tomorrow: build the Projects Module, then Reserve Funds (pending requirements confirmation), then the Admin Panel.",
-    "Finish the POCC MVP this week; begin production validation Monday (import historical data; enter live operational records; record friction, don't expand scope).",
-    "Capture the first workflow baselines (before/after durations) per the Baseline Protocol.",
-    "Continue capturing Riley's workflow before July 24.",
+    "Complete Reserve Funds and run the Data Integrity Audit — protect formulas, helpers, and system sheets so users edit only true input fields.",
+    "Friday: stress-test formulas, filters, dropdowns, protections, reserve calculations, project rollups, dashboard KPIs, and realistic workflows to decide MVP readiness for real data.",
+    "Next week: shadow the departing team member, transition operations, and capture institutional knowledge; validate POCC on real work.",
+    "Hold the MVP feature freeze during the transition (only fixes, stability, docs, security, usability).",
+    "Capture the first workflow baselines (before/after durations) per the Baseline Protocol once real usage begins.",
     "Keep this dashboard current — it auto-publishes to the public URL at each closeout."
   ]
 };
@@ -579,7 +585,7 @@ const _snap = [
   {num:`${DATA.valueCreated.estimated.length}`, lbl:"Estimated Improvements"},
   {num:`${DATA.valueCreated.riskAvoided.length}`, lbl:"Risks Reduced"},
   {num:`${DATA.valueCreated.strategic.length}`, lbl:"Strategic Initiatives"},
-  {num:"Validation", lbl:"Current Phase"}
+  {num:"Hardening", lbl:"Current Phase"}
 ];
 el("impact-snapshot").innerHTML =
   `<div class="snap-title">Impact Snapshot</div>`+
