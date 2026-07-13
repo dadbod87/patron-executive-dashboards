@@ -89,6 +89,18 @@
     padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
   .lead-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
     padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+  /* Executive Brief — the 60-second read */
+  .brief{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:14px;padding:6px 22px 14px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .brief .brief-title{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+    font-weight:800;padding:14px 0 6px}
+  .brief .brief-row{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .brief .brief-row:last-child{border-bottom:none}
+  .brief .brief-lbl{flex:0 0 148px;font-size:12px;font-weight:800;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:.04em}
+  .brief .brief-val{flex:1;color:var(--ink);font-size:14.5px;line-height:1.5}
+  .brief .brief-row.risk .brief-lbl{color:var(--amber)}
+  @media(max-width:600px){.brief .brief-row{flex-direction:column;gap:3px}.brief .brief-lbl{flex-basis:auto}}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:720px){.grid2{grid-template-columns:1fr}.meta{justify-content:flex-start}}
 
@@ -255,10 +267,8 @@
 
   <!-- OVERVIEW -->
   <section class="panel active" data-tab="overview">
-    <div class="lead-card">
-      <h2 style="margin-bottom:10px">Executive Summary</h2>
-      <p class="lead" id="exec-summary"></p>
-    </div>
+    <!-- Executive Brief — the 60-second read -->
+    <div class="brief" id="exec-brief"></div>
     <div class="grid2">
       <div class="block">
         <h3>Current Priorities</h3>
@@ -278,6 +288,12 @@
         <h3>This Month (July 2026)</h3>
         <ul class="list-check" id="month"></ul>
       </div>
+    </div>
+    <!-- Atlas Project History — background reading; moved below the operational cards -->
+    <div class="lead-card" style="margin-top:8px">
+      <h2 style="margin-bottom:4px">Atlas Project History</h2>
+      <p class="sectlead" style="margin-bottom:10px">Background reading — the full narrative of how Atlas and POCC reached today. The Executive Brief at the top is the current snapshot; this section is the evolution behind it.</p>
+      <p class="lead" id="exec-summary"></p>
     </div>
   </section>
 
@@ -363,16 +379,24 @@ const DATA = {
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
     asOf:"2026-07-13",
     phase:"Atlas · POCC RC1 / Operational Validation (Milestone #005) · Operations Intelligence Platform (#004)",
-    version:"v2.1 (2026-07-13)",
-    currentFocus:"POCC has reached its first Production Candidate (RC1, Milestone #005) and is now in Operational Validation — the business is being run through POCC on real Patron Group data, and real usage now drives product improvements rather than new feature-building. Sprint 1.6 (Production Hardening) is complete and verified. On 2026-07-13, seven usage-driven refinements were implemented and verified — most notably a clarified Financial Ownership Model that makes the dashboard show a single executive financial summary. The immediate priority is capturing Riley's institutional knowledge before she departs on July 24, completing the vendor list and W-9 status, gaining Mercury bank access to monitor live transactions, gathering Reserve Fund balances with Jess and Chance, and finishing entry of active Projects and Work Orders. The Operations Intelligence Platform (Milestone #004) continues to mature in parallel."
+    version:"v2.2 (2026-07-13)",
+    currentFocus:"This week the priority is operating the business through POCC while capturing Riley's institutional knowledge before her departure this Friday (July 17) — completing the Vendor database and W-9 status, obtaining Mercury access, establishing Reserve Fund balances, and finishing operational data entry."
+  },
+  // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
+  execBrief:{
+    currentState:"POCC is live at RC1 (Production Candidate) and Atlas is in Operational Validation — leadership is now running The Patron Group through POCC on real data, with improvements emerging from real use rather than speculative building.",
+    whatChanged:"Seven usage-driven refinements landed this session, led by a clarified Financial Ownership Model: the executive dashboard now shows one financial number (Project Financial Health) instead of two overlapping ones.",
+    whyItMatters:"Leadership gets a single, trustworthy financial view with no double-counting, plus faster status recognition and cleaner, error-resistant data entry — the system now improves from real operations, not guesswork.",
+    currentRisks:"Riley departs this Friday, July 17. Capturing her institutional knowledge (vendors, W-9s, Mercury workflow, reserve funds, routines) before then is the week's highest risk to manage.",
+    tomorrowFocus:"Capture Riley's knowledge, complete the Vendor database and W-9 status, obtain Mercury access, establish Reserve Fund balances with Jess/Chance, and finish entering active operational data."
   },
   cards:[
     {num:"RC1 · #005", label:"Production Candidate", sub:"POCC is a production-ready operational platform; Sprint 1.6 hardening complete and verified"},
     {num:"Operational Validation", label:"Current phase", sub:"Running the business through POCC on real data — improvements now emerge from real use, not new feature-building"},
     {num:"7 refinements", label:"Verified 2026-07-13", sub:"Single financial source · color-coded statuses · smarter work queue · property-aware Project selection"},
-    {num:"July 24", label:"Riley transition", sub:"Capture institutional knowledge before departure — the week's top priority"}
+    {num:"July 17", label:"Riley transition", sub:"Capture institutional knowledge before departure — the week's top priority"}
   ],
-  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer. As of 2026-07-09 its MVP is feature-complete and has entered Production Hardening (Atlas Milestone #001): the core operational modules — Executive Dashboard, Work Orders, Bank Transactions, Projects, Reserve Funds (with a visible reimbursement ledger), Vendors, Properties, entity mapping, executive alerts, and dashboard KPIs — are in place, and POCC has grown into an operational finance platform. Today also established POCC's durable product foundation: a Constitution, a documentation hierarchy, engineering and implementation standards, expanded design principles, a Dashboard Responsibility Model (the dashboard shows live state; reports become a separate module), and an executive dashboard design language. A leadership meeting with the COO and Operations lead scheduled the production transition, prioritized capturing the departing team member's institutional knowledge during her final week, and shifted the discussion toward expanding Nick's responsibilities. As of 2026-07-10, POCC has entered a Validation & Quality Assurance stage — no longer primarily building features; the priority is proving existing functionality is reliable before more modules ship, using a new 10-phase regression checklist run before any module is production-ready and after any large data import. The first stress-test session already caught and resolved a real reliability issue before production. As of 2026-07-10, Atlas transitioned from a reporting system into an Operations Intelligence Platform (Milestone #004): it completed a governed Reporting Platform (Operational Health Engine, Reporting Engine, KPI Engine, Executive Dashboard, Executive Portfolio Report, and Report Generator v1 — all validated) and stood up three governed intelligence engines — Property, Entity, and Vendor Intelligence (v1.0) — under a shared Operations Intelligence Framework. Operational systems now feed governed intelligence layers that can power multiple products, so dashboards, reports, and future interfaces share one governed definition. Report generation is the first capability with a clear before-and-after labor baseline: producing a comparable six-month operational report previously took Nick about 16 hours of manual reconciliation, versus seconds-to-minutes with the governed platform — an initial estimated direct-labor saving of about $480 per comparable report at $30/hour (an estimate from one observed baseline, not cumulative realized savings). Additional value (reduced leadership interruption, fewer reconciliation errors, faster decisions, stronger operational visibility, less dependence on individual memory) is tracked separately, without dollar values, until evidence exists. As of 2026-07-13, POCC reached its first Production Candidate (RC1, Milestone #005): Sprint 1.6 production hardening is complete and verified, and POCC has entered Operational Validation — the business is now run through POCC on real Patron Group data, with improvements emerging from real use rather than speculative building. Seven refinements were implemented and verified that day. The most significant clarified the Financial Ownership Model: the dashboard now shows a single executive financial summary (Project Financial Health) because the duplicate Work Order Financial Health section — which restated the same project budgets and risked double-counting — was removed; Projects are now the single financial source, while Work Orders remain operational and Bank Transactions remain accounting. Project selection on Work Orders and Bank Transactions became property-aware (faster, error-resistant entry and cleaner operational and accounting attribution), and a Project Name (internal identity) vs. Project Display Name (presentation) model was introduced to prepare for a future web or mobile interface without disturbing today's calculations — with financial reporting repaired and verified unchanged. The immediate focus is capturing the departing team member's institutional knowledge before July 24, completing the vendor list and W-9 status, gaining bank access for live transaction monitoring, gathering reserve-fund balances with the COO and accounting, and finishing entry of active Projects and Work Orders. Full detail is in the tabs below.",
+  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer. As of 2026-07-09 its MVP is feature-complete and has entered Production Hardening (Atlas Milestone #001): the core operational modules — Executive Dashboard, Work Orders, Bank Transactions, Projects, Reserve Funds (with a visible reimbursement ledger), Vendors, Properties, entity mapping, executive alerts, and dashboard KPIs — are in place, and POCC has grown into an operational finance platform. Today also established POCC's durable product foundation: a Constitution, a documentation hierarchy, engineering and implementation standards, expanded design principles, a Dashboard Responsibility Model (the dashboard shows live state; reports become a separate module), and an executive dashboard design language. A leadership meeting with the COO and Operations lead scheduled the production transition, prioritized capturing the departing team member's institutional knowledge during her final week, and shifted the discussion toward expanding Nick's responsibilities. As of 2026-07-10, POCC has entered a Validation & Quality Assurance stage — no longer primarily building features; the priority is proving existing functionality is reliable before more modules ship, using a new 10-phase regression checklist run before any module is production-ready and after any large data import. The first stress-test session already caught and resolved a real reliability issue before production. As of 2026-07-10, Atlas transitioned from a reporting system into an Operations Intelligence Platform (Milestone #004): it completed a governed Reporting Platform (Operational Health Engine, Reporting Engine, KPI Engine, Executive Dashboard, Executive Portfolio Report, and Report Generator v1 — all validated) and stood up three governed intelligence engines — Property, Entity, and Vendor Intelligence (v1.0) — under a shared Operations Intelligence Framework. Operational systems now feed governed intelligence layers that can power multiple products, so dashboards, reports, and future interfaces share one governed definition. Report generation is the first capability with a clear before-and-after labor baseline: producing a comparable six-month operational report previously took Nick about 16 hours of manual reconciliation, versus seconds-to-minutes with the governed platform — an initial estimated direct-labor saving of about $480 per comparable report at $30/hour (an estimate from one observed baseline, not cumulative realized savings). Additional value (reduced leadership interruption, fewer reconciliation errors, faster decisions, stronger operational visibility, less dependence on individual memory) is tracked separately, without dollar values, until evidence exists. As of 2026-07-13, POCC reached its first Production Candidate (RC1, Milestone #005): Sprint 1.6 production hardening is complete and verified, and POCC has entered Operational Validation — the business is now run through POCC on real Patron Group data, with improvements emerging from real use rather than speculative building. Seven refinements were implemented and verified that day. The most significant clarified the Financial Ownership Model: the dashboard now shows a single executive financial summary (Project Financial Health) because the duplicate Work Order Financial Health section — which restated the same project budgets and risked double-counting — was removed; Projects are now the single financial source, while Work Orders remain operational and Bank Transactions remain accounting. Project selection on Work Orders and Bank Transactions became property-aware (faster, error-resistant entry and cleaner operational and accounting attribution), and a Project Name (internal identity) vs. Project Display Name (presentation) model was introduced to prepare for a future web or mobile interface without disturbing today's calculations — with financial reporting repaired and verified unchanged. The immediate focus is capturing the departing team member's institutional knowledge before July 17, completing the vendor list and W-9 status, gaining bank access for live transaction monitoring, gathering reserve-fund balances with the COO and accounting, and finishing entry of active Projects and Work Orders. Full detail is in the tabs below.",
   today:[
     "POCC reached its first Production Candidate (RC1, Milestone #005): Sprint 1.6 production hardening is complete and verified, and POCC is now in Operational Validation — run on real Patron Group data, with improvements emerging from real use.",
     "What changed: Work Order Financial Health was removed from the dashboard. Why: it restated the same project budgets and risked double-counting. Impact: Projects are now the single executive financial source; Work Orders remain operational.",
@@ -382,7 +406,7 @@ const DATA = {
     "What changed: introduced Project Name (internal identity) vs. Project Display Name (presentation), and repaired downstream financial summaries after the change. Why: prepare for a future web/mobile interface without disturbing today's numbers. Impact: financial reporting verified unchanged and restored; ready for a friendlier future UI."
   ],
   priority:[
-    "Capture Riley's institutional knowledge before she departs July 24 — vendors and preferred vendors, W-9 status, emergency contacts, property-specific knowledge, reserve-fund info, the Mercury workflow, and operational routines (top priority).",
+    "Capture Riley's institutional knowledge before she departs July 17 — vendors and preferred vendors, W-9 status, emergency contacts, property-specific knowledge, reserve-fund info, the Mercury workflow, and operational routines (top priority).",
     "Complete the Vendors database — verify every active vendor and record W-9 status.",
     "Gain Mercury bank access and begin monitoring live transactions through POCC.",
     "Gather Reserve Fund balances, categories, and target amounts with Jess and/or Chance.",
@@ -422,7 +446,7 @@ const DATA = {
   ],
   discoveries:[
     {workflow:"John's daily operations", label:"report", detail:"John's follow-up work is largely reactive; his day can swing from little to do to ~60 vendor/status calls. He finds Zoho confusing and asks Riley for remaining budget before proceeding.", implication:"A simple daily view of budget, work, and follow-ups could create value quickly."},
-    {workflow:"Riley's budget & exception work", label:"hyp", detail:"Riley appears to manage exceptions, reminders, follow-ups, and budget-impacting details for John rather than full projects. She works mostly in Zoho Analytics and leaves July 24.", implication:"Capturing her workflow now is a time-sensitive risk-reduction priority; the first prototype may be exception + budget aware."},
+    {workflow:"Riley's budget & exception work", label:"hyp", detail:"Riley appears to manage exceptions, reminders, follow-ups, and budget-impacting details for John rather than full projects. She works mostly in Zoho Analytics and leaves July 17.", implication:"Capturing her workflow now is a time-sensitive risk-reduction priority; the first prototype may be exception + budget aware."},
     {workflow:"Zoho ↔ QuickBooks reconciliation", label:"report", detail:"Project names, IDs, categories, and imported records do not align cleanly between Zoho and QuickBooks, creating manual monthly reconciliation work.", implication:"Atlas may add value first as a connection and presentation layer, not a replacement."},
     {workflow:"Bank transaction classification", label:"report", detail:"Chance clarified that the workflow does not need named accounting fields yet — only Project Expense / Non-Project Expense / Unsure. Nick will classify each transaction by purpose and project link.", implication:"Keep classification minimal now; Bank Transactions becomes the reconciliation hub."},
     {workflow:"Vendor compliance (W-9 before payment)", label:"report", detail:"Chance's guidance: a vendor should not be paid until a completed W-9 is received; today the process relies too heavily on memory, and vendor compliance should become part of POCC.", implication:"Now the first validated Operational Alert — Needs Payment + no W-9 → Missing W-9 Payment Hold (flag, KPI, Today's Work Queue, leadership visibility). Computed visibility, not external automation."},
@@ -443,7 +467,7 @@ const DATA = {
     ],
     // 3) RISK AVOIDED — qualitative value that is hard to price in dollars.
     riskAvoided:[
-      {item:"Riley's budget & exception knowledge captured before her July 24 departure — reduced key-person dependency.", label:"report"},
+      {item:"Riley's budget & exception knowledge captured before her July 17 departure — reduced key-person dependency.", label:"report"},
       {item:"Executive visibility improved — one place to see completed work, deliverables, discoveries, milestones, and open questions.", label:"fact"},
       {item:"Documentation preserved — durable, reviewable company memory instead of knowledge living in chat history or one person's head.", label:"fact"},
       {item:"Standardized processes — the Operational Alerts Framework and a permanent UX standard keep POCC consistent as it grows.", label:"fact"},
@@ -514,7 +538,7 @@ const DATA = {
     {name:"RC1 Operational Validation — seven verified refinements. Financial Ownership Model: the duplicate Work Order Financial Health was removed (it risked double-counting) so Projects are the single executive financial source. Property-aware Project selection on Work Orders and Bank Transactions (faster, error-resistant entry; cleaner attribution). Consistent status color language, a three-level work-queue sort, and a Project Name vs. Display Name identity model — with financial reporting repaired and verified unchanged", date:"2026-07-13", mile:true}
   ],
   questions:[
-    "Riley transition (departs July 24): which of her responsibilities are highest-risk to lose? Capturing her institutional knowledge is the week's top priority.",
+    "Riley transition (departs July 17): which of her responsibilities are highest-risk to lose? Capturing her institutional knowledge is the week's top priority.",
     "Vendors: which active vendors are still missing W-9 status, where are W-9s stored, and who confirms receipt before payment?",
     "Mercury bank access — needed to begin live transaction monitoring through POCC (stakeholder dependency).",
     "Reserve Fund balances, categories, and target amounts — pending Jess and/or Chance.",
@@ -523,7 +547,7 @@ const DATA = {
     "Work-order status colors: ten additional statuses still need a documented color (non-blocking follow-up)."
   ],
   next:[
-    "Capture Riley's institutional knowledge before July 24 — vendors, W-9 status, emergency contacts, property specifics, reserve funds, the Mercury workflow, and operational routines.",
+    "Capture Riley's institutional knowledge before July 17 — vendors, W-9 status, emergency contacts, property specifics, reserve funds, the Mercury workflow, and operational routines.",
     "Complete the Vendors database and W-9 status; finish entering active Projects and Work Orders into POCC.",
     "Gain Mercury access and begin monitoring live bank activity through POCC.",
     "Gather Reserve Fund balances, categories, and targets with Jess and/or Chance.",
@@ -602,6 +626,17 @@ el("impact-snapshot").innerHTML =
   `<div class="snap-grid">`+
   _snap.map(s=>`<div class="snap-item"><div class="snap-num">${s.num}</div><div class="snap-lbl">${s.lbl}</div></div>`).join("")+
   `</div>`;
+
+// Executive Brief — the 60-second read (Current Risks shown only when present)
+const briefRow = (lbl,val,cls="") =>
+  `<div class="brief-row ${cls}"><div class="brief-lbl">${lbl}</div><div class="brief-val">${val}</div></div>`;
+el("exec-brief").innerHTML =
+  `<div class="brief-title">Executive Brief · ${DATA.meta.asOf}</div>`+
+  briefRow("Current State", DATA.execBrief.currentState)+
+  briefRow("What Changed", DATA.execBrief.whatChanged)+
+  briefRow("Why It Matters", DATA.execBrief.whyItMatters)+
+  (DATA.execBrief.currentRisks ? briefRow("Current Risks", DATA.execBrief.currentRisks, "risk") : "")+
+  briefRow("Tomorrow's Focus", DATA.execBrief.tomorrowFocus);
 
 // Overview lists
 el("exec-summary").textContent = DATA.execSummary;
