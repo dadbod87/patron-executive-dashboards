@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nick — Work Impact Dashboard | Project Atlas</title>
+<title>The Patron Group — Executive Operations Brief</title>
 <!--
   Work Impact Dashboard (Subsystem #1 of the Patron Operations Command Center)
   VISUAL SNAPSHOT of the living log system in work-impact/. The markdown logs
@@ -22,66 +22,88 @@
 -->
 <style>
   :root{
-    --bg:#eef2f7; --surface:#ffffff; --surface-2:#f5f8fc; --line:#e4e9f0;
-    --ink:#1e2a37; --ink-soft:#3a4a5c; --muted:#64748b;
-    --accent:#2f6bd8; --accent-soft:#eaf1fd;
-    --green:#0f9d6b; --blue:#2f6bd8; --amber:#b9791a; --purple:#6d4bd8;
-    --slate:#5b6b7e; --teal:#0f8f88;
-    --shadow:0 1px 2px rgba(21,40,64,.05), 0 6px 20px rgba(21,40,64,.05);
+    /* Patron executive palette — deep navy, charcoal, warm gray, muted bronze, subtle gold */
+    --bg:#f4f2ed; --surface:#ffffff; --surface-2:#f7f5f0; --line:#e6e1d6;
+    --ink:#16223a; --ink-soft:#3a4557; --muted:#726d61;
+    --navy:#14223a; --navy-soft:#26364f;
+    --accent:#9a7b43; --accent-soft:#f2ece0; --accent-line:#e4d8c1; --gold:#b7975a;
+    /* muted semantic tones (kept legible; luxury over saturation) */
+    --green:#3f7d5a; --blue:#3a5a8c; --amber:#9a7b43; --purple:#6a5a86;
+    --slate:#5b6472; --teal:#3f7d78;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Cambria,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 1px 2px rgba(20,34,58,.04), 0 10px 30px rgba(20,34,58,.05);
   }
   *{box-sizing:border-box}
   body{
     margin:0; background:var(--bg); color:var(--ink);
-    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
+    font:15px/1.62 var(--sans);
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   }
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:1080px;margin:0 auto;padding:30px 22px 90px}
+  /* thin navy→bronze rule across the very top — a quiet mark of a produced document */
+  body::before{content:"";position:fixed;top:0;left:0;right:0;height:3px;z-index:20;
+    background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 55%,var(--accent) 100%)}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  a:hover{border-bottom-color:var(--accent)}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 26px 100px}
 
   /* ---------- header ---------- */
-  header.top{background:var(--surface);border:1px solid var(--line);border-radius:18px;
-    padding:24px 26px;box-shadow:var(--shadow);margin-bottom:16px}
-  .head-row{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px}
-  .brand{display:flex;flex-direction:column;gap:6px}
-  .kicker{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
-  h1{margin:0;font-size:27px;letter-spacing:-.02em;color:var(--ink)}
-  .sub{color:var(--muted);font-size:14px;max-width:560px}
-  .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;justify-content:flex-end}
+  header.top{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:0 0 24px;box-shadow:var(--shadow);margin-bottom:20px;overflow:hidden}
+  /* masthead — navy band carrying the Patron wordmark + emblem */
+  .masthead{display:flex;align-items:center;gap:14px;background:var(--navy);
+    background:linear-gradient(100deg,var(--navy) 0%,var(--navy-soft) 100%);
+    padding:16px 26px;color:#f3efe6}
+  .emblem{flex:none;width:40px;height:40px}
+  .emblem svg{display:block;width:40px;height:40px}
+  .wordmark{display:flex;flex-direction:column;line-height:1.15}
+  .wordmark .wm-name{font-family:var(--serif);font-size:18px;letter-spacing:.14em;color:#f6f1e7}
+  .wordmark .wm-sub{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+  .masthead .doc-type{margin-left:auto;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:#cdbe9c;border:1px solid rgba(183,151,90,.4);border-radius:999px;padding:5px 12px;white-space:nowrap}
+  .head-row{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 26px 0}
+  .brand{display:flex;flex-direction:column;gap:7px}
+  .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{margin:0;font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:0;color:var(--ink)}
+  .sub{color:var(--muted);font-size:14px;max-width:600px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;justify-content:flex-end;max-width:100%}
   .mchip{font-size:12px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);
-    border-radius:999px;padding:5px 11px;white-space:nowrap}
+    border-radius:6px;padding:5px 11px;white-space:nowrap;max-width:100%;overflow-wrap:anywhere}
+  .mchip.mchip-phase{white-space:normal}
   .mchip b{color:var(--ink-soft);font-weight:600;margin-right:5px}
 
-  .focus{display:flex;align-items:center;gap:14px;margin-top:20px;padding:15px 18px;
-    background:var(--accent-soft);border:1px solid #d4e3fb;border-left:4px solid var(--accent);border-radius:12px}
-  .focus .flabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+  .focus{display:flex;align-items:baseline;gap:14px;margin:22px 26px 0;padding:15px 20px;
+    background:var(--accent-soft);border:1px solid var(--accent-line);border-left:3px solid var(--accent);border-radius:0 10px 10px 0}
+  .focus .flabel{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
     font-weight:800;white-space:nowrap}
-  .focus .ftext{font-size:15px;font-weight:600;color:var(--ink)}
+  .focus .ftext{font-size:15px;font-weight:500;color:var(--ink);line-height:1.55}
 
   /* ---------- metric cards ---------- */
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:16px 0 6px}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
-    padding:18px 18px 16px;box-shadow:var(--shadow)}
-  .cicon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-  .cicon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .card .cnum{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1}
-  .card .clabel{font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:600}
-  .card .csub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0 6px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative}
+  .card::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;background:var(--accent);opacity:.85}
+  .cicon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .cicon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .card .cnum{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:.01em;color:var(--navy);line-height:1.15}
+  .card .clabel{font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:700}
+  .card .csub{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.45}
 
   /* ---------- tabs ---------- */
-  nav.tabs{display:flex;flex-wrap:wrap;gap:7px;margin:26px 0 18px;position:sticky;top:0;z-index:5;
-    padding:12px 0;background:linear-gradient(180deg,var(--bg) 78%,rgba(238,242,247,0))}
+  nav.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 20px;position:sticky;top:3px;z-index:5;
+    padding:12px 0;background:linear-gradient(180deg,var(--bg) 80%,rgba(244,242,237,0))}
   nav.tabs button{background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);
-    padding:9px 15px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s;box-shadow:var(--shadow)}
-  nav.tabs button:hover{border-color:#b9cdf0;color:var(--accent)}
-  nav.tabs button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;
+    transition:.16s ease;box-shadow:var(--shadow)}
+  nav.tabs button:hover{border-color:var(--accent);color:var(--accent)}
+  nav.tabs button.active{background:var(--navy);color:#f4efe4;border-color:var(--navy);box-shadow:0 4px 14px rgba(20,34,58,.18)}
 
   section.panel{display:none;animation:fade .2s ease}
   section.panel.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-  h2{font-size:19px;margin:4px 0 6px;letter-spacing:-.01em;color:var(--ink)}
-  h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 12px;font-weight:700}
+  h2{font-family:var(--serif);font-size:23px;font-weight:600;margin:4px 0 8px;letter-spacing:0;color:var(--ink)}
+  h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 14px;font-weight:700}
   .lead{color:var(--ink-soft);max-width:820px;margin:0}
   .sectlead{color:var(--muted);max-width:820px;margin:0 0 16px;font-size:14px}
 
@@ -230,6 +252,22 @@
   }
   @media(prefers-reduced-motion:reduce){ section.panel{animation:none} }
 
+  /* ---------- Atlas Project History — editorial chapter timeline ---------- */
+  .history{margin-top:4px}
+  .chapter{display:flex;gap:18px;padding:4px 0 22px}
+  .chapter:last-child{padding-bottom:2px}
+  .chapter .rail{flex:none;position:relative;width:14px}
+  .chapter .rail::before{content:"";position:absolute;left:6px;top:6px;bottom:-4px;width:2px;background:var(--accent-line)}
+  .chapter:last-child .rail::before{display:none}
+  .chapter .rail .node{position:absolute;left:0;top:5px;width:13px;height:13px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .chapter .cbody{flex:1;min-width:0}
+  .chapter .cera{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+  .chapter .cperiod{display:inline-block;margin-left:10px;font-family:var(--sans);font-size:10.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent);vertical-align:middle}
+  .chapter .ctext{color:var(--ink-soft);font-size:14px;line-height:1.62;margin:7px 0 0}
+  @media(max-width:560px){.chapter{gap:12px}}
+
   /* ---------- print / PDF ---------- */
   @media print{
     :root{--shadow:none}
@@ -248,9 +286,23 @@
 <div class="wrap">
 
   <header class="top">
+    <div class="masthead">
+      <span class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 40 40" role="img" aria-label="The Patron Group emblem">
+          <circle cx="20" cy="20" r="18.4" fill="none" stroke="#b7975a" stroke-width="1.1" opacity=".65"/>
+          <path d="M7.5 27.5 L16 14.5 L21 21.5 L26 12.5 L32.5 27.5 Z" fill="none" stroke="#c8ad78" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M7.5 27.5 L32.5 27.5" stroke="#c8ad78" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="wordmark">
+        <span class="wm-name">THE PATRON GROUP</span>
+        <span class="wm-sub">Project Atlas</span>
+      </span>
+      <span class="doc-type">Business · Asset Management</span>
+    </div>
     <div class="head-row">
       <div class="brand">
-        <span class="kicker">Project Atlas · Patron Operations Command Center</span>
+        <span class="kicker">Patron Operations Command Center · Executive Reporting</span>
         <h1 id="h-title"></h1>
         <span class="sub" id="h-sub"></span>
       </div>
@@ -292,8 +344,8 @@
     <!-- Atlas Project History — background reading; moved below the operational cards -->
     <div class="lead-card" style="margin-top:8px">
       <h2 style="margin-bottom:4px">Atlas Project History</h2>
-      <p class="sectlead" style="margin-bottom:10px">Background reading — the full narrative of how Atlas and POCC reached today. The Executive Brief at the top is the current snapshot; this section is the evolution behind it.</p>
-      <p class="lead" id="exec-summary"></p>
+      <p class="sectlead" style="margin-bottom:18px">How Atlas and the Patron Operations Command Center reached today — read as chapters. The Executive Brief above is the current snapshot; this is the evolution behind it.</p>
+      <div class="history" id="exec-summary"></div>
     </div>
   </section>
 
@@ -373,13 +425,13 @@
    ============================================================================ */
 const DATA = {
   meta:{
-    title:"Nick — Work Impact Dashboard",
-    sub:"Making behind-the-scenes operational work visible — evidence-based, no exaggeration.",
+    title:"Executive Operations Brief",
+    sub:"Operational intelligence, strategic progress, and leadership priorities for The Patron Group — evidence-based, prepared by Project Atlas.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
     asOf:"2026-07-16",
-    phase:"Atlas · POCC RC1 / Operational Validation (#005) · Operations Intelligence Platform (#004) · field operations + reporting implemented (#008 Eric Field Queue, #009 reporting/financial-insight day)",
-    version:"v2.5 (2026-07-16)",
+    phase:"POCC Operational Validation (RC1) · Operations Intelligence Platform",
+    version:"v3.0 (2026-07-16)",
     currentFocus:"John formally expanded Nick's role into a right-hand project decision partner, and the Project Options Standard / Three-Option Rule became an Atlas operating standard (bring two or three decision-ready options for meaningful decisions). Nick went hands-on with finance — learned the Mercury ACH payment workflow and sent payments, reconciled the Cigar Room budget with Chance, and moved approved funds into the Final Draft project with Jess and John. A major future direction was documented: the Property Development Pipeline / Property Lifecycle Command Center — a separate future module for a property's development lifecycle that hands stabilized properties into POCC (not built yet). Riley's official final day is July 17 — finalize the access and knowledge transition."
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
@@ -396,7 +448,15 @@ const DATA = {
     {num:"Future", label:"Property Development Pipeline", sub:"Documented future lifecycle module (Option B) that hands stabilized properties into POCC — not built yet"},
     {num:"July 17", label:"Riley transition", sub:"Her official final day tomorrow — finalize access/account transition + institutional-knowledge capture"}
   ],
-  execSummary:"Nick is using Project Atlas to learn how The Patron Group operates and to turn that learning into durable, reviewable company memory. The Patron Operations Command Center (POCC) is Atlas's primary application layer. As of 2026-07-09 its MVP is feature-complete and has entered Production Hardening (Atlas Milestone #001): the core operational modules — Executive Dashboard, Work Orders, Bank Transactions, Projects, Reserve Funds (with a visible reimbursement ledger), Vendors, Properties, entity mapping, executive alerts, and dashboard KPIs — are in place, and POCC has grown into an operational finance platform. Today also established POCC's durable product foundation: a Constitution, a documentation hierarchy, engineering and implementation standards, expanded design principles, a Dashboard Responsibility Model (the dashboard shows live state; reports become a separate module), and an executive dashboard design language. A leadership meeting with the COO and Operations lead scheduled the production transition, prioritized capturing the departing team member's institutional knowledge during her final week, and shifted the discussion toward expanding Nick's responsibilities. As of 2026-07-10, POCC has entered a Validation & Quality Assurance stage — no longer primarily building features; the priority is proving existing functionality is reliable before more modules ship, using a new 10-phase regression checklist run before any module is production-ready and after any large data import. The first stress-test session already caught and resolved a real reliability issue before production. As of 2026-07-10, Atlas transitioned from a reporting system into an Operations Intelligence Platform (Milestone #004): it completed a governed Reporting Platform (Operational Health Engine, Reporting Engine, KPI Engine, Executive Dashboard, Executive Portfolio Report, and Report Generator v1 — all validated) and stood up three governed intelligence engines — Property, Entity, and Vendor Intelligence (v1.0) — under a shared Operations Intelligence Framework. Operational systems now feed governed intelligence layers that can power multiple products, so dashboards, reports, and future interfaces share one governed definition. Report generation is the first capability with a clear before-and-after labor baseline: producing a comparable six-month operational report previously took Nick about 16 hours of manual reconciliation, versus seconds-to-minutes with the governed platform — an initial estimated direct-labor saving of about $480 per comparable report at $30/hour (an estimate from one observed baseline, not cumulative realized savings). Additional value (reduced leadership interruption, fewer reconciliation errors, faster decisions, stronger operational visibility, less dependence on individual memory) is tracked separately, without dollar values, until evidence exists. As of 2026-07-13, POCC reached its first Production Candidate (RC1, Milestone #005): Sprint 1.6 production hardening is complete and verified, and POCC has entered Operational Validation — the business is now run through POCC on real Patron Group data, with improvements emerging from real use rather than speculative building. Seven refinements were implemented and verified that day. The most significant clarified the Financial Ownership Model: the dashboard now shows a single executive financial summary (Project Financial Health) because the duplicate Work Order Financial Health section — which restated the same project budgets and risked double-counting — was removed; Projects are now the single financial source, while Work Orders remain operational and Bank Transactions remain accounting. Project selection on Work Orders and Bank Transactions became property-aware (faster, error-resistant entry and cleaner operational and accounting attribution), and a Project Name (internal identity) vs. Project Display Name (presentation) model was introduced to prepare for a future web or mobile interface without disturbing today's calculations — with financial reporting repaired and verified unchanged. The immediate focus is capturing the departing team member's institutional knowledge before July 17, completing the vendor list and W-9 status, gaining bank access for live transaction monitoring, gathering reserve-fund balances with the COO and accounting, and finishing entry of active Projects and Work Orders. Full detail is in the tabs below.",
+  // Atlas Project History — told as skimmable chapters (era · period · narrative). Complete information preserved.
+  execSummaryChapters:[
+    {era:"Foundation", period:"Late June 2026", text:"Project Atlas began as a way for Nick to learn how The Patron Group operates and turn that learning into durable, reviewable company memory. The first work built the repository memory and knowledge system, a company-language glossary to reconcile terms across Zoho and QuickBooks, and an initial understanding of the people (John, Riley, Chance) and the multi-entity structure the company runs on."},
+    {era:"The Command Center Takes Shape", period:"Early July 2026", text:"The Patron Operations Command Center (POCC) was named as Atlas's primary application layer. Sprints 1 and 1.5 delivered the core operational workbook and its executive polish; the Dashboard was reframed as executive attention management; and the Operational Alerts Framework produced its first validated alert (a W-9 payment hold). A permanent UX standard was adopted, the executive publishing pipeline went live, and the Work Impact reporting became an evidence-based system that only claims what it can defend."},
+    {era:"An Operational Finance Platform", period:"July 8–9, 2026", text:"POCC's financial source-of-truth was finalized (Projects own budgets, Bank Transactions own financial events, Work Orders own operations), and the Reserve Funds subsystem and Portfolio Improvement Report v1 were built — the COO reviewed both very positively. Atlas Milestone #001 marked POCC MVP feature-complete and entering Production Hardening, and its durable product foundation was set: a Constitution, documentation hierarchy, engineering and implementation standards, and expanded design principles. A leadership meeting scheduled the production transition, prioritized capturing a departing team member's institutional knowledge, and reframed Atlas as the company's operating system and institutional-knowledge platform."},
+    {era:"Validation & the Operations Intelligence Platform", period:"July 10, 2026", text:"POCC entered a Validation & Quality Assurance stage — proving reliability before shipping more, using a regression checklist run before any module is production-ready and after any large import (the first stress test caught and fixed a real issue before production). Atlas then completed a governed Reporting Platform (Milestone #002) and three governed intelligence engines — Property, Entity, and Vendor (Milestone #003) — becoming an Operations Intelligence Platform (Milestone #004). Report generation became the first capability with a clear before-and-after labor baseline: a comparable six-month operational report went from about 16 hours of manual reconciliation to seconds-to-minutes — an initial estimated direct-labor saving of about $480 per comparable report at $30/hour (one observed baseline, not cumulative realized savings). Other value (less leadership interruption, fewer errors, faster decisions) is tracked separately, without dollar figures, until evidence exists."},
+    {era:"Production Candidate & Operating the Business", period:"July 13–14, 2026", text:"POCC reached its first Production Candidate (RC1, Milestone #005) and entered Operational Validation — the business is now run through POCC on real Patron Group data, with improvements emerging from real use. The Financial Ownership Model removed a duplicate financial section that risked double-counting, making Projects the single executive financial source while Work Orders stay operational and Bank Transactions stay accounting. Vendor Onboarding (Milestone #006) and Financial Data Population (Milestone #007) moved POCC from structural prototype toward a live operational system, and the Standard Operational Intake Workflow (Capture → interpret → implement) was adopted."},
+    {era:"Field Operations, Reporting & an Expanded Role", period:"July 15–16, 2026", text:"The Eric Field Work Queue began synchronizing automatically in both directions between the office and the field (Milestone #008), and a control-driven Reporting System, a Financial Reserve Calculator, and a Protection-by-Default engineering standard were added (Milestone #009). John then formally expanded Nick into a right-hand project decision partner, adopting the Project Options Standard / Three-Option Rule (bring two or three decision-ready options for meaningful decisions). Nick went hands-on with finance — learning the Mercury ACH payment workflow and processing vendor payments, reconciling a project budget with accounting, and helping reallocate approved project funds — and the long-term Property Development Pipeline vision was documented as a separate future module that will hand stabilized properties into POCC."}
+  ],
   today:[
     "Role expanded + decision standard adopted: John formally made Nick his right-hand project decision partner, and the Project Options Standard / Three-Option Rule became an Atlas operating standard — for meaningful project decisions (materials, designs, property strategies, vendor approaches, significant quotes, budget/scope) Nick brings two or three decision-ready options: lowest responsible cost; best overall value with a recommendation; premium/highest durability. Alternatives must be real — never invent quotes, pricing, availability, or vendor capabilities.",
     "Hands-on financial operations: Nick learned the Mercury ACH payment workflow and sent multiple contractor/vendor payments, and became familiar with the payment-approval process. (No amounts, account numbers, or balances are stored in the repository.)",
@@ -494,6 +554,7 @@ const DATA = {
     {workflow:"Budget remaining lookup",     before:"Not yet measured", after:"Not yet measured", freq:"To confirm", conf:"unknown",   evidence:"Baseline needed", status:"Baseline needed"}
   ],
   milestones:[
+    {name:"Nick's role formally expanded to right-hand project decision partner; the Project Options Standard / Three-Option Rule adopted as an Atlas operating standard. Hands-on operations: learned the Mercury ACH payment workflow and processed vendor payments; reconciled a project budget with accounting; helped reallocate approved project funds. The long-term Property Development Pipeline / Property Lifecycle Command Center vision documented (a separate future module handing stabilized properties into POCC). Executive Operations Brief redesigned (v3) and renamed", date:"2026-07-16", mile:true},
     {name:"Field Operations, Financial Insight & Reporting System Implementation Day (Milestone #009) — Financial Reserve Calculator + control-driven reporting system (active validation) + Protection by Default standard", date:"2026-07-15", mile:true},
     {name:"Eric Field Work Queue: Automated Two-Way Sync MVP Complete (Milestone #008) — POCC's first field-operations workflow, syncing automatically both directions with no manual effort or email", date:"2026-07-15", mile:true},
     {name:"Repository memory system created", date:"2026-06-28", mile:true},
@@ -545,19 +606,19 @@ const DATA = {
   questions:[
     "Riley transition (departs July 17): which of her responsibilities are highest-risk to lose? Capturing her institutional knowledge is the week's top priority.",
     "Vendors: which active vendors are still missing W-9 status, where are W-9s stored, and who confirms receipt before payment?",
-    "Mercury bank access — needed to begin live transaction monitoring through POCC (stakeholder dependency).",
+    "Executive Portfolio → Executive Projects Report rename (reported in the workbook) — confirm, then reconcile the name across Atlas documentation.",
     "Reserve Fund balances, categories, and target amounts — pending Jess and/or Chance.",
     "Reserve Funds policy: live-balance vs. reimbursement-only and fixed-target vs. exactly-spent top-off — confirm before building.",
     "Executive dashboard hosting: plan to move this artifact to The Patron Group's own domain behind authenticated (password/identity) access — future infrastructure item.",
     "Work-order status colors: ten additional statuses still need a documented color (non-blocking follow-up)."
   ],
   next:[
-    "Capture Riley's institutional knowledge before July 17 — vendors, W-9 status, emergency contacts, property specifics, reserve funds, the Mercury workflow, and operational routines.",
-    "Complete the Vendors database and W-9 status; finish entering active Projects and Work Orders into POCC.",
-    "Gain Mercury access and begin monitoring live bank activity through POCC.",
-    "Gather Reserve Fund balances, categories, and targets with Jess and/or Chance.",
-    "Continue real-world POCC validation — let improvements emerge from use; if a user hesitates, improve the product, not the training.",
-    "Keep this executive artifact current — refreshed and published whenever executive-facing content changes (unless publication is held or the safety review flags unapproved sensitive content)."
+    "Finalize the Riley transition on her official final day (July 17) — any remaining account/access transfer (credentials to approved secure storage only) and institutional-knowledge capture.",
+    "Verify the reporting helper-scope isolation fix before treating the reporting system or the property report as production-complete.",
+    "Continue real-world POCC operational validation — let improvements emerge from use; if a user hesitates, improve the product, not the training.",
+    "Reconcile the Executive Portfolio → Executive Projects Report rename across Atlas documentation once the workbook change is confirmed.",
+    "Continue capturing baselines from real POCC usage to promote estimated savings toward Verified as evidence accrues.",
+    "Keep the Executive Operations Brief current — refreshed and published whenever executive-facing content changes (unless publication is held or the safety review flags unapproved sensitive content)."
   ]
 };
 
@@ -587,8 +648,8 @@ const STAT = {
 const el = (id) => document.getElementById(id);
 const li = (arr) => arr.map(x=>`<li>${x}</li>`).join("");
 
-// Accent colors + subtle icons for the metric cards (presentation only)
-const CARD_ACCENT = ["#2f6bd8","#0f8f88","#6d4bd8","#b9791a"];
+// Accent colors + subtle icons for the metric cards (presentation only) — restrained navy/bronze set
+const CARD_ACCENT = ["#14223a","#9a7b43","#3a5a8c","#5b6472"];
 const ICONS = [
   '<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>',
   '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
@@ -604,7 +665,7 @@ el("h-meta").innerHTML =
   `<span class="mchip"><b>Audience</b>${DATA.meta.audience}</span>`+
   `<span class="mchip"><b>As of</b>${DATA.meta.asOf} · ${DATA.meta.version}</span>`+
   `<span class="mchip"><b>Owner</b>${DATA.meta.owner}</span>`+
-  `<span class="mchip">${DATA.meta.phase}</span>`;
+  `<span class="mchip mchip-phase">${DATA.meta.phase}</span>`;
 
 // Cards
 el("cards").innerHTML = DATA.cards.map((c,i)=>{
@@ -644,7 +705,15 @@ el("exec-brief").innerHTML =
   briefRow("Tomorrow's Focus", DATA.execBrief.tomorrowFocus);
 
 // Overview lists
-el("exec-summary").textContent = DATA.execSummary;
+el("exec-summary").innerHTML = DATA.execSummaryChapters.map(c=>
+  `<div class="chapter">
+     <div class="rail"><span class="node"></span></div>
+     <div class="cbody">
+       <div class="cera">${c.era}<span class="cperiod">${c.period}</span></div>
+       <p class="ctext">${c.text}</p>
+     </div>
+   </div>`
+).join("");
 el("today").innerHTML = li(DATA.today);
 el("priority").innerHTML = li(DATA.priority);
 el("week").innerHTML = li(DATA.week);
@@ -742,11 +811,11 @@ const legend = Object.keys(LBL).map(k=>badge(k)).join(" ");
 
 // Footer
 el("foot").innerHTML =
-  `Visual snapshot of the living log system in <code>work-impact/</code> — the markdown logs are the source of truth. `+
-  `Built per <code>work-impact/README.md</code> and <code>knowledge/ai/work-impact-artifact-protocol.md</code>. `+
-  `Savings are measured per the <code>Work Impact Baseline Protocol</code> (<code>knowledge/ai/work-impact-baseline-protocol.md</code>) — we only claim what we can defend. `+
+  `The <b>Executive Operations Brief</b> (formerly the Work Impact Dashboard) is the executive presentation layer of the living log system in <code>work-impact/</code> — the markdown logs are the source of truth. `+
+  `Built per <code>work-impact/README.md</code>, <code>knowledge/ai/work-impact-artifact-protocol.md</code>, and the <code>Executive Operations Brief Design Standards</code>. `+
+  `Value is measured per the <code>Work Impact Baseline Protocol</code> (<code>knowledge/ai/work-impact-baseline-protocol.md</code>) — we only claim what we can defend. `+
   `Evidence-based; no invented work, time, or money saved. No sensitive financial, tenant, ownership, legal, or personal data (DATA_GOVERNANCE.md). `+
-  `Subsystem #1 of the Patron Operations Command Center.`;
+  `Prepared by Project Atlas · Subsystem #1 of the Patron Operations Command Center.`;
 
 // Tabs
 const TABS = [
