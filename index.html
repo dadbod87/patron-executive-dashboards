@@ -321,6 +321,8 @@
   <section class="panel active" data-tab="overview">
     <!-- Executive Brief — the 60-second read -->
     <div class="brief" id="exec-brief"></div>
+    <!-- Executive Impact — stakeholder-reported vs pending measurement -->
+    <div class="lead-card" id="exec-impact" style="margin-top:8px"></div>
     <div class="grid2">
       <div class="block">
         <h3>Current Priorities</h3>
@@ -431,7 +433,7 @@ const DATA = {
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
     asOf:"2026-07-24",
     phase:"Patron Platform (the unified company software platform; POCC is its operations module) + Patron Operating Standards · POCC RC4 (feedback-driven) — live operational use · Milestone #013 — Work Order Dispatch Center Version 1 complete",
-    version:"v3.7 (2026-07-24)",
+    version:"v3.8 (2026-07-24)",
     currentFocus:"A build day — the first polished POCC workflow shipped. The Work Order Dispatch Center went from idea to a production-ready Version 1: John can now build a professional, branded Work Order Package and send it to vendors straight from POCC — no more manual Word documents. The workflow (pick property → pick work orders → build package → review → create a Gmail draft → send) feels like real software, with a professional email carrying property grouping, scope of work, and a Dispatch ID. It is also the first reusable design pattern for the wider company platform. Using POCC live also surfaced the next improvement to design: letting one Work Order have several vendors (e.g. electrical + HVAC) — captured as a clean, scalable direction and queued as tomorrow's design study (no building yet). Next: that multi-vendor design study; the rent-tracking app (Patron Property Portal) remains the next product milestone. POCC keeps running the business. (Workbook build reported by Gemini; documentation and decisions are Verified.)"
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
@@ -441,6 +443,23 @@ const DATA = {
     whyItMatters:"It removes repetitive manual work, makes vendor communication consistent and professional, and creates a record of what was sent — while keeping John's final approval (nothing sends by accident). Just as important, it establishes the look and feel every future company application will reuse, so the platform grows as one connected, polished system.",
     currentRisks:"None introduced. The build is reported by Gemini's workbook (not independently repo-verified); the time saved is not yet quantified (a before/after of the old Word-and-email process would measure it). No sensitive vendor or property data is stored in the project's records.",
     tomorrowFocus:"Tomorrow — a design study on letting one Work Order carry multiple vendors (a common real need, e.g. electrical + HVAC), designed as a clean, scalable relationship covering the workflow and the user experience. Design only; nothing is being built yet, and it does not change the roadmap order. The rent-tracking app (Patron Property Portal) remains the next product milestone. Meanwhile, support John's live use of POCC and validate maintenance intake with Avah. Executive context (not active work): John continues to express confidence in Atlas and sees it growing one department system at a time — Kristie's workflow next — toward a long-term single Patron platform."
+  },
+  // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
+  execImpact:{
+    intro:"POCC and the Work Order Dispatch Center have measurably changed how The Patron Group operates day to day. To keep this dashboard credible, impact is reported in two clearly separated ways: what stakeholders have observed and reported, and what remains to be formally measured. No dollar amounts or hours-saved figures are estimated.",
+    beforeAfter:"Before POCC + Dispatch Center, John pieced operational status together from scratch paper, whiteboards, emails, phone calls, personal memory, and verbal conversations — often asking a since-departed team member (Riley) what was outstanding and where work stood. Information was fragmented across systems (Zoho had stopped serving the business well), finding work meant searching multiple places, and work orders were communicated mostly verbally — causing repeated interruptions, missed scope, duplicate effort, and inconsistent field communication, with operational knowledge concentrated in one person. Today that information is centralized in POCC: John can immediately see outstanding work, status, priorities, and follow-up dates, manage work from one place, and dispatch a professional Work Order Package in seconds. Operational knowledge is now documented and shared across multiple employees rather than living in one person's memory.",
+    stakeholderReported:[
+      "Significant reduction in the time and effort to prepare and dispatch work — John reports building and sending multiple work orders in well under a minute (about 30 seconds), versus manually writing Word documents and communicating task lists verbally.",
+      "Centralized operational visibility — outstanding work, status, priorities, and follow-up dates are all in one place (POCC), eliminating searches across scratch paper, whiteboards, emails, and memory.",
+      "Verbal task-list communication largely eliminated — Dispatch Center produces clear, written Scopes of Work, greatly reducing missed scope, misunderstandings, and duplicate effort.",
+      "Improved consistency between office and field, and improved work quality through standardized Work Order Packages.",
+      "Reduced dependence on one individual's institutional knowledge — the system is now understood by multiple employees; the company no longer depends on one person's memory to understand operational status.",
+      "Easier onboarding and knowledge sharing — workflows are documented instead of existing primarily in one person's head; improved transparency across the organization.",
+      "Better operational continuity — Zoho reported by stakeholders as fully replaced for this workflow (previously it was no longer serving the business well).",
+      "Faster operational decision-making and increased organizational efficiency."
+    ],
+    stakeholderFeedback:"John stated the Dispatch Center dramatically improves his workflow, that he loves the system, and that it is a significant improvement over previous methods — previously he had to verbally communicate work orders and task lists, which frequently caused misunderstandings or missed work; the written Scopes of Work now dramatically improve communication quality. John and Jess also expressed that they see Nick's long-term role evolving beyond individual improvements into a Systems Designer for The Patron Group. (Executive vision only, not active roadmap work.)",
+    pendingMeasurement:"No time-saved, hours, or dollar figures are claimed for these improvements yet — they are stakeholder-reported and workflow-analysis based. Formal before/after baselines (e.g. work-order preparation and dispatch time) remain to be captured before any quantified savings are reported. See the Workflow Baseline Metrics below (baselines not yet captured) and the Value Created categories, where Verified Savings remain empty until measured."
   },
   cards:[
     {num:"#013", label:"Dispatch Center V1 complete", sub:"POCC's first polished, end-to-end workflow: John builds a branded Work Order Package and sends it to vendors straight from POCC — no more manual Word documents; every send carries a traceable Dispatch ID"},
@@ -503,7 +522,8 @@ const DATA = {
     {name:"Operational Alerts Framework", type:"Architecture", audience:"Atlas / POCC", purpose:"Reusable standard to surface operational blockers (W-9 hold is the first validated alert)", status:"complete", label:"fact"},
     {name:"Work Impact Baseline Protocol", type:"Methodology", audience:"Atlas / Leadership", purpose:"Official measurement methodology: how workflow time becomes defensible, evidence-labeled impact", status:"complete", label:"fact"},
     {name:"Executive publishing pipeline (public Pages)", type:"Infrastructure", audience:"Leadership", purpose:"Two-repo, allowlisted, safety-scanned publish of the dashboard to a permanent public URL; automatic in the daily closeout", status:"complete", label:"fact"},
-    {name:"Reserve Funds Module — design", type:"Architecture", audience:"POCC / Jess", purpose:"Next major POCC feature: auditable monthly reserve replenishment (Bank Transactions = source of truth; derived Outstanding; append-only log)", status:"progress", label:"report"}
+    {name:"Reserve Funds Module — design", type:"Architecture", audience:"POCC / Jess", purpose:"Next major POCC feature: auditable monthly reserve replenishment (Bank Transactions = source of truth; derived Outstanding; append-only log)", status:"progress", label:"report"},
+    {name:"Work Order Dispatch Center V1 (Milestone #013)", type:"Application", audience:"John / Vendors", purpose:"Guided in-POCC workflow that builds and sends a professional, branded Work Order Package to vendors (Entity → Property → select work orders → build package → review → Gmail draft → send); replaces the manual Word→email process. Gmail owns recipients; POCC stores no vendor emails.", status:"complete", label:"report"}
   ],
   discoveries:[
     {workflow:"John's daily operations", label:"report", detail:"John's follow-up work is largely reactive; his day can swing from little to do to ~60 vendor/status calls. He finds Zoho confusing and asks Riley for remaining budget before proceeding.", implication:"A simple daily view of budget, work, and follow-ups could create value quickly."},
@@ -528,6 +548,8 @@ const DATA = {
     ],
     // 3) RISK AVOIDED — qualitative value that is hard to price in dollars.
     riskAvoided:[
+      {item:"Reduced dependence on one person's memory (Stakeholder-Reported, 2026-07-24) — operational status now lives in POCC and is understood by multiple employees; the company no longer relies on asking one individual what is outstanding.", label:"report"},
+      {item:"Reduced miscommunication (Stakeholder-Reported, 2026-07-24) — Dispatch Center replaces verbal task lists with written Scopes of Work, cutting missed scope, duplicate effort, and office↔field inconsistency.", label:"report"},
       {item:"Riley's budget & exception knowledge captured before her July 17 departure — reduced key-person dependency.", label:"report"},
       {item:"Executive visibility improved — one place to see completed work, deliverables, discoveries, milestones, and open questions.", label:"fact"},
       {item:"Documentation preserved — durable, reviewable company memory instead of knowledge living in chat history or one person's head.", label:"fact"},
@@ -536,6 +558,8 @@ const DATA = {
     ],
     // 4) STRATEGIC VALUE — long-term organizational improvement; why Atlas matters beyond labor savings.
     strategic:[
+      {item:"Operational transformation via Dispatch Center V1 (Stakeholder-Reported, 2026-07-24) — John reports dispatching a professional Work Order Package in seconds and calls it a significant improvement he 'loves'; centralized visibility, standardized communication, and documented workflows replace scattered notes, memory, and verbal hand-offs.", label:"report"},
+      {item:"Nick's role evolving toward Systems Designer for The Patron Group (Stakeholder Guidance — John & Jess, 2026-07-24) — beyond individual improvements toward department-specific systems that eventually connect into one unified Patron platform. Executive vision only.", label:"report"},
       {item:"Faster executive decisions — leadership sees what needs attention today at a glance, instead of digging through data.", label:"fact"},
       {item:"One trusted source of operational truth — information is entered once and stays consistent everywhere it's used.", label:"fact"},
       {item:"Reporting leadership can rely on — clean, consistent numbers, with ambiguous items flagged for review rather than guessed.", label:"report"},
@@ -706,6 +730,21 @@ el("exec-brief").innerHTML =
   briefRow("Why It Matters", DATA.execBrief.whyItMatters)+
   (DATA.execBrief.currentRisks ? briefRow("Current Risks", DATA.execBrief.currentRisks, "risk") : "")+
   briefRow("Tomorrow's Focus", DATA.execBrief.tomorrowFocus);
+
+// Executive Impact — stakeholder-reported operational improvements vs. quantified metrics pending measurement
+if (DATA.execImpact){
+  const EI = DATA.execImpact;
+  el("exec-impact").innerHTML =
+    `<h2 style="margin-bottom:4px">Executive Impact — POCC + Dispatch Center</h2>`+
+    `<p class="sectlead" style="margin-bottom:14px">${EI.intro}</p>`+
+    `<p class="ctext" style="margin-bottom:16px">${EI.beforeAfter}</p>`+
+    `<div class="brief-row"><div class="brief-lbl">Stakeholder-Reported Operational Improvements</div>`+
+    `<div class="brief-val"><ul class="list-check" style="margin:0">`+
+      EI.stakeholderReported.map(i=>`<li>${i}</li>`).join("")+
+    `</ul></div></div>`+
+    `<div class="brief-row"><div class="brief-lbl">Stakeholder Feedback</div><div class="brief-val">${EI.stakeholderFeedback}</div></div>`+
+    `<div class="brief-row risk"><div class="brief-lbl">Quantified Metrics — Pending Future Measurement</div><div class="brief-val">${EI.pendingMeasurement}</div></div>`;
+}
 
 // Overview lists
 el("exec-summary").innerHTML = DATA.execSummaryChapters.map(c=>
