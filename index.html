@@ -295,6 +295,9 @@
   .brain-link:hover{background:var(--navy-soft);border-color:var(--navy-soft);color:#f4efe4}
   .brain-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .brain-link .arr{font-size:13px;line-height:1;color:var(--gold)}
+  .binder-link{background:var(--surface);color:var(--navy);border-color:var(--navy)}
+  .binder-link:hover{background:var(--accent-soft);color:var(--navy);border-color:var(--navy)}
+  .prov .brain-link{margin-left:4px}
 
   /* status chips — label + SHAPE, never colour alone */
   .st{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;letter-spacing:.08em;
@@ -306,8 +309,11 @@
   .st-progress{color:var(--accent)}   .st-progress i{border-radius:50%;background:linear-gradient(90deg,currentColor 50%,transparent 50%);box-shadow:inset 0 0 0 1px currentColor}
   .st-preview{color:var(--slate)}     .st-preview i{border-radius:50%;background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
 
-  /* the System panel — the ONLY surface permitted to widen (prose stays 1080px) */
-  .sysmap-wrap{margin:0 -26px}
+  /* the System panel — the ONLY surface permitted to widen (prose stays 1080px).
+     The diagram draws its own frame, so the wrapping block carries no card chrome while the diagram is shown. */
+  .sysmap-wrap{margin:0}
+  @media(min-width:720px){ section.panel[data-tab="system"] .block{background:transparent;border:0;box-shadow:none;padding:0} }
+  .sys-divider{stroke:var(--accent-line);stroke-width:1}
   .sysmap{width:100%;height:auto;display:block}
   /* Atlas System Map — frame (Project Atlas), tier label column, cards, gutter-routed connectors, legend */
   .sys-frame{fill:var(--surface-2);stroke:var(--accent-line);stroke-width:1.5}
@@ -342,9 +348,9 @@
   .sys-tier-h{font-family:var(--serif);font-size:17px;color:var(--ink);margin:22px 0 2px}
   .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .sys-fallback{display:none}
-  /* centred in the viewport: the wrap's natural left edge is (100vw − 1080px)/2 + 26px padding + 1px border + 20px block padding */
+  /* centred in the viewport: the wrap's natural left edge is (100vw − 1080px)/2 + 26px page padding */
   @media(min-width:1200px){ section.panel[data-tab="system"] .sysmap-wrap{
-      width:min(1440px,100vw - 48px); margin-left:calc(493px - min(720px,50vw - 24px)); } }
+      width:min(1440px,100vw - 48px); margin-left:calc(514px - min(720px,50vw - 24px)); } }
   /* mobile: the diagram is REPLACED by the list — never scaled, never panned */
   @media(max-width:719px){ .sysmap-wrap{display:none} .sys-fallback{display:block} }
   @media(prefers-reduced-motion:reduce){ .prov.is-current .prov-dot{animation:none} }
@@ -1053,7 +1059,9 @@ const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st
     `<span class="prov-layers">${cur ? `all ${sync.of} publication layers agree` : "see the closeout record"}</span>`+
     // Reciprocal link — navigation only. The Brain is not embedded, its data is not loaded, and its interface is not reused.
     `<a class="brain-link" href="https://atlas-living-brain.thepatrongrp-4382.chatgpt.site/" target="_blank" rel="noopener noreferrer">`+
-    `Explore the Atlas Living Brain <span class="arr" aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span></a>`;
+    `Explore the Atlas Living Brain <span class="arr" aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span></a>`+
+    `<a class="brain-link binder-link" href="https://claude.ai/code/artifact/4ced964e-3818-4935-b9a6-b98e3f03caa6" target="_blank" rel="noopener noreferrer">`+
+    `Open Owner Onboarding Binder <span class="arr" aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span></a>`;
 })();
 
 /* Atlas System Map — authored coordinates, no runtime layout, no physics, no library.
@@ -1076,9 +1084,8 @@ const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st
   const BAND={x:M+16, y:16, w:FW-32, h:52};     // root band (Project Atlas)
   const rowY=[120,266,412];                     // card tops per tier; 70-unit lane between rows
   const laneY = i => rowY[i]+NH+(rowY[i+1]-rowY[i]-NH)/2;
-  const FH = rowY[2]+NH+24;                     // frame bottom
-  const LEGY = FH+30;                           // legend baseline
-  const VBH = LEGY+20;
+  const DIVY = rowY[2]+NH+22;                   // internal footer: a subtle divider beneath the diagram
+  // FH (frame bottom) and VBH are settled once the legend footer has been laid out — see below
 
   /* ── nodes: every node keeps its tier (the text list is the canonical grouping); the root becomes the frame ── */
   const nodes={};
@@ -1181,18 +1188,22 @@ const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st
     `<text class="sys-band-m" x="${BAND.x+176}" y="${BAND.y+32}">${esc(root.status)} · ${esc(root.owner)}</text>`+
     `<text class="sys-band-d" x="${BAND.x+BAND.w-18}" y="${BAND.y+32}" text-anchor="end">The encompassing operating system — the durable, authoritative memory of how these systems fit together</text>` : "";
 
-  /* ── legend: line style per relationship kind, in the order the kinds appear ── */
+  /* ── legend footer INSIDE the frame: header line, then the five samples, wrapping within the frame ── */
   const seen=[]; SYS.edges.forEach(e=>{ if(nodes[e.from]&&nodes[e.to]&&!seen.includes(e.kind)) seen.push(e.kind); });
-  const lgdHead="Relationships · read A → B as “A governs B”";
-  cv.font="700 10px "+sans;                                   // header is letter-spaced .14em — measured, never assumed
-  const lgdHeadW=cv.measureText(lgdHead.toUpperCase()).width + lgdHead.length*1.4;
-  let legend=`<text class="sys-lgd-h" x="${M+PAD}" y="${LEGY}">${lgdHead}</text>`;
-  let lx=M+PAD+Math.ceil(lgdHeadW)+36;
+  const lgdHead="Relationships · read each connector from A to B · line style defines the relationship";
+  const LX0=FX+PAD, LXMAX=FX+FW-PAD;
+  let legend=`<line class="sys-divider" x1="${LX0}" y1="${DIVY}" x2="${LXMAX}" y2="${DIVY}"/>`+
+             `<text class="sys-lgd-h" x="${LX0}" y="${DIVY+24}">${esc(lgdHead)}</text>`;
+  cv.font="11px "+sans;                                       // item widths are measured, never assumed
+  let lx=LX0, ly=DIVY+24+24;
+  seen.forEach(k=>{ const c=kindClass(k), w=44+Math.ceil(cv.measureText(k).width);
+    if(lx>LX0 && lx+w>LXMAX){ lx=LX0; ly+=22; }              // wrap cleanly, always inside the frame
+    legend += `<path class="sys-edge k-${c}" marker-end="url(#mk-${c})" d="M${lx} ${ly-4} L${lx+34} ${ly-4}"/>`+
+              `<text class="sys-lgd" x="${lx+44}" y="${ly}">${esc(k)}</text>`;
+    lx += w+34; });
   cv.font="600 13px "+sans;
-  seen.forEach(k=>{ const c=kindClass(k);
-    legend += `<path class="sys-edge k-${c}" marker-end="url(#mk-${c})" d="M${lx} ${LEGY-4} L${lx+34} ${LEGY-4}"/>`+
-              `<text class="sys-lgd" x="${lx+44}" y="${LEGY}">${esc(k)}</text>`;
-    lx += 44 + Math.ceil(cv.measureText(k).width*0.85) + 34; });
+  const FH = ly+20;                             // frame bottom — diagram and legend are both inside
+  const VBH = FH+8;
 
   const defs = `<defs>`+
     `<marker id="mk-governs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mk k-governs" d="M1 1 L9 5 L1 9 Z"/></marker>`+
