@@ -256,6 +256,55 @@
   }
   @media(prefers-reduced-motion:reduce){ section.panel{animation:none} }
 
+  /* ============ LIVING INTELLIGENCE (2026-09-03) — reuses existing tokens only ============ */
+  :root{ --breathe-period:5.5s; }
+  /* provenance strip — synchronization state, stated in words first */
+  .prov{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 26px;
+    border-top:1px solid var(--line);background:var(--surface-2)}
+  .prov-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .prov.is-current .prov-dot{background:var(--green)}
+  .prov.is-current .prov-dot{animation:breathe var(--breathe-period) ease-in-out infinite}
+  @keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.18)}}
+  .prov-state{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+  .prov.is-current .prov-state{color:var(--green)}
+  .prov-item{font-size:12px;color:var(--muted)}
+  .prov-item b{color:var(--ink-soft);font-weight:600;margin-right:5px}
+  .prov-layers{margin-left:auto;font-size:11.5px;color:var(--muted)}
+
+  /* status chips — label + SHAPE, never colour alone */
+  .st{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;font-weight:700;color:var(--ink-soft);
+    border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:2px 9px}
+  .st i{flex:none;width:7px;height:7px;background:currentColor;display:block}
+  .st-operational{color:var(--green)} .st-operational i{border-radius:50%}
+  .st-built{color:var(--blue)}        .st-built i{border-radius:1px}
+  .st-progress{color:var(--accent)}   .st-progress i{border-radius:50%;background:linear-gradient(90deg,currentColor 50%,transparent 50%);box-shadow:inset 0 0 0 1px currentColor}
+  .st-preview{color:var(--slate)}     .st-preview i{border-radius:50%;background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+
+  /* the System panel — the ONLY surface permitted to widen (prose stays 1080px) */
+  .sysmap-wrap{margin:0 -26px}
+  .sysmap{width:100%;height:auto;display:block}
+  .sys-tierlbl{font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;fill:var(--accent)}
+  .sys-node{fill:var(--surface);stroke:var(--line)}
+  .sys-rail{fill:var(--accent)}
+  .sys-name{font:600 13px/1 var(--sans);fill:var(--ink)}
+  .sys-meta{font:11px/1 var(--sans);fill:var(--muted)}
+  .sys-edge{stroke:var(--accent-line);fill:none}
+  .sys-edgelbl{font:10px/1 var(--sans);fill:var(--muted);letter-spacing:.04em}
+  .sys-dl{margin:0}
+  .sys-dl dt{font-weight:700;color:var(--ink);margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .sys-dl dd{margin:3px 0 0;color:var(--ink-soft);font-size:14px}
+  .sys-dl .sys-rel{color:var(--muted);font-size:12.5px;margin-top:3px}
+  .sys-tier-h{font-family:var(--serif);font-size:17px;color:var(--ink);margin:22px 0 2px}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .sys-fallback{display:none}
+  @media(min-width:1200px){ section.panel[data-tab="system"] .sysmap-wrap{
+      width:min(1440px,100vw - 48px); margin-left:calc(540px - min(720px,50vw - 24px)); } }
+  /* mobile: the diagram is REPLACED by the list — never scaled, never panned */
+  @media(max-width:719px){ .sysmap-wrap{display:none} .sys-fallback{display:block} }
+  @media(prefers-reduced-motion:reduce){ .prov.is-current .prov-dot{animation:none} }
+
+
   /* ---------- Atlas Project History — editorial chapter timeline ---------- */
   .history{margin-top:4px}
   .chapter{display:flex;gap:18px;padding:4px 0 22px}
@@ -280,6 +329,8 @@
     nav.tabs{display:none}
     header.top,.card,.block,.lead-card,.disc,.snapshot,.vcat,.principle{box-shadow:none;break-inside:avoid}
     section.panel{display:block!important;animation:none}
+    .prov.is-current .prov-dot{animation:none}
+    .sysmap-wrap{margin:0} .sys-fallback{display:block}
     h2{border-top:1px solid var(--line);padding-top:16px;margin-top:22px}
     section.panel[data-tab="overview"] h2{border-top:none;margin-top:6px}
     a{color:var(--ink)}
@@ -312,6 +363,7 @@
       </div>
       <div class="meta" id="h-meta"></div>
     </div>
+    <div class="prov" id="prov"></div>
     <div class="focus"><span class="flabel">Current Focus</span><span class="ftext" id="h-focus"></span></div>
   </header>
 
@@ -361,6 +413,16 @@
   </section>
 
   <!-- DELIVERABLES -->
+  <section class="panel" data-tab="system">
+    <h2>The System</h2>
+    <p class="sectlead" id="sys-lead"></p>
+    <div class="block">
+      <div class="sysmap-wrap" id="sysmap"></div>
+      <div class="sys-fallback" id="sys-fallback"></div>
+      <div class="visually-hidden" id="sys-a11y"></div>
+    </div>
+  </section>
+
   <section class="panel" data-tab="deliverables">
     <h2>Deliverables</h2>
     <p class="sectlead">Tangible outputs created for The Patron Group. Status and evidence reference are shown for each.</p>
@@ -440,18 +502,71 @@ const DATA = {
     sub:"Operational intelligence, strategic progress, and leadership priorities for The Patron Group — evidence-based, prepared by Project Atlas.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-09-01",
-    phase:"The POCC operating model changed on September 1, and it is now in use. This was a change to how the company records and reconciles money in its Google Sheets operating system — NOT a software deployment. Every expense is now classified as exactly one of three things: work on a project, a general (non-project) cost belonging to an entity, or a Tools & John Gas reserve purchase. Non-project costs are tracked by entity and by month, so entity funding requests and month-end reimbursements can be calculated directly instead of reconstructed. Historical reimbursement records are preserved untouched. Tools & John Gas is now the only reserve fund going forward, with its standard monthly target, its actual spending and the contribution actually received each reported separately rather than netted together. Project tracking expanded from three projects to eight, each carrying an August 31 opening balance from QuickBooks with September-forward spending applied to it, and funding added to a project can now be recorded through a new Project Reimbursements sheet. The dashboard now shows each project's current balance, sorted so the projects needing funding appear first — replacing a combined project-funding total that described no project and hid the ones that mattered. Entity-only classification was added for Patron Dev Works and The Patron Group, which have no physical property. Nick and Chance can now reconcile POCC against QuickBooks by printing both and comparing the lines; that reconciliation stays deliberately manual. POCC Web — the browser interface — was NOT deployed: its implementation specification is written and independently reviewed, and the first step is approved but has not been started. QuickBooks remains the accounting system of record.",
-    version:"v10.0 (2026-09-01)",
-    currentFocus:"Step one of bringing the POCC Web browser interface into line with the new September workbook model. It is deliberately the smallest possible first step — reading and displaying the new layout correctly, with no ability to write anything — and it is reviewed before anything follows it. No application has been deployed and none will be until the interface and the workbook agree and the combined result has been checked. QuickBooks remains the accounting system of record."
+    asOf:"2026-09-03",
+    phase:"The POCC operating model changed on September 1, and it is now in use. This was a change to how the company records and reconciles money in its Google Sheets operating system — NOT a software deployment. Every expense is now classified as exactly one of three things: work on a project, a general (non-project) cost belonging to an entity, or a Tools & John Gas reserve purchase. Non-project costs are tracked by entity and by month, so entity funding requests and month-end reimbursements can be calculated directly instead of reconstructed. Historical reimbursement records are preserved untouched. Tools & John Gas is now the only reserve fund going forward, with its standard monthly target, its actual spending and the contribution actually received each reported separately rather than netted together. Project tracking expanded from three projects to eight, each carrying an August 31 opening balance from QuickBooks with September-forward spending applied to it, and funding added to a project can now be recorded through a new Project Reimbursements sheet. The dashboard now shows each project's current balance, sorted so the projects needing funding appear first — replacing a combined project-funding total that described no project and hid the ones that mattered. Entity-only classification was added for Patron Dev Works and The Patron Group, which have no physical property. Nick and Chance can now reconcile POCC against QuickBooks by printing both and comparing the lines; that reconciliation stays deliberately manual. POCC Web — the browser interface — was NOT deployed: its first two September-parity slices are implemented and landed on the working branch, and the third is specified but its implementation is not authorized. Nothing has been deployed. QuickBooks remains the accounting system of record.",
+    version:"v10.1 (2026-09-03)",
+    currentFocus:"Bringing the POCC Web browser interface into line with the September workbook model. The first two parity steps are landed on the working branch and are NOT deployed. The next step — making projects usable with any property — is specified, but its implementation remains UNAUTHORIZED: the specification has not yet passed independent review, and no code will be written until it does and until that authorization is given separately. No application has been deployed and none will be until the interface and the workbook agree and the combined result has been checked. QuickBooks remains the accounting system of record."
+  },
+  // ── The System — a CURATED subset of the Atlas Living Brain canonical snapshot.
+  // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
+  // Derived at the named source commit; refreshed by Daily Closeout when the Brain changes
+  // a node this subset carries. Brain contract: knowledge/brain/BRAIN_CONTRACT.md
+  system:{
+    // `sync` is set by the Daily Closeout from scripts/verify-leadership-artifacts.sh.
+    // Motion on the provenance strip is bound to `verified` and means exactly that — nothing else
+    // on this page animates, and nothing here is live data.
+    sync:{ verified:true, layers:5, of:5 },
+    snapshotUpdated:"2026-09-03",
+    sourceCommit:"63a857b",
+    lead:"How the parts of the operation fit together, how mature each one is, and who is authoritative for what. Curated from the Atlas canonical system map — the full map lives in the Atlas Living Brain.",
+    tiers:[
+      {id:"authority", label:"Authority & Governance", nodes:[
+        {id:"project-atlas",        name:"Project Atlas",            status:"Operational", owner:"Atlas",       desc:"The version-controlled repository that is the durable, authoritative memory. When the repository and anyone's recollection disagree, the repository wins."},
+        {id:"data-governance",      name:"Data Governance",          status:"Operational", owner:"Atlas",       desc:"What may enter the repository at all. Credentials, personal information and private financial detail are excluded by rule."},
+        {id:"publication-authority",name:"Publication Authority",    status:"Operational", owner:"Owner",       desc:"Publishing any public artifact is a separate, explicitly granted act. Generating a leadership surface is never the same as publishing it."},
+        {id:"deployment-boundary",  name:"Deployment Boundary",      status:"Operational", owner:"Owner",       desc:"Trunk, production and the live operating workbook change only by explicit human authorization."}
+      ]},
+      {id:"operating", label:"Operating Systems", nodes:[
+        {id:"september-model",  name:"September Operating Model", status:"Operational", owner:"Owner",     desc:"The approved classification, reserve and reimbursement model effective from September. History is preserved, never rewritten."},
+        {id:"knowledge-system", name:"Company Knowledge System", status:"Operational", owner:"Atlas",     desc:"Structured operating knowledge about how the business actually works, kept separate from the record of what was built."},
+        {id:"daily-closeout",   name:"Daily Closeout",           status:"Operational", owner:"Atlas",     desc:"The end-of-day procedure that promotes the day's work into durable memory and verifies the leadership surfaces end to end."},
+        {id:"accounting-system",name:"Accounting System of Record", status:"Operational", owner:"Accounting", desc:"The company's accounting system remains authoritative for financial records. Reconciliation against it is deliberately performed by people."}
+      ]},
+      {id:"surfaces", label:"Product Surfaces", nodes:[
+        {id:"pocc",               name:"Operations Command Center", status:"Operational", owner:"Operations", desc:"The operations command center in daily use — work orders, maintenance, vendors, transactions and executive reporting."},
+        {id:"pocc-web",           name:"POCC Web Interface",        status:"In Progress", owner:"Atlas",      desc:"A browser interface over the command center. Parity work is landed on the working branch; nothing is deployed."},
+        {id:"patron-platform",    name:"Patron Platform",           status:"Built",       owner:"Atlas",      desc:"The employee-facing operating platform: one secure sign-in, role-based workspaces, shared records. Working on demonstration data."},
+        {id:"executive-dashboard",name:"Executive Operations Brief",status:"Operational", owner:"Atlas",      desc:"This document — the leadership-facing progress surface, published to a stable address and verified at every closeout."}
+      ]}
+    ],
+    // Only the relationships that answer a leadership question: who is authoritative, and where information goes.
+    edges:[
+      {from:"data-governance",      to:"project-atlas",       kind:"governs"},
+      {from:"publication-authority",to:"executive-dashboard", kind:"governs"},
+      {from:"deployment-boundary",  to:"pocc-web",            kind:"governs"},
+      {from:"deployment-boundary",  to:"patron-platform",     kind:"governs"},
+      {from:"september-model",      to:"pocc",                kind:"authoritative for"},
+      {from:"september-model",      to:"pocc-web",            kind:"authoritative for"},
+      {from:"daily-closeout",       to:"executive-dashboard", kind:"feeds"},
+      {from:"knowledge-system",     to:"patron-platform",     kind:"feeds"},
+      {from:"pocc",                 to:"accounting-system",   kind:"reconciled against"},
+      {from:"pocc-web",             to:"pocc",                kind:"module of"}
+    ],
+    // Evidence-backed growth: what became real, and when. Landed reality only.
+    growth:[
+      {when:"2026-09-02", what:"September operating model live in both workbooks", status:"Operational"},
+      {when:"2026-09-02", what:"POCC Web parity — first two slices landed on the working branch (not deployed)", status:"In Progress"},
+      {when:"2026-08-14", what:"Production master data onboarded", status:"Operational"},
+      {when:"2026-08-10", what:"Governed agent loop live-proven", status:"Operational"}
+    ]
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
     currentState:"The way POCC records and reconciles money changed on September 1, and the change is live in the Google Sheets operating system that runs the business. This was an operating-model and financial-control improvement, not a software release. Expenses are now classified one of three ways, non-project costs roll up by entity and month, eight projects each carry a real opening balance from QuickBooks, and money added to a project has a place to be recorded. The browser interface was not deployed and no application went live.",
     whatChanged:"Seven things. (1) Every new expense is classified as exactly one of: project work, a general non-project cost belonging to an entity, or a Tools & John Gas reserve purchase. (2) Non-project costs are totalled by entity and by month, so what each entity is owed at month end is calculated rather than reconstructed. (3) Tools & John Gas is the only reserve fund going forward; its standard monthly target, its actual spending and the contribution actually received are reported separately and never netted against each other. The two retired reserves keep their history. (4) Project tracking went from three projects to eight, each with an August 31 opening balance from QuickBooks and September-forward spending applied to it — including the three that start negative, which are shown as needing funding rather than rounded away. (5) A new Project Reimbursements sheet records money added to a project. (6) The dashboard now lists each project's current balance, lowest first, replacing a combined funding total that described no project. (7) Two entities that own no property — Patron Dev Works and The Patron Group — can now be charged directly without inventing a property for them.",
     whyItMatters:"Month-end reconciliation between POCC and QuickBooks was slow and inconsistent because the two systems did not agree on how an expense should be described. They do now, and Nick and Chance can reconcile by printing both and comparing the lines — a deliberately manual process, because the volume suits a person and an automated bridge would create a third number nobody owns. Entity funding requests and reimbursements are now a calculation rather than an investigation. And the project view finally reflects reality: eight live projects, real opening balances carried over from QuickBooks, and the ones in deficit visible at the top instead of averaged into a portfolio figure.",
-    currentRisks:"This was a change to the Google Sheets operating model. No application was deployed. The POCC Web browser interface has NOT been updated and must not be used against the new workbook until it is — the interface still expects the old layout, and its implementation plan has been written and independently reviewed four times but not started. During the work a formula column was accidentally overwritten by a dropdown selection, which briefly blanked some entity values and disturbed the reimbursement summary; it was found, corrected the same day, and the dropdown that invited the mistake was removed from both the live and practice workbooks so it cannot recur. The September reimbursement summary was verified healthy afterwards. Historical records were preserved throughout — nothing was rewritten. QuickBooks remains the accounting system of record; no time or dollar savings are claimed.",
-    tomorrowFocus:"Step one of bringing the POCC Web browser interface into line with the new September workbook model. It is deliberately the smallest possible first step — reading and displaying the new layout correctly, with no ability to write anything — and it is reviewed before anything follows it. No application has been deployed and none will be until the interface and the workbook agree and the combined result has been checked. QuickBooks remains the accounting system of record."
+    currentRisks:"This was a change to the Google Sheets operating model. No application was deployed. The POCC Web browser interface has NOT been updated and must not be used against the new workbook until it is — the interface still expects the old layout in the areas not yet converted. Its first two parity steps are landed on the working branch and not deployed; the third remains unauthorized pending a specification that passes independent review. During the work a formula column was accidentally overwritten by a dropdown selection, which briefly blanked some entity values and disturbed the reimbursement summary; it was found, corrected the same day, and the dropdown that invited the mistake was removed from both the live and practice workbooks so it cannot recur. The September reimbursement summary was verified healthy afterwards. Historical records were preserved throughout — nothing was rewritten. QuickBooks remains the accounting system of record; no time or dollar savings are claimed.",
+    tomorrowFocus:"Bringing the POCC Web browser interface into line with the September workbook model. The first two parity steps are landed on the working branch and are NOT deployed. The next step — making projects usable with any property — is specified, but its implementation remains UNAUTHORIZED: the specification has not yet passed independent review, and no code will be written until it does and until that authorization is given separately. No application has been deployed and none will be until the interface and the workbook agree and the combined result has been checked. QuickBooks remains the accounting system of record."
   },
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
   execImpact:{
@@ -476,7 +591,7 @@ const DATA = {
   cards:[
     {num:"Decisions stick", label:"Master Data review persistence live in Production", sub:"Approving a Master Data record now saves that decision through one governed, permission-checked path and the display reliably reflects it — the earlier 'keeps saying Needs Review after Approve' issue is fixed and deployed"},
     {num:"Safe = fast", label:"Guarded release pipeline operational", sub:"Routine deployment/validation went from dozens of manual, error-prone commands to a few checked, evidence-producing steps — dry-run by default, shared-environment changes human-operated; on its first real use its safety guard caught a mis-targeted deployment and stopped it before any change reached the wrong database"},
-    {num:"12 / 7", label:"Avah residential package assembled & validated", sub:"12 tenants / 7 leases (6 ready, 1 held on a rent discrepancy, 1 third-party deposit set aside for its own step); signed leases referenced in Google Drive rather than re-copied; real resident data kept out of the code repository"},
+    {num:"12 / 7", label:"Avah residential package assembled & validated (measured 2026-08-13)", sub:"12 tenants / 7 leases (6 ready, 1 held on a rent discrepancy, 1 third-party deposit set aside for its own step); signed leases referenced in Google Drive rather than re-copied; real resident data kept out of the code repository"},
     {num:"Held", label:"No real resident data loaded yet (by design)", sub:"Avah's validated data is intentionally not yet loaded — it stays off the shared environments pending a human-operated rehearsal and one mixed-use property containment step; the operator tools built for the rehearsal are temporary and will be removed after"}
   ],
   // Atlas Project History — told as skimmable chapters (era · period · narrative). Complete information preserved.
@@ -729,7 +844,7 @@ const _snap = [
   {num:`${DATA.valueCreated.estimated.length}`, lbl:"Estimated Improvements"},
   {num:`${DATA.valueCreated.riskAvoided.length}`, lbl:"Risks Reduced"},
   {num:`${DATA.valueCreated.strategic.length}`, lbl:"Strategic Initiatives"},
-  {num:"Production Readiness (B1)", lbl:"Current Phase"}
+  {num:"POCC Web September Parity", lbl:"Current Phase"}
 ];
 el("impact-snapshot").innerHTML =
   `<div class="snap-title">Impact Snapshot</div>`+
@@ -868,17 +983,91 @@ el("next").innerHTML = li(DATA.next);
 const legend = Object.keys(LBL).map(k=>badge(k)).join(" ");
 ["legend-1","legend-2"].forEach(id=>{ if(el(id)) el(id).innerHTML = legend; });
 
+/* ═══════════ LIVING INTELLIGENCE — provenance, system map, growth (2026-09-03) ═══════════
+   Presentation only. Reads DATA; computes nothing, claims nothing the repository does not. */
+const SYS = DATA.system;
+const ST_CLASS = {"Operational":"st-operational","Built":"st-built","In Progress":"st-progress",
+                  "Preview":"st-preview","Production Ready":"st-operational","Planned":"st-preview","Future":"st-preview"};
+const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st}</span>`;
+
+/* Provenance strip. `verified` is set by the Daily Closeout from
+   scripts/verify-leadership-artifacts.sh — motion is bound to it and means exactly that. */
+(function(){
+  const sync = (SYS && SYS.sync) || {verified:false, layers:0, of:5};
+  const cur  = sync.verified === true;
+  el("prov").className = "prov" + (cur ? " is-current" : "");
+  el("prov").innerHTML =
+    `<span class="prov-dot" aria-hidden="true"></span>`+
+    `<span class="prov-state">${cur ? "Synchronized · verified current" : "Synchronization not verified"}</span>`+
+    `<span class="prov-item"><b>As of</b>${DATA.meta.asOf}</span>`+
+    `<span class="prov-item"><b>Version</b>${DATA.meta.version}</span>`+
+    `<span class="prov-item"><b>System map from</b>${SYS.snapshotUpdated} · ${SYS.sourceCommit}</span>`+
+    `<span class="prov-layers">${cur ? `all ${sync.of} publication layers agree` : "see the closeout record"}</span>`;
+})();
+
+/* The System — authored coordinates, no runtime layout, no physics, no library. */
+(function(){
+  if(!SYS) return;
+  el("sys-lead").textContent = SYS.lead;
+  const nodes={}, TW=1200, NW=250, NH=64, COLS=4;
+  const rowY=[52,196,340];
+  SYS.tiers.forEach((t,ti)=>t.nodes.forEach((n,ni)=>{
+    const gap=(TW-COLS*NW)/(COLS+1);
+    nodes[n.id]={...n, x:gap+ni*(NW+gap), y:rowY[ti], tier:t.label};
+  }));
+  let edges="";
+  SYS.edges.forEach(e=>{
+    const a=nodes[e.from], b=nodes[e.to]; if(!a||!b) return;
+    const x1=a.x+NW/2, y1=a.y+NH, x2=b.x+NW/2, y2=b.y;
+    const my=(y1+y2)/2;
+    edges += `<path class="sys-edge" d="M${x1} ${y1} C ${x1} ${my}, ${x2} ${my}, ${x2} ${y2}"/>`+
+             `<text class="sys-edgelbl" x="${(x1+x2)/2}" y="${my-3}" text-anchor="middle">${e.kind}</text>`;
+  });
+  let boxes="", tiers="";
+  SYS.tiers.forEach((t,ti)=>{
+    tiers += `<text class="sys-tierlbl" x="0" y="${rowY[ti]-14}">${t.label}</text>`;
+    t.nodes.forEach(n=>{
+      const d=nodes[n.id];
+      boxes += `<g><rect class="sys-node" x="${d.x}" y="${d.y}" width="${NW}" height="${NH}" rx="8"/>`+
+               `<rect class="sys-rail" x="${d.x}" y="${d.y}" width="3" height="${NH}" rx="1.5"/>`+
+               `<text class="sys-name" x="${d.x+14}" y="${d.y+25}">${n.name}</text>`+
+               `<text class="sys-meta" x="${d.x+14}" y="${d.y+45}">${n.status} · ${n.owner}</text></g>`;
+    });
+  });
+  el("sysmap").innerHTML =
+    `<svg class="sysmap" viewBox="0 -30 ${TW} 460" role="img" preserveAspectRatio="xMidYMin meet" `+
+    `aria-labelledby="sysmap-t sysmap-d"><title id="sysmap-t">Atlas system map</title>`+
+    `<desc id="sysmap-d">Twelve systems in three tiers — Authority and Governance, Operating Systems, `+
+    `Product Surfaces — with the governing and information-flow relationships between them. `+
+    `The same information follows in text.</desc>${edges}${boxes}${tiers}</svg>`;
+
+  /* Mobile + print + screen-reader equivalent — the same information, never a scaled diagram. */
+  const relOf = id => SYS.edges.filter(e=>e.from===id||e.to===id).map(e=>
+      e.from===id ? `${e.kind} → ${nodes[e.to]?nodes[e.to].name:e.to}`
+                  : `${nodes[e.from]?nodes[e.from].name:e.from} ${e.kind} → this`);
+  const listHTML = SYS.tiers.map(t=>
+    `<div class="sys-tier-h">${t.label}</div><dl class="sys-dl">`+
+    t.nodes.map(n=>{
+      const r=relOf(n.id);
+      return `<dt>${n.name} ${stChip(n.status)}</dt><dd>${n.desc}`+
+             (r.length?`<div class="sys-rel">${r.join(" · ")}</div>`:"")+`</dd>`;
+    }).join("")+`</dl>`).join("");
+  el("sys-fallback").innerHTML = listHTML;
+  el("sys-a11y").innerHTML = listHTML;
+})();
+
 // Footer
 el("foot").innerHTML =
   `The <b>Executive Operations Brief</b> (formerly the Work Impact Dashboard) is the executive presentation layer of the living log system in <code>work-impact/</code> — the markdown logs are the source of truth. `+
   `Built per <code>work-impact/README.md</code>, <code>knowledge/ai/work-impact-artifact-protocol.md</code>, and the <code>Executive Operations Brief Design Standards</code>. `+
   `Value is measured per the <code>Work Impact Baseline Protocol</code> (<code>knowledge/ai/work-impact-baseline-protocol.md</code>) — we only claim what we can defend. `+
   `Evidence-based; no invented work, time, or money saved. No sensitive financial, tenant, ownership, legal, or personal data (DATA_GOVERNANCE.md). `+
+  `The System map is a curated subset of the Atlas canonical system snapshot (${SYS.snapshotUpdated} · ${SYS.sourceCommit}); the complete map lives in the Atlas Living Brain. `+
   `Prepared by Project Atlas · Subsystem #1 of the Patron Operations Command Center.`;
 
 // Tabs
 const TABS = [
-  ["overview","Overview"],["deliverables","Deliverables"],["discoveries","Discoveries"],
+  ["overview","Overview"],["system","The System"],["deliverables","Deliverables"],["discoveries","Discoveries"],
   ["value","Value Created"],["milestones","Milestones"],["questions","Open Questions"],["next","Next Actions"]
 ];
 el("tabs").innerHTML = TABS.map(([id,label],i)=>
