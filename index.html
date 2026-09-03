@@ -49,7 +49,7 @@
 
   /* ---------- header ---------- */
   header.top{background:var(--surface);border:1px solid var(--line);border-radius:14px;
-    padding:0 0 24px;box-shadow:var(--shadow);margin-bottom:20px;overflow:hidden}
+    padding:0;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
   /* masthead — navy band carrying the Patron wordmark + emblem */
   .masthead{display:flex;align-items:center;gap:14px;background:var(--navy);
     background:linear-gradient(100deg,var(--navy) 0%,var(--navy-soft) 100%);
@@ -72,7 +72,8 @@
   .mchip.mchip-phase{white-space:normal}
   .mchip b{color:var(--ink-soft);font-weight:600;margin-right:5px}
 
-  .focus{display:flex;align-items:baseline;gap:14px;margin:22px 26px 0;padding:15px 20px;
+  /* Current Focus — sits directly below the navigation, outside the header card */
+  .focus{display:flex;align-items:baseline;gap:14px;margin:0 0 20px;padding:15px 20px;
     background:var(--accent-soft);border:1px solid var(--accent-line);border-left:3px solid var(--accent);border-radius:0 10px 10px 0}
   .focus .flabel{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
     font-weight:800;white-space:nowrap}
@@ -89,14 +90,31 @@
   .card .clabel{font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:700}
   .card .csub{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.45}
 
-  /* ---------- tabs ---------- */
-  nav.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 20px;position:sticky;top:3px;z-index:5;
-    padding:12px 0;background:linear-gradient(180deg,var(--bg) 80%,rgba(244,242,237,0))}
-  nav.tabs button{background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);
-    padding:9px 16px;border-radius:7px;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer;
-    transition:.16s ease;box-shadow:var(--shadow)}
+  /* ---------- tabs — the ONE canonical navigation: compact, sticky, directly below the header ---------- */
+  nav.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;position:sticky;top:3px;z-index:6;
+    padding:8px 0;background:rgba(244,242,237,.94);
+    -webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);
+    border-bottom:1px solid var(--line)}
+  nav.tabs button{position:relative;display:inline-flex;align-items:center;gap:7px;flex:none;
+    background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);
+    padding:7px 13px;border-radius:7px;font-size:12.5px;font-weight:600;letter-spacing:.01em;cursor:pointer;
+    white-space:nowrap;transition:border-color .16s ease,color .16s ease,background .16s ease;box-shadow:var(--shadow)}
   nav.tabs button:hover{border-color:var(--accent);color:var(--accent)}
+  nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   nav.tabs button.active{background:var(--navy);color:#f4efe4;border-color:var(--navy);box-shadow:0 4px 14px rgba(20,34,58,.18)}
+  nav.tabs button.active:hover{color:#f4efe4;border-color:var(--navy)}
+  /* restrained "new" marker — discoverability, not decoration */
+  .tab-new{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;line-height:1;
+    color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:999px;padding:3px 6px 2px}
+  nav.tabs button.active .tab-new{color:var(--navy);background:var(--gold);border-color:var(--gold)}
+  /* phones: one horizontally scrollable row — labels never clip, wrap, or shrink */
+  @media(max-width:719px){
+    nav.tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;
+      margin-left:-26px;margin-right:-26px;padding-left:26px;padding-right:26px;scroll-padding:0 26px}
+  }
+  @media(max-width:560px){
+    nav.tabs{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;scroll-padding:0 14px}
+  }
 
   section.panel{display:none;animation:fade .2s ease}
   section.panel.active{display:block}
@@ -270,6 +288,13 @@
   .prov-item{font-size:12px;color:var(--muted)}
   .prov-item b{color:var(--ink-soft);font-weight:600;margin-right:5px}
   .prov-layers{margin-left:auto;font-size:11.5px;color:var(--muted)}
+  /* reciprocal link to the Atlas Living Brain — navigation only; nothing is embedded or loaded */
+  .brain-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.02em;
+    color:#f4efe4;background:var(--navy);border:1px solid var(--navy);border-radius:999px;padding:6px 13px;
+    white-space:nowrap;transition:background .16s ease,border-color .16s ease}
+  .brain-link:hover{background:var(--navy-soft);border-color:var(--navy-soft);color:#f4efe4}
+  .brain-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .brain-link .arr{font-size:13px;line-height:1;color:var(--gold)}
 
   /* status chips — label + SHAPE, never colour alone */
   .st{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;letter-spacing:.08em;
@@ -284,13 +309,32 @@
   /* the System panel — the ONLY surface permitted to widen (prose stays 1080px) */
   .sysmap-wrap{margin:0 -26px}
   .sysmap{width:100%;height:auto;display:block}
-  .sys-tierlbl{font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;fill:var(--accent)}
+  /* Atlas System Map — frame (Project Atlas), tier label column, cards, gutter-routed connectors, legend */
+  .sys-frame{fill:var(--surface-2);stroke:var(--accent-line);stroke-width:1.5}
+  .sys-band{fill:var(--navy)}
+  .sys-band-t{font:600 14px/1 var(--serif);letter-spacing:.14em;fill:#f6f1e7}
+  .sys-band-m{font:700 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;fill:var(--gold)}
+  .sys-band-d{font:11.5px/1 var(--sans);fill:#d6cbb0}
+  .sys-tierlbl{font:700 10.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;fill:var(--accent)}
   .sys-node{fill:var(--surface);stroke:var(--line)}
+  .sys-node.is-external{stroke:var(--slate);stroke-dasharray:4 3}
   .sys-rail{fill:var(--accent)}
   .sys-name{font:600 13px/1 var(--sans);fill:var(--ink)}
   .sys-meta{font:11px/1 var(--sans);fill:var(--muted)}
-  .sys-edge{stroke:var(--accent-line);fill:none}
-  .sys-edgelbl{font:10px/1 var(--sans);fill:var(--muted);letter-spacing:.04em}
+  .sys-tag{font:700 9px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;fill:var(--slate)}
+  .sys-edge{fill:none;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+  .sys-edge.k-governs{stroke:var(--navy-soft)}
+  .sys-edge.k-authoritative{stroke:var(--accent)}
+  .sys-edge.k-feeds{stroke:var(--accent);stroke-dasharray:6 4}
+  .sys-edge.k-reconciled{stroke:var(--slate);stroke-dasharray:1.5 4}
+  .sys-edge.k-module{stroke:var(--ink-soft)}
+  .mk.k-governs{fill:var(--navy-soft)}
+  .mk.k-authoritative{fill:var(--accent)}
+  .mk.k-feeds{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mk.k-reconciled{fill:var(--surface);stroke:var(--slate);stroke-width:1.5}
+  .mk.k-module{fill:var(--surface);stroke:var(--ink-soft);stroke-width:1.4}
+  .sys-lgd-h{font:700 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:var(--muted)}
+  .sys-lgd{font:11px/1 var(--sans);fill:var(--ink-soft)}
   .sys-dl{margin:0}
   .sys-dl dt{font-weight:700;color:var(--ink);margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .sys-dl dd{margin:3px 0 0;color:var(--ink-soft);font-size:14px}
@@ -298,8 +342,9 @@
   .sys-tier-h{font-family:var(--serif);font-size:17px;color:var(--ink);margin:22px 0 2px}
   .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .sys-fallback{display:none}
+  /* centred in the viewport: the wrap's natural left edge is (100vw − 1080px)/2 + 26px padding + 1px border + 20px block padding */
   @media(min-width:1200px){ section.panel[data-tab="system"] .sysmap-wrap{
-      width:min(1440px,100vw - 48px); margin-left:calc(540px - min(720px,50vw - 24px)); } }
+      width:min(1440px,100vw - 48px); margin-left:calc(493px - min(720px,50vw - 24px)); } }
   /* mobile: the diagram is REPLACED by the list — never scaled, never panned */
   @media(max-width:719px){ .sysmap-wrap{display:none} .sys-fallback{display:block} }
   @media(prefers-reduced-motion:reduce){ .prov.is-current .prov-dot{animation:none} }
@@ -364,8 +409,12 @@
       <div class="meta" id="h-meta"></div>
     </div>
     <div class="prov" id="prov"></div>
-    <div class="focus"><span class="flabel">Current Focus</span><span class="ftext" id="h-focus"></span></div>
   </header>
+
+  <!-- The single canonical navigation — directly below the header/provenance strip, before everything else -->
+  <nav class="tabs" id="tabs" aria-label="Brief sections"></nav>
+
+  <div class="focus"><span class="flabel">Current Focus</span><span class="ftext" id="h-focus"></span></div>
 
   <div class="cards" id="cards"></div>
 
@@ -376,7 +425,6 @@
     <figcaption>Patron Platform Foundation v1.0 — the desktop login experience, the workspace shell, and the responsive mobile login (illustrative product view; operational detail follows below).</figcaption>
   </figure>
 
-  <nav class="tabs" id="tabs"></nav>
 
   <!-- OVERVIEW -->
   <section class="panel active" data-tab="overview">
@@ -414,7 +462,7 @@
 
   <!-- DELIVERABLES -->
   <section class="panel" data-tab="system">
-    <h2>The System</h2>
+    <h2>Atlas System Map</h2>
     <p class="sectlead" id="sys-lead"></p>
     <div class="block">
       <div class="sysmap-wrap" id="sysmap"></div>
@@ -504,10 +552,10 @@ const DATA = {
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
     asOf:"2026-09-03",
     phase:"The POCC operating model changed on September 1, and it is now in use. This was a change to how the company records and reconciles money in its Google Sheets operating system — NOT a software deployment. Every expense is now classified as exactly one of three things: work on a project, a general (non-project) cost belonging to an entity, or a Tools & John Gas reserve purchase. Non-project costs are tracked by entity and by month, so entity funding requests and month-end reimbursements can be calculated directly instead of reconstructed. Historical reimbursement records are preserved untouched. Tools & John Gas is now the only reserve fund going forward, with its standard monthly target, its actual spending and the contribution actually received each reported separately rather than netted together. Project tracking expanded from three projects to eight, each carrying an August 31 opening balance from QuickBooks with September-forward spending applied to it, and funding added to a project can now be recorded through a new Project Reimbursements sheet. The dashboard now shows each project's current balance, sorted so the projects needing funding appear first — replacing a combined project-funding total that described no project and hid the ones that mattered. Entity-only classification was added for Patron Dev Works and The Patron Group, which have no physical property. Nick and Chance can now reconcile POCC against QuickBooks by printing both and comparing the lines; that reconciliation stays deliberately manual. POCC Web — the browser interface — was NOT deployed: its first two September-parity slices are implemented and landed on the working branch, and the third is specified but its implementation is not authorized. Nothing has been deployed. QuickBooks remains the accounting system of record.",
-    version:"v10.1 (2026-09-03)",
+    version:"v10.2 (2026-09-03)",
     currentFocus:"Bringing the POCC Web browser interface into line with the September workbook model. The first two parity steps are landed on the working branch and are NOT deployed. The next step — making projects usable with any property — is specified, but its implementation remains UNAUTHORIZED: the specification has not yet passed independent review, and no code will be written until it does and until that authorization is given separately. No application has been deployed and none will be until the interface and the workbook agree and the combined result has been checked. QuickBooks remains the accounting system of record."
   },
-  // ── The System — a CURATED subset of the Atlas Living Brain canonical snapshot.
+  // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
   // Derived at the named source commit; refreshed by Daily Closeout when the Brain changes
   // a node this subset carries. Brain contract: knowledge/brain/BRAIN_CONTRACT.md
@@ -530,7 +578,7 @@ const DATA = {
         {id:"september-model",  name:"September Operating Model", status:"Operational", owner:"Owner",     desc:"The approved classification, reserve and reimbursement model effective from September. History is preserved, never rewritten."},
         {id:"knowledge-system", name:"Company Knowledge System", status:"Operational", owner:"Atlas",     desc:"Structured operating knowledge about how the business actually works, kept separate from the record of what was built."},
         {id:"daily-closeout",   name:"Daily Closeout",           status:"Operational", owner:"Atlas",     desc:"The end-of-day procedure that promotes the day's work into durable memory and verifies the leadership surfaces end to end."},
-        {id:"accounting-system",name:"Accounting System of Record", status:"Operational", owner:"Accounting", desc:"The company's accounting system remains authoritative for financial records. Reconciliation against it is deliberately performed by people."}
+        {id:"accounting-system",name:"Accounting System of Record", status:"Operational", owner:"Accounting", external:true, desc:"The company's accounting system remains authoritative for financial records. Reconciliation against it is deliberately performed by people."}
       ]},
       {id:"surfaces", label:"Product Surfaces", nodes:[
         {id:"pocc",               name:"Operations Command Center", status:"Operational", owner:"Operations", desc:"The operations command center in daily use — work orders, maintenance, vendors, transactions and executive reporting."},
@@ -1002,44 +1050,167 @@ const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st
     `<span class="prov-item"><b>As of</b>${DATA.meta.asOf}</span>`+
     `<span class="prov-item"><b>Version</b>${DATA.meta.version}</span>`+
     `<span class="prov-item"><b>System map from</b>${SYS.snapshotUpdated} · ${SYS.sourceCommit}</span>`+
-    `<span class="prov-layers">${cur ? `all ${sync.of} publication layers agree` : "see the closeout record"}</span>`;
+    `<span class="prov-layers">${cur ? `all ${sync.of} publication layers agree` : "see the closeout record"}</span>`+
+    // Reciprocal link — navigation only. The Brain is not embedded, its data is not loaded, and its interface is not reused.
+    `<a class="brain-link" href="https://atlas-living-brain.thepatrongrp-4382.chatgpt.site/" target="_blank" rel="noopener noreferrer">`+
+    `Explore the Atlas Living Brain <span class="arr" aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span></a>`;
 })();
 
-/* The System — authored coordinates, no runtime layout, no physics, no library. */
+/* Atlas System Map — authored coordinates, no runtime layout, no physics, no library.
+   Project Atlas is drawn as the encompassing frame (root band); every other system is a card in its
+   tier. Connectors are orthogonal and routed ONLY through dedicated gutters — the lane between tiers
+   and the vertical rails between columns — so no line or label ever crosses a card. The relationships
+   drawn are exactly DATA.system.edges; containment implies nothing beyond what those edges state. */
 (function(){
   if(!SYS) return;
   el("sys-lead").textContent = SYS.lead;
-  const nodes={}, TW=1200, NW=250, NH=64, COLS=4;
-  const rowY=[52,196,340];
-  SYS.tiers.forEach((t,ti)=>t.nodes.forEach((n,ni)=>{
-    const gap=(TW-COLS*NW)/(COLS+1);
-    nodes[n.id]={...n, x:gap+ni*(NW+gap), y:rowY[ti], tier:t.label};
-  }));
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const ROOT = "project-atlas";
+
+  /* ── geometry (viewBox units) ── */
+  const W=1210, M=12, PAD=22, LBLW=100, LBLGAP=18, NW=220, GAP=44, NH=76;
+  const X0 = M+PAD+LBLW+LBLGAP;                 // first card column
+  const colX = i => X0 + i*(NW+GAP);            // card columns
+  const rail = i => colX(i-1)+NW+GAP/2;         // vertical gutter centre between column i-1 and column i
+  const FX=M, FW=W-2*M;                         // frame
+  const BAND={x:M+16, y:16, w:FW-32, h:52};     // root band (Project Atlas)
+  const rowY=[120,266,412];                     // card tops per tier; 70-unit lane between rows
+  const laneY = i => rowY[i]+NH+(rowY[i+1]-rowY[i]-NH)/2;
+  const FH = rowY[2]+NH+24;                     // frame bottom
+  const LEGY = FH+30;                           // legend baseline
+  const VBH = LEGY+20;
+
+  /* ── nodes: every node keeps its tier (the text list is the canonical grouping); the root becomes the frame ── */
+  const nodes={};
+  SYS.tiers.forEach((t,ti)=>t.nodes.forEach((n,ni)=>{ nodes[n.id]={...n, tier:t.label, ti, ni}; }));
+  const root = nodes[ROOT];
+  // authored positions — three governance cards sit over the columns/rails their connectors use
+  const POS = {
+    "data-governance":[colX(0),rowY[0]], "deployment-boundary":[rail(2)-NW/2,rowY[0]], "publication-authority":[colX(3),rowY[0]],
+    "accounting-system":[colX(0),rowY[1]], "september-model":[colX(1),rowY[1]], "knowledge-system":[colX(2),rowY[1]], "daily-closeout":[colX(3),rowY[1]],
+    "pocc":[colX(0),rowY[2]], "pocc-web":[colX(1),rowY[2]], "patron-platform":[colX(2),rowY[2]], "executive-dashboard":[colX(3),rowY[2]]
+  };
+  Object.values(nodes).forEach(n=>{
+    if(n.id===ROOT) return;
+    const p = POS[n.id] || [colX(Math.min(n.ni,3)), rowY[n.ti]];   // fallback: column order within the tier
+    n.x=p[0]; n.y=p[1];
+  });
+  const ax = (n,f) => n.x+NW*f, top = n => n.y, bot = n => n.y+NH, midY = n => n.y+NH/2;
+
+  /* ── connectors: authored routes through gutters only. Unrouted edges fall back to a straight drop. ── */
+  const N = id => nodes[id];
+  const ROUTE = {
+    "data-governance>project-atlas":         ()=>[[ax(N("data-governance"),.5),top(N("data-governance"))],[ax(N("data-governance"),.5),BAND.y+BAND.h]],
+    "publication-authority>executive-dashboard": ()=>{const a=N("publication-authority"),b=N("executive-dashboard");
+        return [[ax(a,.2),bot(a)],[ax(a,.2),laneY(0)],[rail(3),laneY(0)],[rail(3),laneY(1)],[ax(b,.2),laneY(1)],[ax(b,.2),top(b)]];},
+    "deployment-boundary>pocc-web":          ()=>{const a=N("deployment-boundary"),b=N("pocc-web");
+        return [[rail(2)-7,bot(a)],[rail(2)-7,laneY(1)],[ax(b,.78),laneY(1)],[ax(b,.78),top(b)]];},
+    "deployment-boundary>patron-platform":   ()=>{const a=N("deployment-boundary"),b=N("patron-platform");
+        return [[rail(2)+7,bot(a)],[rail(2)+7,laneY(1)],[ax(b,.22),laneY(1)],[ax(b,.22),top(b)]];},
+    "september-model>pocc":                  ()=>{const a=N("september-model"),b=N("pocc");
+        return [[ax(a,.25),bot(a)],[ax(a,.25),laneY(1)],[ax(b,.78),laneY(1)],[ax(b,.78),top(b)]];},
+    "september-model>pocc-web":              ()=>{const a=N("september-model"),b=N("pocc-web"); return [[ax(a,.5),bot(a)],[ax(b,.5),top(b)]];},
+    "daily-closeout>executive-dashboard":    ()=>{const a=N("daily-closeout"),b=N("executive-dashboard"); return [[ax(a,.5),bot(a)],[ax(b,.5),top(b)]];},
+    "knowledge-system>patron-platform":      ()=>{const a=N("knowledge-system"),b=N("patron-platform"); return [[ax(a,.5),bot(a)],[ax(b,.5),top(b)]];},
+    "pocc>accounting-system":                ()=>{const a=N("pocc"),b=N("accounting-system"); return [[ax(a,.25),top(a)],[ax(b,.25),bot(b)]];},
+    "pocc-web>pocc":                         ()=>{const a=N("pocc-web"),b=N("pocc"); return [[a.x,midY(a)],[b.x+NW,midY(b)]];}
+  };
+  const KIND = {"governs":"governs","authoritative for":"authoritative","feeds":"feeds","reconciled against":"reconciled","module of":"module"};
+  const kindClass = k => KIND[k] || "feeds";
+  const rounded = (pts,r=8)=>{ // orthogonal polyline with softened corners
+    if(pts.length<3) return "M"+pts.map(p=>p.join(" ")).join(" L ");
+    let d=`M${pts[0][0]} ${pts[0][1]}`;
+    for(let i=1;i<pts.length-1;i++){
+      const [px,py]=pts[i-1],[cx,cy]=pts[i],[nx,ny]=pts[i+1];
+      const d1=Math.hypot(cx-px,cy-py), d2=Math.hypot(nx-cx,ny-cy), rr=Math.min(r,d1/2,d2/2);
+      const ax1=cx-(cx-px)/d1*rr, ay1=cy-(cy-py)/d1*rr, bx=cx+(nx-cx)/d2*rr, by=cy+(ny-cy)/d2*rr;
+      d+=` L${ax1} ${ay1} Q${cx} ${cy} ${bx} ${by}`;
+    }
+    const l=pts[pts.length-1]; return d+` L${l[0]} ${l[1]}`;
+  };
   let edges="";
   SYS.edges.forEach(e=>{
     const a=nodes[e.from], b=nodes[e.to]; if(!a||!b) return;
-    const x1=a.x+NW/2, y1=a.y+NH, x2=b.x+NW/2, y2=b.y;
-    const my=(y1+y2)/2;
-    edges += `<path class="sys-edge" d="M${x1} ${y1} C ${x1} ${my}, ${x2} ${my}, ${x2} ${y2}"/>`+
-             `<text class="sys-edgelbl" x="${(x1+x2)/2}" y="${my-3}" text-anchor="middle">${e.kind}</text>`;
+    const r = ROUTE[`${e.from}>${e.to}`];
+    let pts;
+    if(r) pts=r();
+    else if(a.id===ROOT||b.id===ROOT) return;                  // the root is the frame; only authored routes reach it
+    else pts=[[ax(a,.5),bot(a)],[ax(b,.5),top(b)]];
+    const k=kindClass(e.kind);
+    edges += `<g><title>${esc(a.name)} ${esc(e.kind)} ${esc(b.name)}</title>`+
+             `<path class="sys-edge k-${k}" marker-end="url(#mk-${k})" d="${rounded(pts)}"/></g>`;
   });
-  let boxes="", tiers="";
+
+  /* ── cards. Names that would overflow wrap onto two lines (measured, never clipped). ── */
+  const cv=document.createElement("canvas").getContext("2d");
+  const sans=getComputedStyle(document.documentElement).getPropertyValue("--sans")||"sans-serif";
+  cv.font="600 13px "+sans;
+  const nameLines = s => {
+    if(cv.measureText(s).width<=NW-28) return [s];
+    const w=s.split(" "); let best=[s,""], bd=1e9;
+    for(let i=1;i<w.length;i++){ const l1=w.slice(0,i).join(" "), l2=w.slice(i).join(" ");
+      const d=Math.abs(cv.measureText(l1).width-cv.measureText(l2).width); if(d<bd){bd=d;best=[l1,l2];} }
+    return best;
+  };
+  let boxes="";
+  Object.values(nodes).forEach(n=>{
+    if(n.id===ROOT) return;
+    const ln=nameLines(n.name), two=ln.length>1;
+    const nameSvg = two
+      ? `<text class="sys-name" x="${n.x+14}" y="${n.y+20}">${esc(ln[0])}<tspan x="${n.x+14}" dy="15">${esc(ln[1])}</tspan></text>`
+      : `<text class="sys-name" x="${n.x+14}" y="${n.y+27}">${esc(ln[0])}</text>`;
+    boxes += `<g><rect class="sys-node${n.external?" is-external":""}" x="${n.x}" y="${n.y}" width="${NW}" height="${NH}" rx="8"/>`+
+             `<rect class="sys-rail" x="${n.x}" y="${n.y}" width="3" height="${NH}" rx="1.5"/>`+nameSvg+
+             `<text class="sys-meta" x="${n.x+14}" y="${n.y+(two?55:47)}">${esc(n.status)} · ${esc(n.owner)}</text>`+
+             (n.external?`<text class="sys-tag" x="${n.x+14}" y="${n.y+(two?68:66)}">External system of record</text>`:"")+`</g>`;
+  });
+
+  /* ── tier labels: a dedicated column left of the cards, never in a connector's path ── */
+  let tiers="";
   SYS.tiers.forEach((t,ti)=>{
-    tiers += `<text class="sys-tierlbl" x="0" y="${rowY[ti]-14}">${t.label}</text>`;
-    t.nodes.forEach(n=>{
-      const d=nodes[n.id];
-      boxes += `<g><rect class="sys-node" x="${d.x}" y="${d.y}" width="${NW}" height="${NH}" rx="8"/>`+
-               `<rect class="sys-rail" x="${d.x}" y="${d.y}" width="3" height="${NH}" rx="1.5"/>`+
-               `<text class="sys-name" x="${d.x+14}" y="${d.y+25}">${n.name}</text>`+
-               `<text class="sys-meta" x="${d.x+14}" y="${d.y+45}">${n.status} · ${n.owner}</text></g>`;
-    });
+    const w=t.label.split(" "), l1=w.length>1?w.slice(0,-1).join(" "):t.label, l2=w.length>1?w[w.length-1]:"";
+    const cy=rowY[ti]+NH/2, x=X0-LBLGAP;
+    tiers += l2
+      ? `<text class="sys-tierlbl" x="${x}" y="${cy-3}" text-anchor="end">${esc(l1)}<tspan x="${x}" dy="14">${esc(l2)}</tspan></text>`
+      : `<text class="sys-tierlbl" x="${x}" y="${cy+4}" text-anchor="end">${esc(l1)}</text>`;
   });
+
+  /* ── root band: Project Atlas as the encompassing operating system ── */
+  const band = root ? `<rect class="sys-band" x="${BAND.x}" y="${BAND.y}" width="${BAND.w}" height="${BAND.h}" rx="8"/>`+
+    `<text class="sys-band-t" x="${BAND.x+18}" y="${BAND.y+33}">${esc(root.name).toUpperCase()}</text>`+
+    `<text class="sys-band-m" x="${BAND.x+176}" y="${BAND.y+32}">${esc(root.status)} · ${esc(root.owner)}</text>`+
+    `<text class="sys-band-d" x="${BAND.x+BAND.w-18}" y="${BAND.y+32}" text-anchor="end">The encompassing operating system — the durable, authoritative memory of how these systems fit together</text>` : "";
+
+  /* ── legend: line style per relationship kind, in the order the kinds appear ── */
+  const seen=[]; SYS.edges.forEach(e=>{ if(nodes[e.from]&&nodes[e.to]&&!seen.includes(e.kind)) seen.push(e.kind); });
+  const lgdHead="Relationships · read A → B as “A governs B”";
+  cv.font="700 10px "+sans;                                   // header is letter-spaced .14em — measured, never assumed
+  const lgdHeadW=cv.measureText(lgdHead.toUpperCase()).width + lgdHead.length*1.4;
+  let legend=`<text class="sys-lgd-h" x="${M+PAD}" y="${LEGY}">${lgdHead}</text>`;
+  let lx=M+PAD+Math.ceil(lgdHeadW)+36;
+  cv.font="600 13px "+sans;
+  seen.forEach(k=>{ const c=kindClass(k);
+    legend += `<path class="sys-edge k-${c}" marker-end="url(#mk-${c})" d="M${lx} ${LEGY-4} L${lx+34} ${LEGY-4}"/>`+
+              `<text class="sys-lgd" x="${lx+44}" y="${LEGY}">${esc(k)}</text>`;
+    lx += 44 + Math.ceil(cv.measureText(k).width*0.85) + 34; });
+
+  const defs = `<defs>`+
+    `<marker id="mk-governs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mk k-governs" d="M1 1 L9 5 L1 9 Z"/></marker>`+
+    `<marker id="mk-authoritative" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mk k-authoritative" d="M1 1 L9 5 L1 9 Z"/></marker>`+
+    `<marker id="mk-feeds" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mk k-feeds" d="M2 1.5 L8 5 L2 8.5"/></marker>`+
+    `<marker id="mk-reconciled" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><circle class="mk k-reconciled" cx="5" cy="5" r="3.2"/></marker>`+
+    `<marker id="mk-module" viewBox="0 0 12 10" refX="11" refY="5" markerWidth="10" markerHeight="8" orient="auto"><path class="mk k-module" d="M1 5 L6 1 L11 5 L6 9 Z"/></marker>`+
+    `</defs>`;
+
+  const cardCount = Object.keys(nodes).length - (root?1:0);
   el("sysmap").innerHTML =
-    `<svg class="sysmap" viewBox="0 -30 ${TW} 460" role="img" preserveAspectRatio="xMidYMin meet" `+
+    `<svg class="sysmap" viewBox="0 0 ${W} ${VBH}" role="img" preserveAspectRatio="xMidYMin meet" `+
     `aria-labelledby="sysmap-t sysmap-d"><title id="sysmap-t">Atlas system map</title>`+
-    `<desc id="sysmap-d">Twelve systems in three tiers — Authority and Governance, Operating Systems, `+
-    `Product Surfaces — with the governing and information-flow relationships between them. `+
-    `The same information follows in text.</desc>${edges}${boxes}${tiers}</svg>`;
+    `<desc id="sysmap-d">Project Atlas frames the map as the encompassing operating system. Within it, ${cardCount} systems in three tiers — `+
+    `Authority and Governance, Operating Systems, Product Surfaces — with the governing and information-flow relationships between them. `+
+    `The same information follows in text.</desc>${defs}`+
+    `<rect class="sys-frame" x="${FX}" y="${2}" width="${FW}" height="${FH}" rx="14"/>`+
+    band+tiers+edges+boxes+legend+`</svg>`;
 
   /* Mobile + print + screen-reader equivalent — the same information, never a scaled diagram. */
   const relOf = id => SYS.edges.filter(e=>e.from===id||e.to===id).map(e=>
@@ -1049,7 +1220,8 @@ const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st
     `<div class="sys-tier-h">${t.label}</div><dl class="sys-dl">`+
     t.nodes.map(n=>{
       const r=relOf(n.id);
-      return `<dt>${n.name} ${stChip(n.status)}</dt><dd>${n.desc}`+
+      return `<dt>${n.name} ${stChip(n.status)}${n.external?` <span class="st st-preview"><i></i>External system of record</span>`:""}</dt><dd>${n.desc}`+
+             (n.id===ROOT?`<div class="sys-rel">Drawn as the frame that encompasses the three tiers in the diagram.</div>`:"")+
              (r.length?`<div class="sys-rel">${r.join(" · ")}</div>`:"")+`</dd>`;
     }).join("")+`</dl>`).join("");
   el("sys-fallback").innerHTML = listHTML;
@@ -1062,23 +1234,53 @@ el("foot").innerHTML =
   `Built per <code>work-impact/README.md</code>, <code>knowledge/ai/work-impact-artifact-protocol.md</code>, and the <code>Executive Operations Brief Design Standards</code>. `+
   `Value is measured per the <code>Work Impact Baseline Protocol</code> (<code>knowledge/ai/work-impact-baseline-protocol.md</code>) — we only claim what we can defend. `+
   `Evidence-based; no invented work, time, or money saved. No sensitive financial, tenant, ownership, legal, or personal data (DATA_GOVERNANCE.md). `+
-  `The System map is a curated subset of the Atlas canonical system snapshot (${SYS.snapshotUpdated} · ${SYS.sourceCommit}); the complete map lives in the Atlas Living Brain. `+
+  `The Atlas System Map is a curated subset of the Atlas canonical system snapshot (${SYS.snapshotUpdated} · ${SYS.sourceCommit}); the complete map lives in the Atlas Living Brain. `+
   `Prepared by Project Atlas · Subsystem #1 of the Patron Operations Command Center.`;
 
-// Tabs
+// Tabs — the single canonical navigation (an accessible tablist; Overview is the default view)
 const TABS = [
-  ["overview","Overview"],["system","The System"],["deliverables","Deliverables"],["discoveries","Discoveries"],
+  ["overview","Overview"],["system","Atlas System Map",{isNew:true}],["deliverables","Deliverables"],["discoveries","Discoveries"],
   ["value","Value Created"],["milestones","Milestones"],["questions","Open Questions"],["next","Next Actions"]
 ];
-el("tabs").innerHTML = TABS.map(([id,label],i)=>
-  `<button data-go="${id}" class="${i===0?'active':''}">${label}</button>`
+const reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+const tabsEl = el("tabs");
+tabsEl.setAttribute("role","tablist");
+tabsEl.innerHTML = TABS.map(([id,label,opt],i)=>
+  `<button type="button" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${i===0?"true":"false"}" `+
+  `tabindex="${i===0?0:-1}" data-go="${id}" class="${i===0?'active':''}">${label}`+
+  `${opt&&opt.isNew?` <span class="tab-new">New</span>`:""}</button>`
 ).join("");
-el("tabs").addEventListener("click", e=>{
+document.querySelectorAll("section.panel").forEach(p=>{
+  p.id = `panel-${p.dataset.tab}`; p.setAttribute("role","tabpanel"); p.setAttribute("aria-labelledby",`tab-${p.dataset.tab}`);
+});
+function keepTabInView(btn){ // horizontal only — never moves the page
+  const l=btn.offsetLeft-tabsEl.scrollLeft, r=l+btn.offsetWidth, w=tabsEl.clientWidth;
+  if(l<12) tabsEl.scrollLeft += l-12; else if(r>w-12) tabsEl.scrollLeft += r-w+12;
+}
+function goTab(id, focusBtn){
+  tabsEl.querySelectorAll("button[data-go]").forEach(x=>{
+    const on = x.dataset.go===id;
+    x.classList.toggle("active", on); x.setAttribute("aria-selected", on?"true":"false"); x.tabIndex = on?0:-1;
+    if(on){ keepTabInView(x); if(focusBtn) x.focus(); }
+  });
+  document.querySelectorAll("section.panel").forEach(p=>p.classList.toggle("active", p.dataset.tab===id));
+  // the nav is sticky: if the reader has scrolled past it, bring the chosen section's start into view
+  const navTop = tabsEl.offsetTop - 3;
+  if(window.scrollY > navTop) window.scrollTo({top:navTop, behavior: reduceMotion ? "auto" : "smooth"});
+}
+tabsEl.addEventListener("click", e=>{
   const b = e.target.closest("button[data-go]"); if(!b) return;
-  const go = b.dataset.go;
-  document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.toggle("active", x===b));
-  document.querySelectorAll("section.panel").forEach(p=>p.classList.toggle("active", p.dataset.tab===go));
-  window.scrollTo({top:0, behavior:"smooth"});
+  goTab(b.dataset.go, false);
+});
+tabsEl.addEventListener("keydown", e=>{
+  const keys = ["ArrowRight","ArrowLeft","Home","End"]; if(!keys.includes(e.key)) return;
+  const btns=[...tabsEl.querySelectorAll("button[data-go]")], cur=btns.findIndex(b=>b.getAttribute("aria-selected")==="true");
+  let nxt = cur;
+  if(e.key==="ArrowRight") nxt=(cur+1)%btns.length;
+  if(e.key==="ArrowLeft")  nxt=(cur-1+btns.length)%btns.length;
+  if(e.key==="Home") nxt=0;
+  if(e.key==="End")  nxt=btns.length-1;
+  e.preventDefault(); goTab(btns[nxt].dataset.go, true);
 });
 </script>
 </body>
