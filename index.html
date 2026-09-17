@@ -606,13 +606,13 @@ const DATA = {
     sub:"Operational intelligence, strategic progress, and leadership priorities for The Patron Group — evidence-based, prepared by Project Atlas.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-09-16",
-    lastReviewed:"2026-09-16",
+    asOf:"2026-09-17",
+    lastReviewed:"2026-09-17",
     reviewOutcome:"Materially updated",
-    lastMaterialUpdate:"2026-09-16",
-    phase:"POCC Web remains live in Production at Version 5. Patron app changes remain on the development platform only. Nick accepted payments (with visible rent credit) and development email on September 16. The release is planned as two milestones — the app in Production with Avah's residential work first, then the POCC cutover with John — and a residential-first access control that keeps operational access off until an audited administrator activation is built and tested on development, with its final browser test scheduled for the next working day. An independent security review is required before Production use and is not yet engaged or scheduled; the week of September 21 is a target, not a confirmed release date.",
-    version:"v25 (2026-09-16)",
-    currentFocus:"Finish the residential-first browser test; prepare the product-only release candidate for review; choose and schedule the independent security review; decide recovery options with Jess and the owner; then the protected release rehearsal and Production email.",
+    lastMaterialUpdate:"2026-09-17",
+    phase:"The Patron Platform is now live in Production for internal office use at the company's own address, released on September 17 after a rehearsal on a copy of real data. Employees sign in with a password and a second factor; the database itself now requires that second factor. POCC Web remains live in Production at Version 5 and, with the Google Sheet, stays the authoritative system for operational work until the later cutover with John. Avah starts next week on residential work only. An independent security review is still required and is scheduled when John returns; by the owner's decision of September 17 it follows this internal release rather than blocking it, and its findings will be fixed and retested.",
+    version:"v26 (2026-09-17)",
+    currentFocus:"Avah's invitation and guided first entry next week on Production (residential only, with Nick present); the independent security review when John returns; the recovery-point and uploaded-file backup decisions with Jess and the owner.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -674,11 +674,11 @@ const DATA = {
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
-    currentState:"Patron remains development-only; POCC Web is unchanged at Version 5. Nick accepted payments (rent credit shown to the cent, applied only to the same tenant's charges) and development email (invitation, reset and alerts proven live). Release is now two milestones: the app in Production with Avah's residential work while POCC Web and the Google Sheet stay authoritative, then the POCC cutover with John.",
-    whatChanged:"Built on development a residential-first access control: a new account can start with residential work only, and operational access is switched on only by an administrator with two-factor sign-in, a written reason and an audit record — with a follow-up fix so an ordinary access request cannot get around it, and open sessions pick up the change without signing out. Server tests, 1,167 automated tests and the build pass; the browser test with a test coordinator account is paused until the next working day. Prepared for decisions: the security-review package and a nightly uploaded-file backup proposal for Jess.",
-    whyItMatters:"It lets Avah start real residential work without also switching on operations that still belong to POCC Web and the Google Sheet, and it keeps turning those on a deliberate, recorded decision rather than a date or a side door.",
-    currentRisks:"The independent security review is required and not yet engaged or scheduled, so the week of September 21 is a target, not a forecast. Point-in-time recovery and uploaded-file backup are undecided (nothing enabled). The release rehearsal, Production email and the residential-first browser test remain open. No time or dollar savings are claimed.",
-    tomorrowFocus:"Finish the residential-first browser test; prepare the product-only release candidate for review; choose and schedule the independent security review; decide recovery options with Jess and the owner; then the protected release rehearsal and Production email."
+    currentState:"The Patron Platform is live in Production for internal office use at the company's own address. Employees sign in with a password and a second factor. POCC Web is unchanged at Version 5 and, with the Google Sheet, remains the authoritative system for operational work until the later cutover with John. No tenant or customer has access, and no real residential records have been entered yet.",
+    whatChanged:"The final access test passed, and the two display faults it found were fixed and rechecked. An internal security review of the exact release found one critical fault — someone who knew only a password, without finishing second-factor sign-in, could reach data through the database's own interface — and it was fixed so the database itself requires that second factor. The release was then rehearsed on a throwaway copy of real Production data (73 database updates in under two and a half minutes, business records unchanged) before Nick performed the Production release and verified sign-in, password reset by email and alerting.",
+    whyItMatters:"The office can now use the platform for residential work with an audited record of who did what, while the operational systems the company relies on every day stay exactly where they are. The critical weakness was found and closed before anyone's real data was in it.",
+    currentRisks:"The independent security review has not happened yet — by the owner's decision it follows this internal release, is scheduled when John returns, and its findings will be fixed and retested; this release is not described as independently reviewed. Backups are once daily with no point-in-time recovery, and there is no backup of uploaded documents yet, so documents are not relied on until that is decided. Avah's first real entries next week are done with Nick present, and nothing is guessed. No time or dollar savings are claimed.",
+    tomorrowFocus:"Avah's invitation and guided first entry next week (residential only); schedule the independent security review when John returns; decide the recovery point and uploaded-file backup with Jess and the owner."
   },
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
   execImpact:{
@@ -716,6 +716,10 @@ const DATA = {
     {era:"Field Operations, Reporting & an Expanded Role", period:"July 15–16, 2026", text:"The Eric Field Work Queue began synchronizing automatically in both directions between the office and the field (Milestone #008), and a control-driven Reporting System, a Financial Reserve Calculator, and a Protection-by-Default engineering standard were added (Milestone #009). John then formally expanded Nick into a right-hand project decision partner, adopting the Project Options Standard / Three-Option Rule (bring two or three decision-ready options for meaningful decisions). Nick went hands-on with finance — learning the Mercury ACH payment workflow and processing vendor payments, reconciling a project budget with accounting, and helping reallocate approved project funds — and the long-term Property Development Pipeline vision was documented as a separate future module that will hand stabilized properties into POCC."}
   ],
   today:[
+    "Released the Patron Platform to Production for internal office use at the company's own address, after a rehearsal on a throwaway copy of real Production data; Nick performed every protected step and verified sign-in with a second factor, password reset by email and alerting.",
+    "Found and fixed a critical sign-in weakness before release: someone who knew only a password, without finishing second-factor sign-in, could reach data through the database's own interface, and an administrator in that state could invite another administrator. The database itself now requires the completed second factor.",
+    "Completed the residential-first access test with a test coordinator account, fixed the two display faults it found, rechecked them with a second test account, and closed both test accounts, their authenticators and both temporary preview links.",
+    "Rehearsed the release on a copy of real Production data — 73 database updates in 138 seconds with business records unchanged — then deleted the copy the same day.",
     "Built a correct way to reverse a rent payment entered in error — kept in the history with its reason, never deleted, never read as a refund — and a way to correct a lease's start date or type before any rent is charged; both originally browser-verified on Dev; lease correction accepted, payment acceptance open pending credit-fix verification and Nick's retest.",
     "Found, by saving payments in the browser, that the payment form recorded an amount thousands of times larger than the one typed, and that a reversed payment stopped a later one from applying; fixed both, and the form now shows the exact amount before saving.",
     "Recorded Nick's direction that Avah works across company-wide operations; added recording deposits to her role on development, with refunds, approvals and administration excluded, and separated opening balances, late fees and waivers into three decisions for Nick.",
@@ -779,11 +783,11 @@ const DATA = {
     "Did not touch the real, live Production workbook; did not create a Production copy of the interface; did not turn on Production saving. Measured that today's corrected working approach used only a small fraction of the available work allowance for the results delivered."
   ],
   priority:[
-    "Verify the credit fix, then Nick's payment retest; finish email setup and acceptance; rehearse recovery and release, reconcile Avah's current records, then release to Production and start Avah in the week of September 21.",
-    "Nick's September 16 target is to release the existing app changes to Production during the week of September 21, then start Avah on Production. John remains targeted for the week of September 28. Payment and email acceptance, the protected restore rehearsal, reviewed business records and the named Production checkpoints must be completed first.",
-    "Review Avah's current tracker with her; resolve affected-domain data gaps without guessing. Operations Coordinator with all scope; deposit entry included; charge access decisions remain separate.",
-    "John's POCC Web access and future Patron account remain separate milestones.",
-    "Local dashboard v25 and binder v1.15 await the normal publication and live read-back step; current shared binder remains Version 15."
+    "Avah's invitation and guided first entry next week on Production — residential work only, with Nick present; nothing guessed, and her own acceptance still closes it.",
+    "The independent security review is scheduled when John returns; it follows this internal release by the owner's decision of September 17, and its findings are fixed and retested. This release is not described as independently reviewed.",
+    "Decide the recovery point (backups are once daily, with no point-in-time recovery) and the uploaded-file backup with Jess and the owner; documents are not relied on until then.",
+    "POCC Web and the Google Sheet remain authoritative for operational work until the later cutover with John.",
+    "Local dashboard v26 published with this closeout; the owner binder's shared link still serves the earlier pinned version until Nick selects the newest one."
   ],
   /* Everything about creating, verifying, deploying and authorizing POCC Web in Production is FINISHED
      (2026-09-05) and now lives under Milestones. Do not reintroduce it here as future work. */
