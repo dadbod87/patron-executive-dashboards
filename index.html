@@ -611,8 +611,8 @@ const DATA = {
     reviewOutcome:"Materially updated",
     lastMaterialUpdate:"2026-09-17",
     phase:"The Patron Platform is now live in Production for internal office use at the company's own address, released on September 17 after a rehearsal on a copy of real data. Employees sign in with a password and a second factor; the database itself now requires that second factor. POCC Web remains live in Production at Version 5 and, with the Google Sheet, stays the authoritative system for operational work until the later cutover with John. Avah starts next week on residential work only. An independent security review is still required and is scheduled when John returns; by the owner's decision of September 17 it follows this internal release rather than blocking it, and its findings will be fixed and retested.",
-    version:"v26 (2026-09-17)",
-    currentFocus:"Avah's invitation and guided first entry next week on Production (residential only, with Nick present); the independent security review when John returns; the recovery-point and uploaded-file backup decisions with Jess and the owner.",
+    version:"v27 (2026-09-17)",
+    currentFocus:"Avah's invitation and guided first entry next week on Production (residential only, with Nick present); the independent security review when John returns; the recovery-point and uploaded-file backup decisions with Jess and the owner. In progress, not released: a follow-up that lets an administrator choose exactly which areas of the platform each person reaches — tested on a local machine only and paused before any shared environment.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -676,9 +676,10 @@ const DATA = {
   execBrief:{
     currentState:"The Patron Platform is live in Production for internal office use at the company's own address. Employees sign in with a password and a second factor. POCC Web is unchanged at Version 5 and, with the Google Sheet, remains the authoritative system for operational work until the later cutover with John. No tenant or customer has access, and no real residential records have been entered yet.",
     whatChanged:"The final access test passed, and the two display faults it found were fixed and rechecked. An internal security review of the exact release found one critical fault — someone who knew only a password, without finishing second-factor sign-in, could reach data through the database's own interface — and it was fixed so the database itself requires that second factor. The release was then rehearsed on a throwaway copy of real Production data (73 database updates in under two and a half minutes, business records unchanged) before Nick performed the Production release and verified sign-in, password reset by email and alerting.",
+    whatChangedAlso:"Also today, after the release, and not released: a follow-up was built that lets an administrator choose exactly which areas of the platform each person reaches — for a new invitation and for someone who already has an account — with the rule enforced by the database rather than by hiding buttons. It is finished and tested on a local machine only, and was deliberately stopped before reaching any shared environment when the assistant's own tooling refused the protected database step. Production is unchanged by this work. Two faults were caught before it went anywhere: one screen described access it did not actually control, and the database update would have failed on the development system.",
     whyItMatters:"The office can now use the platform for residential work with an audited record of who did what, while the operational systems the company relies on every day stay exactly where they are. The critical weakness was found and closed before anyone's real data was in it.",
     currentRisks:"The independent security review has not happened yet — by the owner's decision it follows this internal release, is scheduled when John returns, and its findings will be fixed and retested; this release is not described as independently reviewed. Backups are once daily with no point-in-time recovery, and there is no backup of uploaded documents yet, so documents are not relied on until that is decided. Avah's first real entries next week are done with Nick present, and nothing is guessed. No time or dollar savings are claimed.",
-    tomorrowFocus:"Avah's invitation and guided first entry next week (residential only); schedule the independent security review when John returns; decide the recovery point and uploaded-file backup with Jess and the owner."
+    tomorrowFocus:"Avah's invitation and guided first entry next week (residential only); schedule the independent security review when John returns; decide the recovery point and uploaded-file backup with Jess and the owner. Then, separately and only once permission is granted, apply the access-area follow-up to the development system first and verify it there."
   },
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
   execImpact:{
@@ -1037,6 +1038,7 @@ el("exec-brief").innerHTML =
   `<div class="brief-title">Executive Brief · ${DATA.meta.lastMaterialUpdate}</div>`+
   briefRow("Current State", DATA.execBrief.currentState)+
   briefRow("What Changed", DATA.execBrief.whatChanged)+
+  (DATA.execBrief.whatChangedAlso ? briefRow("Also Today (not released)", DATA.execBrief.whatChangedAlso) : "")+
   briefRow("Why It Matters", DATA.execBrief.whyItMatters)+
   (DATA.execBrief.currentRisks ? briefRow("Current Risks", DATA.execBrief.currentRisks, "risk") : "")+
   briefRow("Tomorrow's Focus", DATA.execBrief.tomorrowFocus);
