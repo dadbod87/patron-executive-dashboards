@@ -610,9 +610,9 @@ const DATA = {
     lastReviewed:"2026-09-18",
     reviewOutcome:"Materially updated",
     lastMaterialUpdate:"2026-09-18",
-    phase:"The Patron Platform is live in Production for internal office use, and since September 18 an administrator can choose, person by person, which of seven parts of it someone reaches — enforced by the database, never beyond the person's role. Tested on the development platform, applied to Production after a fresh check with the company's records unchanged, and confirmed by Nick after signing in. POCC Web (Version 5) and the Google Sheet remain authoritative for operational work until the later cutover with John. Avah starts next week on residential work only. The independent security review is still required and is scheduled when John returns; the platform is not described as independently reviewed.",
-    version:"v28 (2026-09-18)",
-    currentFocus:"Avah's invitation and guided first entry next week on Production (residential only, with Nick present, nothing guessed); the independent security review when John returns; the recovery-point and uploaded-file backup decisions with Jess and the owner. Released 2026-09-18: per-person access areas.",
+    phase:"The Patron Platform is live in Production for internal office use, unchanged since this morning. The next release — personal home workspaces, employee access requests with administrator decisions and automatic expiry, sessions ended on deactivation, and one shared definition of access — is prepared and tested on the development platform but not approved; two final checks come first on Monday, then the owner decides. Gmail is connected for Dispatch in Production; Avah starts Tuesday, September 22, after the release.",
+    version:"v29 (2026-09-18)",
+    currentFocus:"Monday: two final checks, then the owner's decision on the prepared personal-workspaces and access-requests release; Tuesday: Avah's guided start on Production with Nick present, nothing guessed; the independent security review when John returns.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -661,6 +661,7 @@ const DATA = {
     ],
     // Evidence-backed growth: what became real, and when. Landed reality only.
     growth:[
+      {when:"2026-09-18", what:"Next release prepared and tested on the development platform — personal workspaces, employee access requests, sessions ended on deactivation, one shared definition of access; not yet approved", status:"Built"},
       {when:"2026-09-18", what:"Per-person access areas released to Production — administrators choose which of seven areas each person reaches, enforced by the database; company records unchanged", status:"Production Ready"},
       {when:"2026-09-17", what:"Patron Platform released to Production for internal office use by named employees (no tenant or customer access; no real residential records yet)", status:"Production Ready"},
       {when:"2026-09-16", what:"Payments and transactional email accepted by Nick on the development database; residential-first access control built there with its final browser test pending (development-only, not in use)", status:"Built"},
@@ -676,12 +677,12 @@ const DATA = {
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
-    currentState:"The Patron Platform is live in Production for internal office use, and administrators can now choose, person by person, which of seven parts of it someone reaches — Residential; Work Orders, Maintenance & Vendors; Dispatch; Finance; Reports; Master Data & Imports; Administration. POCC Web (Version 5) and the Google Sheet remain authoritative for operational work. No tenant or customer has access, and no real residential records have been entered yet.",
-    whatChanged:"The access-area feature finished yesterday was applied to the development system and tested, then — with the owner's approval — applied to Production after a fresh check that Production still matched what the change expected. The company's records were unchanged by it. The app was released through a change set containing only the platform's own files, and Nick confirmed it working after signing in.",
-    whatChangedAlso:"Nothing else changed in Production. The per-person change screen has not yet been used on a real account, because no second active account exists; it is covered by automatic tests.",
-    whyItMatters:"Avah can be given exactly the residential work she does and nothing more, and that limit is enforced by the database itself, not just by hiding screens — before the first employee other than Nick joins Production.",
-    currentRisks:"The independent security review has not happened yet; it is scheduled when John returns and the platform is not described as independently reviewed. Backups are once daily with no point-in-time recovery, and uploaded documents have no backup yet. No time or dollar savings are claimed.",
-    tomorrowFocus:"Avah's invitation and guided first entry next week, residential only, with Nick present; schedule the independent security review when John returns; decide the recovery point and uploaded-file backup with Jess and the owner."
+    currentState:"Production is unchanged since this morning — live for internal office use, with per-person access areas. The next release is prepared and tested on the development platform but not approved. POCC Web (Version 5) and the Google Sheet remain authoritative for operational work. No tenant or customer has access, and no real residential records have been entered yet.",
+    whatChanged:"Built and tested on the development platform: a personal home workspace for each person (it decides where they land, never what they can reach); My Access, where an employee sees the areas they lack — by name and purpose only — and asks with a business reason, while an administrator approves for a set period or permanently, or declines, always with a reason, and temporary access ends by itself; deactivation now ends every open session; and one shared definition of access for menus, pages and the database. A full test with a test employee account found real problems — reports offered without access, report pages showing sample figures, an approval the screens did not recognise, a missing reason in the audit record — each fixed and retested.",
+    whatChangedAlso:"The Security & Trust page was rewritten from checked facts and states plainly what is still missing. Gmail was connected for Dispatch in Production; the first real draft waits for the owner's go. Nothing else changed in Production.",
+    whyItMatters:"Avah's first day should run on access that is exact and self-explaining: she sees only what she may use, knows what she can ask for, and every grant is recorded and can expire — and leadership reports never show sample numbers as if they were real.",
+    currentRisks:"The independent security review has not happened; the platform is not described as independently reviewed. Production keeps seven days of daily backups but no point-in-time recovery, so a restore just before the release would lose that day's changes; the recovery choice is part of Monday's first check. One test observation is unexplained and not counted as a pass. No time or dollar savings are claimed.",
+    tomorrowFocus:"Monday — confirm Production recovery, check Security & Trust as an ordinary employee, re-run every check on the exact release, then the owner decides; after release, prepare Avah's Tuesday start. Slack read-only follows and is not allowed to delay her."
   },
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
   execImpact:{
