@@ -606,13 +606,13 @@ const DATA = {
     sub:"Operational intelligence, strategic progress, and leadership priorities for The Patron Group — evidence-based, prepared by Project Atlas.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-09-21",
-    lastReviewed:"2026-09-21",
+    asOf:"2026-09-22",
+    lastReviewed:"2026-09-22",
     reviewOutcome:"Materially updated",
-    lastMaterialUpdate:"2026-09-21",
-    phase:"The Patron Platform is live in Production for internal office use and current as of September 21: personal home workspaces, employee access requests, sessions ended on deactivation and one shared definition of access were released after the final checks, followed by signed lease files, work-tool handoffs, truthful settings and property cities. POCC Web and the Google Sheet remain authoritative for operational work.",
-    version:"v30 (2026-09-21)",
-    currentFocus:"Tuesday: a fresh read-only Production check, then Nick's own workspace assignment, then Avah's guided start only when she is present and Nick gives a separate go; the independent security review when John returns.",
+    lastMaterialUpdate:"2026-09-22",
+    phase:"The Patron Platform is live in Production for internal office use and, since September 22, in daily use: Avah is onboarded and entering real residential records, and ten same-day releases closed the gaps she met. Next: moving POCC into Patron.",
+    version:"v31 (2026-09-22)",
+    currentFocus:"Pull POCC into Patron — inventory first, then a checkpointed move of work orders, project tracking, maintenance requests and bank transactions for the owner's go; this week or next.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -661,6 +661,7 @@ const DATA = {
     ],
     // Evidence-backed growth: what became real, and when. Landed reality only.
     growth:[
+      {when:"2026-09-22", what:"Avah onboarded and using Patron daily; first real residential records entered; ten same-day releases from her real use", status:"Production Ready"},
       {when:"2026-09-21", what:"Personal workspaces, access requests and signed lease files released to Production; tenant maintenance request page and phone line live; Avah's start rehearsed"},
       {when:"2026-09-18", what:"Next release prepared and tested on the development platform — personal workspaces, employee access requests, sessions ended on deactivation, one shared definition of access; not yet approved", status:"Built"},
       {when:"2026-09-18", what:"Per-person access areas released to Production — administrators choose which of seven areas each person reaches, enforced by the database; company records unchanged", status:"Production Ready"},
@@ -678,12 +679,12 @@ const DATA = {
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
-    currentState:"Live in Production for internal office use and current with today's releases. POCC Web (Version 5) and the Google Sheet remain authoritative for operational work, including maintenance, whose new tenant request page and phone line are reviewed by a person before anything is recorded. No tenant or customer has access, and no real residential records have been entered yet.",
-    whatChanged:"Released to Production today, each with the owner's approval: personal home workspaces; My Access requests with administrator decisions and automatic expiry; deactivation that ends every open session; one shared definition of access for menus, pages and the database; and private storage of the signed lease file, which a lease now needs before it can be activated.",
-    whatChangedAlso:"Also live: Slack, Trello and Google Calendar open the real services with no data exchanged; Settings no longer show switches that do nothing; the side menu can be resized; all but one property now has its city. A tenant maintenance request page and phone line are live and tested. Avah's start was rehearsed on the development platform with a test account.",
-    whyItMatters:"Avah can start on access that is exact and self-explaining, with the signed lease kept alongside each lease from the first day, and tenants now have one clear way to report maintenance, with nothing recorded before a person reviews it.",
-    currentRisks:"The independent security review has not happened; the platform is not described as independently reviewed. Production keeps daily backups without point-in-time recovery, and stored files such as signed leases are not in any backup yet, so a file backup plan comes before real lease files are uploaded. One test observation from last week remains unexplained and is not counted as a pass.",
-    tomorrowFocus:"Tuesday — a fresh read-only Production check, Nick's own workspace assignment, then Avah's guided start only with her present and Nick's separate go; Slack read-only follows and is not allowed to delay her."
+    currentState:"Avah is onboarded and using the Patron app for her daily residential work — the first person other than Nick working in it for real. She signed in with her own password and second factor, checked what she can see with Nick, and entered the first real tenant, lease, charge, payment and deposit records. POCC Web (Version 5) and the Google Sheet remain authoritative for operational work until each area moves over. No tenant or customer has access.",
+    whatChanged:"Ten small releases reached Production today, each checked before release and fixing something Avah met while working: tenant search with the related lease and property; deposits shown on tenant pages; tenant contact details and editing; payments and existing credit can be applied to any tenant charge, with a warning before a duplicate charge and a recorded way to cancel one created in error; lease endings count only active leases; rent and lease-ending summaries on the Leases and Tenants pages; and day counts that use today's date.",
+    whatChangedAlso:"Also today: property lists gained filters, sorting and links to each unit's lease; one tenant account was corrected through the recorded correction steps without inventing any payment; late rent stays a status, never an automatic charge; Claude and Athena's model settings were updated by the owner.",
+    whyItMatters:"The platform has moved from prepared to in use: real residential work now happens in Patron, and each problem found in real use was fixed the same day. That is the foundation for moving the rest of POCC — work orders, projects, maintenance and bank transactions — into the same app.",
+    currentRisks:"The independent security review has not happened; the platform is not described as independently reviewed. Real records now exist while Production has daily backups without point-in-time recovery, and stored files are not in any backup yet — a backup decision is open. Two data questions are with Nick. POCC Web and the Sheet stay authoritative until each area is switched.",
+    tomorrowFocus:"Pull POCC into Patron: an inventory of what POCC Web and the Sheet hold today against what Patron already has, then a step-by-step move of work orders, project tracking, maintenance requests and bank transactions for the owner's go — this week if time permits, otherwise next week."
   },
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
   execImpact:{
