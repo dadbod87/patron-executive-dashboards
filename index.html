@@ -606,13 +606,13 @@ const DATA = {
     sub:"Operational intelligence, strategic progress, and leadership priorities for The Patron Group — evidence-based, prepared by Project Atlas.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-09-22",
-    lastReviewed:"2026-09-22",
+    asOf:"2026-09-23",
+    lastReviewed:"2026-09-23",
     reviewOutcome:"Materially updated",
-    lastMaterialUpdate:"2026-09-22",
-    phase:"The Patron Platform is live in Production for internal office use and, since September 22, in daily use: Avah is onboarded and entering real residential records, and ten same-day releases closed the gaps she met. Next: moving POCC into Patron.",
-    version:"v31 (2026-09-22)",
-    currentFocus:"Pull POCC into Patron — inventory first, then a checkpointed move of work orders, project tracking, maintenance requests and bank transactions for the owner's go; this week or next.",
+    lastMaterialUpdate:"2026-09-23",
+    phase:"The Patron Platform is the company's system of record. On September 23 the operations command center's work — work orders and their checklists, project tracking, bank transactions and the reserve records — moved into Patron, and POCC Web and the Google Sheet became read-only history. Eric joined as Field Lead alongside Avah; his own phone check is next, then John and Jess as Leadership once their addresses are confirmed. The independent security review is still required.",
+    version:"v32 (2026-09-23)",
+    currentFocus:"Eric's own phone check; John and Jess invited as Leadership once their addresses are confirmed; the independent security review when John returns.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -623,8 +623,8 @@ const DATA = {
     // Motion on the provenance strip is bound to `verified` and means exactly that — nothing else
     // on this page animates, and nothing here is live data.
     sync:{ verified:false, layers:3, of:5 },
-    snapshotUpdated:"2026-09-18",
-    sourceCommit:"13b9a7b",
+    snapshotUpdated:"2026-09-23",
+    sourceCommit:"36f8238",
     lead:"How the parts of the operation fit together, how mature each one is, and who is authoritative for what. Curated from the Atlas canonical system map — the full map lives in the Atlas Living Brain.",
     tiers:[
       {id:"authority", label:"Authority & Governance", nodes:[
@@ -634,15 +634,15 @@ const DATA = {
         {id:"deployment-boundary",  name:"Deployment Boundary",      status:"Operational", owner:"Owner",       desc:"Trunk, production and the live operating workbook change only by explicit human authorization."}
       ]},
       {id:"operating", label:"Operating Systems", nodes:[
-        {id:"september-model",  name:"September Operating Model", status:"Operational", owner:"Owner",     desc:"The approved classification, reserve and reimbursement model effective from September. History is preserved, never rewritten."},
+        {id:"september-model",  name:"September Operating Model", status:"Operational", owner:"Owner", desc:"The approved classification, reserve and reimbursement model effective from September, running in the Patron Platform since 2026-09-23. History is preserved, never rewritten."},
         {id:"knowledge-system", name:"Company Knowledge System", status:"Operational", owner:"Atlas",     desc:"Structured operating knowledge about how the business actually works, kept separate from the record of what was built."},
         {id:"daily-closeout",   name:"Daily Closeout",           status:"Operational", owner:"Atlas",     desc:"The end-of-day procedure that promotes the day's work into durable memory and verifies the leadership surfaces end to end."},
         {id:"accounting-system",name:"Accounting System of Record", status:"Operational", owner:"Accounting", external:true, desc:"The company's accounting system remains authoritative for financial records. Reconciliation against it is deliberately performed by people."}
       ]},
       {id:"surfaces", label:"Product Surfaces", nodes:[
-        {id:"pocc",               name:"Operations Command Center", status:"Operational", owner:"Operations", desc:"The operations command center in daily use — work orders, maintenance, vendors, transactions and executive reporting."},
-        {id:"pocc-web",           name:"POCC Web Interface",        status:"Operational", owner:"Atlas",      desc:"A browser interface over the command center, live in Production at a permanent web address and now saving to the real workbook. Restricted to the company domain."},
-        {id:"patron-platform",    name:"Patron Platform",           status:"Production Ready", owner:"Atlas",      desc:"The employee-facing operating platform: one secure sign-in, role-based workspaces, shared records. In Production for internal office use by named employees since 2026-09-17, with residential-first access and, since 2026-09-18, per-person access areas enforced by the database. No tenant or customer access and no real residential records yet — not yet Operational."},
+        {id:"pocc",               name:"Operations Command Center", status:"Archived", owner:"Operations", desc:"Carried work orders, maintenance, vendors, transactions and reporting until 2026-09-23, when its records moved into the Patron Platform. Kept as read-only history."},
+        {id:"pocc-web",           name:"POCC Web Interface", status:"Archived", owner:"Atlas", desc:"The browser interface over the command center, live from 2026-09-05; since 2026-09-23 it shows an archive notice pointing people to the Patron Platform."},
+        {id:"patron-platform",    name:"Patron Platform", status:"Operational", owner:"Atlas", desc:"The employee-facing operating platform: one secure sign-in, role-based workspaces, shared records. The company's system of record since 2026-09-23, in daily use by named internal staff for residential, operations and field work. No tenant or customer access."},
         {id:"executive-dashboard",name:"Executive Operations Brief",status:"Operational", owner:"Atlas",      desc:"This document — the leadership-facing progress surface, published to a stable address and verified at every closeout."}
       ]}
     ],
@@ -679,12 +679,12 @@ const DATA = {
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
-    currentState:"Avah is onboarded and using the Patron app for her daily residential work — the first person other than Nick working in it for real. She signed in with her own password and second factor, checked what she can see with Nick, and entered the first real tenant, lease, charge, payment and deposit records. POCC Web (Version 5) and the Google Sheet remain authoritative for operational work until each area moves over. No tenant or customer has access.",
-    whatChanged:"Ten small releases reached Production today, each checked before release and fixing something Avah met while working: tenant search with the related lease and property; deposits shown on tenant pages; tenant contact details and editing; payments and existing credit can be applied to any tenant charge, with a warning before a duplicate charge and a recorded way to cancel one created in error; lease endings count only active leases; rent and lease-ending summaries on the Leases and Tenants pages; and day counts that use today's date.",
-    whatChangedAlso:"Also today: property lists gained filters, sorting and links to each unit's lease; one tenant account was corrected through the recorded correction steps without inventing any payment; late rent stays a status, never an automatic charge; Claude and Athena's model settings were updated by the owner.",
-    whyItMatters:"The platform has moved from prepared to in use: real residential work now happens in Patron, and each problem found in real use was fixed the same day. That is the foundation for moving the rest of POCC — work orders, projects, maintenance and bank transactions — into the same app.",
-    currentRisks:"The independent security review has not happened; the platform is not described as independently reviewed. Real records now exist while Production has daily backups without point-in-time recovery, and stored files are not in any backup yet — a backup decision is open. Two data questions were settled with Nick the same evening. POCC Web and the Sheet stay authoritative until each area is switched.",
-    tomorrowFocus:"Pull POCC into Patron: an inventory of what POCC Web and the Sheet hold today against what Patron already has, then a step-by-step move of work orders, project tracking, maintenance requests and bank transactions for the owner's go — this week if time permits, otherwise next week."
+    currentState:"The Patron Platform is the company's system of record. The operations command center's work orders, project tracking, bank transactions and reserve records moved into Patron on September 23 and were reconciled; POCC Web now shows an archive notice pointing to Patron, and the Google Sheet is kept as read-only history. Avah works in Patron daily, and Eric joined as Field Lead with his queued jobs assigned to him. No tenant or customer has access.",
+    whatChanged:"Sixteen small releases reached Production, each checked before release: rent due on each lease's own day; live management reports and a published occupancy rate; a Field Lead role for Eric and a full-access Leadership role for John and Jess, with simpler invitations; Jess's financial overview; a green database test suite; editing a job's checklist after it is created; accurate Dispatch and Attention counts; menus that keep their categories when rearranged; and property lists searchable by typing, including on phones.",
+    whatChangedAlso:"",
+    whyItMatters:"Two systems of record for the same work invite disagreement; now there is one. The people doing the work — the office and the field — are working in the same records leadership sees.",
+    currentRisks:"The independent security review has not happened; the platform is not described as independently reviewed. Real records exist while Production has daily backups without point-in-time recovery, and stored files are not in any backup yet. POCC Web's read-only switch-over was still pending when it was archived; its notice already points people to Patron.",
+    tomorrowFocus:"Eric's own check on his phone, then John and Jess as Leadership once their addresses are confirmed; the independent security review when John returns. Future work includes role-based employee procedures and an employee handbook for learning Patron."
   },
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
   execImpact:{
@@ -707,10 +707,10 @@ const DATA = {
     pendingMeasurement:"No time-saved, hours, or dollar figures are claimed for these improvements yet — they are stakeholder-reported and workflow-analysis based. Formal before/after baselines (e.g. work-order preparation and dispatch time) remain to be captured before any quantified savings are reported. See the Workflow Baseline Metrics below (baselines not yet captured) and the Value Created categories, where Verified Savings remain empty until measured."
   },
   cards:[
-    {num:"One view", label:"Work orders open in a single working view", sub:"The job, its checklist, its photos and its history side by side, on real governed records — and each row now says what the job is actually about rather than only an address and a number, drawn only from fields the system already governs and never from an AI-written summary"},
-    {num:"Told, not chased", label:"Work reaches the person who has to do it", sub:"The responsible person is notified when something becomes theirs and can be mentioned by name to ask for attention; a dispatch package is prepared from selected work and handed to Gmail, where the recipient is chosen — nothing is sent by the system itself"},
-    {num:"Automatic", label:"Monthly rent generates itself, correctly prorated", sub:"A mid-month move-in or move-out is charged for the days actually occupied, an issued charge is never rewritten, and an automatic charge says it was created by the system rather than being attributed to a person. Proven on test records, not on real tenants"},
-    {num:"Never deleted", label:"A departing employee is deactivated, not erased", sub:"An owner decision with a long tail: access ends, but everything the person created, edited, commented on and was responsible for stays truthfully attributed to them. Deleting the user is explicitly ruled out as an offboarding method"}
+    {num:"One record", label:"POCC's work now lives in Patron", sub:"Work orders and their checklists, project tracking, bank transactions and the reserve records were imported and reconciled; the old interface and the Sheet are kept as read-only history"},
+    {num:"Office and field", label:"Avah and Eric work in the same records", sub:"The office works residential and operations daily; the Field Lead sees every job and updates only the work assigned to him, notified when something becomes his"},
+    {num:"Live", label:"Management reports read the real records", sub:"Rent, occupancy, lease endings, project balances, reserves and work-order aging come from the same governed records the pages use — no demonstration figures"},
+    {num:"Type to find", label:"Every property list can be searched", sub:"Choosing a property anywhere in Patron now filters as you type, on a desk or a phone, and Dispatch reaches every property the person is allowed to see"}
   ],
   // Atlas Project History — told as skimmable chapters (era · period · narrative). Complete information preserved.
   execSummaryChapters:[
@@ -722,78 +722,20 @@ const DATA = {
     {era:"Field Operations, Reporting & an Expanded Role", period:"July 15–16, 2026", text:"The Eric Field Work Queue began synchronizing automatically in both directions between the office and the field (Milestone #008), and a control-driven Reporting System, a Financial Reserve Calculator, and a Protection-by-Default engineering standard were added (Milestone #009). John then formally expanded Nick into a right-hand project decision partner, adopting the Project Options Standard / Three-Option Rule (bring two or three decision-ready options for meaningful decisions). Nick went hands-on with finance — learning the Mercury ACH payment workflow and processing vendor payments, reconciling a project budget with accounting, and helping reallocate approved project funds — and the long-term Property Development Pipeline vision was documented as a separate future module that will hand stabilized properties into POCC."}
   ],
   today:[
-    "Released the Patron Platform to Production for internal office use at the company's own address, after a rehearsal on a throwaway copy of real Production data; Nick performed every protected step and verified sign-in with a second factor, password reset by email and alerting.",
-    "Found and fixed a critical sign-in weakness before release: someone who knew only a password, without finishing second-factor sign-in, could reach data through the database's own interface, and an administrator in that state could invite another administrator. The database itself now requires the completed second factor.",
-    "Completed the residential-first access test with a test coordinator account, fixed the two display faults it found, rechecked them with a second test account, and closed both test accounts, their authenticators and both temporary preview links.",
-    "Rehearsed the release on a copy of real Production data — 73 database updates in 138 seconds with business records unchanged — then deleted the copy the same day.",
-    "Built a correct way to reverse a rent payment entered in error — kept in the history with its reason, never deleted, never read as a refund — and a way to correct a lease's start date or type before any rent is charged; both originally browser-verified on Dev; lease correction accepted, payment acceptance open pending credit-fix verification and Nick's retest.",
-    "Found, by saving payments in the browser, that the payment form recorded an amount thousands of times larger than the one typed, and that a reversed payment stopped a later one from applying; fixed both, and the form now shows the exact amount before saving.",
-    "Recorded Nick's direction that Avah works across company-wide operations; added recording deposits to her role on development, with refunds, approvals and administration excluded, and separated opening balances, late fees and waivers into three decisions for Nick.",
-    "Prepared a one-time load of the POCC workbook's financial position and work orders that previews every change and never overwrites work done in Patron, proven on test records; wrote the Production move-over as one ordered checklist — not run.",
-    "Recorded Nick's onboarding readiness targets — Avah the week of September 21, John the week of September 28 — as targets that waive neither anyone's own acceptance nor any Production approval.",
-    "Wrote a readiness plan for each person that separates engineering, outside set-up, data preparation, access and their own acceptance, with checklists and an agenda for reviewing Avah's real rent tracker with her; John's existing POCC Web access and his future Patron account are treated as separate milestones.",
-    "Received the email set-up details from Nick and wrote the invitation and password-reset emails so their links lead to Patron's own confirmation page, where nothing happens until the person presses the button.",
-    "Made publishing this brief, the owner binder and the Atlas Living Brain handoff a daily closeout step with an automatic check that shows 'last reviewed' separately from 'last materially updated'.",
-    "Corrected stale statements in the owner binder — travel dates that had passed, a restore rehearsal described both as passed and as pending, and residential features listed as future work that are already built on development.",
-    "Kept every boundary: nothing deployed to Production, no Staging or Production change, no merge to main, no email or domain configured, no real record loaded, no account created and no one invited.",
-    "▸ The items below are from 2026-09-14 and earlier, kept for continuity — read them as history, not as today.",
-    "Finished a governed way to switch off a departing employee's account on the development platform — access ends at once and sign-in is blocked, while everything they created, edited and were responsible for stays attributed to them. Nick tested it end to end with a test account and accepted it.",
-    "Made Patron installable on a phone as an online-only app, deliberately with no offline copy of records that could go stale. Nick installed it on his Android phone, two layout problems he found were fixed, and he accepted it. An iPhone has not been tested yet.",
-    "Built transactional email — invitations and failure alerts — honest about the difference between saved, handed over and delivered, and with email links used only when a person presses the button. It is not yet connected to an email service and has sent nothing.",
-    "Repaired the documents that tell the next working session what is true after they were found to contradict themselves, and added checks that reject each contradiction.",
-    "Proved a fresh copy of the database can be built from the committed changes by actually building it, after a narrowly approved two-line correction.",
-    "Kept every boundary: nothing deployed to Production, no Staging or Production change, no merge to main, no domain or email configuration touched, no real employee invited, and nothing published that day by Nick's decision.",
-    "▸ The items below are from 2026-09-11 and earlier, kept for continuity — read them as history, not as today.",
-    "Made work orders open in a single working view — the job, its checklist, its photos and its history side by side — and made every row say what the job is actually about, after Nick said the rows were 'too cleaned up' and told him nothing without opening each one. The description is drawn only from fields the system already governs, never from an AI-written summary.",
-    "Made work reach the person who has to do it: whoever becomes responsible for a job is notified, anyone can be mentioned by name to ask for their attention, and neither ever quietly grants someone access they did not already have.",
-    "Made it possible to prepare a dispatch from selected work and hand it to Gmail, where the recipient is chosen and the send happens — the system itself sends nothing, and stores no vendor contact addresses.",
-    "Gave each finance page one job instead of three, with a ledger that records who entered every line.",
-    "Made monthly rent generate itself, correctly prorated when a tenant moves in or out part-way through a month, with an explicit move-out and vacancy process. An issued charge is never rewritten, and an automatic charge says the system created it rather than naming a person.",
-    "Closed a reliability fault across the whole platform: an ordinary 'someone else changed this record' refusal had been signalled in a way the infrastructure read as 'try again', so it retried until the connection pool starved. Also found and fixed an edit path that had never worked at all.",
-    "Added a real code-quality gate to the repository, which immediately found sixty-six genuine defects of a kind that can make a form behave unpredictably. All were fixed; 102 lower-priority warnings are left deliberately visible rather than hidden.",
-    "Settled nine launch questions with Nick, including cutting over one area at a time with no period of two systems both claiming to be the truth, who decides a rollback and on what trigger, emergency support beyond Nick, keeping archived documents indefinitely, and deactivating a departing employee's account rather than deleting it.",
-    "Kept every boundary: nothing deployed to Production, no Staging or Production change, no merge to main, no domain or sign-in configuration touched, no employee account created, and no residential record invented.",
-    "▸ The items below are from 2026-09-09 and earlier, kept for continuity — read them as history, not as today.",
-    "Gave bank transactions, projects, vendors, entities, properties and units a real record page each — showing the record's own facts, the records related to it, and a history of who changed what and when, read from the database rather than assembled in the browser.",
-    "Completed the relationship John asked about: a project shows every work order that belongs to it, a property shows the work happening at that address, and both point at the same records. The investigation found the relationship could not be maintained at all — no save path accepted it — so a work order created in Patron would have belonged to no project forever.",
-    "Ended the dependency on work-order numbers generated inside the Google Sheet: Patron now issues its own, every existing record was given one, and the original Sheet reference is kept alongside it so nothing loses its history during the transition.",
-    "Found that the master-data screens were displaying real company records while discarding every change made to them, and rebuilt them to save through a checked, recorded path — with duplicate protection, a refusal to archive anything that still has records beneath it, and two fields removed outright because there was nowhere to save them.",
-    "Closed a privacy problem: a new activity feed was republishing tenant names, phone numbers, permission-to-enter status and access notes into a summary screen, because imported work-order titles carry that content. Corrected on every surface, including the labels a screen reader reads aloud.",
-    "Made searching find a property by its city — which needed two repairs rather than one, because no property had a city recorded at all. 31 were filled in from each property's own records; the 9 that could not be determined were deliberately left blank rather than guessed.",
-    "Stopped list screens downloading the whole business and filtering it in the browser: they now ask the database for exactly what is on screen, and the work of checking permission is done once per screen instead of once per row — one register went from about four tenths of a second to two hundredths, and will behave the same way at ten times the size.",
-    "Reduced database privileges to the minimum each role needs, after an inspection found four functions reachable without signing in — one of which returns a stored credential, protected only by a condition that happened to hold.",
-    "Kept every boundary: nothing deployed to Production, no Staging or Production change, no merge to main, and the development database left as it was found after every test.",
-    "▸ The items below are from 2026-09-08 and earlier, kept for continuity — read them as history, not as today.",
-    "Persisted the command center's operating data — properties, vendors, work orders and checklists, project budgets and funding, bank transactions, reserve reimbursements, the Tools & Gas reserve, entity repayments and prepared dispatch packages — into the Patron Platform's development database through its governed write path (development-only; live counts reported by the executing agent session, not independently re-run).",
-    "Closed a dispatch access gap on the development database, proved package preparation end to end, fixed a timing defect that could turn a save-only action into an email draft, and deleted the one accidental blank draft it produced — no email was sent.",
-    "Made tenants, leases and the rent ledger real database records — monthly obligations, payments, allocations, tenant credit and forward-only rent changes — exercised with clearly-synthetic records that were then removed, leaving the residential tables deliberately empty.",
-    "Reshaped the development screens to how the team works after Nick's review: work orders and tenant maintenance separated with counts, one collapse control per list with record details closed by default, a Tools & Gas card, and 'pay first through the bank, then classify' set as the primary money workflow with the modules that inverted it hidden rather than deleted.",
-    "Gave Avah a monthly rent-charge control that shows which leases will be charged for a chosen month and at what rent before anything is written, then creates each charge exactly once — no new database change or permission.",
-    "Kept every boundary: nothing deployed to Production, no Staging or Production change, no merge to main, the public brief left unpublished by Nick's instruction, and the development database returned to its recorded baseline after every test.",
-    "▸ The items below are from 2026-09-05 and earlier, kept for continuity — read them as history, not as today.",
-    "Brought POCC Web live in Production and then, as a separate decision, allowed it to save to the real workbook — all three approval gates closed in one evening, in deliberate order.",
-    "Made the first real save a true operational update: one genuinely completed checklist item on a real work order, confirmed on screen, still correct after a refresh, matched in the workbook with nothing else on the row disturbed, and kept rather than undone.",
-    "Rejected the planned alternative first save — creating a fake work order and deleting it — because putting something untrue into the operational record and then editing the record to hide it proves less and leaves a falsehood behind.",
-    "Built and set aside a read-only version of the interface BEFORE saving was switched on, so returning to the previous state is a prepared step rather than an emergency change made under pressure.",
-    "Shipped the full mobile and checklist-responsiveness release to the live address, after proving it in the testing environment against real behavior — rapid taps no longer freeze the list, queued saves complete in order, and a refresh preserves what was confirmed.",
-    "Investigated rather than assumed when the live sheet reported more rows than the interface's own limit expected: every extra row was classified individually and the reading and lookup paths were traced in the code, confirming nothing could be hidden from view. The limit was deliberately left alone — it is a conservative safety floor, not a claim about the sheet's size.",
-    "Published both leadership surfaces and then read the published versions back — which is the only reason a stale line asserting the app was still in testing was caught and corrected before anyone read it.",
-    "Recorded plainly that switching saving on applied to everyone with existing edit access who can open the app, not to Nick alone, and that three save paths remain switched on but unproven against the live workbook.",
-    "▸ The items below are from 2026-09-04 and earlier, kept for continuity. They describe the state BEFORE Production existed, and several say so explicitly — read them as history, not as today.",
-    "Closed out POCC Web against the owner's 9-point completion definition: clean project budget cards, a capped and correctly-filtered home work queue and tenant-maintenance list, native in-browser creation of a work order, a bank transaction, and a maintenance request, easy work-order editing on desktop and phone, and an individually-checkable checklist with a plain-language percent-complete.",
-    "Deployed the finished work to Sandbox and verified all of it live against real Sandbox data — not just offline tests — with Nick reviewing directly in the browser.",
-    "Fixed two rough edges Nick found during that live review the same session: a percent-complete indicator that was hidden behind an extra click, and a \"New\" work-order status that was colored differently from otherwise-identical not-started work for no real reason.",
-    "Recorded a durable owner decision that synthetic Sandbox test records do not need to be deleted or restored — Sandbox is for testing, and future synthetic records only need to be clearly labeled and never copied into Production.",
-    "Reconciled the validated Sandbox work back onto the team's one authoritative working branch, then performed a careful, read-only look at the real Production workbook — finding and fixing, in code, a real difference between how a Sandbox and a Production formula behaves before it could have affected a Production write.",
-    "Rebuilt how the interface is configured and packaged so a future Production copy and the Sandbox copy can never be confused with each other or accidentally swapped, and so a Production copy would show an unmistakable read-only label and refuse to save anything until specifically turned on later.",
-    "Did not touch the real, live Production workbook; did not create a Production copy of the interface; did not turn on Production saving. Measured that today's corrected working approach used only a small fraction of the available work allowance for the results delivered."
+    "Moved the operations command center's work into Patron: work orders with every checklist item, project tracking, bank transactions and the September reserve and funding records were imported and reconciled with no unresolved differences; POCC Web now shows an archive notice pointing to Patron, and the Google Sheet is kept as read-only history.",
+    "Onboarded Eric as Field Lead with his own password and second factor; his fourteen queued jobs were matched one by one against the archived Sheet and assigned to him, with one notification for each active job and none for finished ones.",
+    "Released rent due on each lease's own day, with a recorded way to correct an issued charge's due date inside its month.",
+    "Released live management reports that read the same records as the working pages, and a published occupancy rate once every recorded unit was classified.",
+    "Released a Field Lead role and a full-access Leadership role, simpler invitations, and Jess's financial overview; invitations for John and Jess wait on their confirmed addresses.",
+    "Brought the full database test suite to green on a rebuild whose permissions match Production's exactly, and fixed the one real defect it exposed.",
+    "Released editing a job's checklist after it is created, accurate Dispatch and Attention counts, menus that keep their categories when rearranged, and property lists searchable by typing — each checked on a desk and a phone before release."
   ],
   priority:[
-    "Avah's invitation and guided first entry next week on Production — residential work only, with Nick present; nothing guessed, and her own acceptance still closes it.",
-    "The independent security review is scheduled when John returns; it follows this internal release by the owner's decision of September 17, and its findings are fixed and retested. This release is not described as independently reviewed.",
-    "Decide the recovery point (backups are once daily, with no point-in-time recovery) and the uploaded-file backup with Jess and the owner; documents are not relied on until then.",
-    "POCC Web and the Google Sheet remain authoritative for operational work until the later cutover with John.",
-    "Local dashboard v26 published with this closeout; the owner binder's shared link still serves the earlier pinned version until Nick selects the newest one."
+    "Eric's own check on his phone — his workspace, notifications and what he can and cannot change, confirmed by him; an administrator's preview never counts.",
+    "John and Jess invited as Leadership once Nick confirms their addresses; Jess's workspace is linked to her address first.",
+    "The independent security review when John returns; its findings are fixed and retested. The platform is not described as independently reviewed.",
+    "Decide point-in-time recovery and a backup of uploaded files with Jess and the owner.",
+    "Future work: role-based employee procedures and an employee handbook for learning Patron."
   ],
   /* Everything about creating, verifying, deploying and authorizing POCC Web in Production is FINISHED
      (2026-09-05) and now lives under Milestones. Do not reintroduce it here as future work. */
@@ -1172,7 +1114,7 @@ const legend = Object.keys(LBL).map(k=>badge(k)).join(" ");
    Presentation only. Reads DATA; computes nothing, claims nothing the repository does not. */
 const SYS = DATA.system;
 const ST_CLASS = {"Operational":"st-operational","Built":"st-built","In Progress":"st-progress",
-                  "Preview":"st-preview","Production Ready":"st-operational","Planned":"st-preview","Future":"st-preview"};
+                  "Preview":"st-preview","Production Ready":"st-operational","Planned":"st-preview","Future":"st-preview","Archived":"st-preview"};
 const stChip = st => `<span class="st ${ST_CLASS[st]||"st-preview"}"><i></i>${st}</span>`;
 
 /* Provenance strip. `verified` is set by the Daily Closeout from
