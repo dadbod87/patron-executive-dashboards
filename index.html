@@ -606,13 +606,13 @@ const DATA = {
     sub:"Operational intelligence, strategic progress, and leadership priorities for The Patron Group — evidence-based, prepared by Project Atlas.",
     owner:"Nick Summerlin",
     audience:"Jess (COO) · John (Operations) · Dave (Owner)",
-    asOf:"2026-09-24",
-    lastReviewed:"2026-09-24",
+    asOf:"2026-10-01",
+    lastReviewed:"2026-10-01",
     reviewOutcome:"Materially updated",
-    lastMaterialUpdate:"2026-09-24",
-    phase:"The Patron Platform is the company's system of record, and Bank Transactions became easier to read and work in on September 24 — three small releases, with no change to amounts or records. Separately, The Patron Group's new public website went live at thepatrongrp.com the same day — designed by Nick, with the final language and design feedback from Chance, who approved it; the old site is kept for rollback. Next: Eric's own phone check; Nick invites John himself next week and Jess once her workspace is ready. The independent security review is deferred by Nick for a few weeks and is still required.",
-    version:"v33 (2026-09-24)",
-    currentFocus:"Eric's own phone check; John invited by Nick next week and Jess once her workspace is ready; phones open Bank Transactions in Record view; the independent security review, deferred a few weeks.",
+    lastMaterialUpdate:"2026-10-01",
+    phase:"The Patron Platform is the company's system of record. On October 1 Nick decided how project balance warnings work: each project is measured against the balance it held when its current funding cycle began (a warning starting balance, not an approved budget), shown amber as Running low below 40% remaining, red as Critical below 20%, and red again at zero and when overdrawn; Jess, John, Nick and Chance are alerted in the app and each can clear their own alert. The warnings, and a fast screen for choosing categories for older expenses, were built and tested the same day and wait for Nick's single release approval; they are not deployed. Jess's first use went well with Nick walking her through, and Eric's use is accepted (both Owner Reports). Atlas now completes its work in one main AI session instead of routing it across specialist agents. Next: Nick's release approval, categorizing older expenses in the new screen, and report users' own first use. The independent security review is deferred by Nick for a few weeks and is still required.",
+    version:"v37 (2026-10-01)",
+    currentFocus:"Nick's release approval for project balance warnings and the expense review screen; categorizing older expenses; report users' first use; the independent security review, deferred a few weeks.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -661,6 +661,10 @@ const DATA = {
     ],
     // Evidence-backed growth: what became real, and when. Landed reality only.
     growth:[
+      {when:"2026-10-01", what:"Project balance warnings decided by Nick and built with a fast review for older expense categories — tested and prepared as one release awaiting his approval, not deployed; Jess's and Eric's use accepted", status:"Built"},
+      {when:"2026-09-29", what:"Seven releases: access-request notifications, Matt's workspace, one current lease page per unit, expense categories required on new expenses and the one-page project summary report; Jess and Matt onboarded", status:"Operational"},
+      {when:"2026-09-25", what:"Fourteen releases: phone-first work, finance lists past 1,000 rows, an audited activity view with a 60-day usage record, a sharper app icon and Chance's workspace; Chance invited by Nick", status:"Operational"},
+      {when:"2026-09-28", what:"Five releases: the Security page, clearer work-order creation, Responsible at creation and the Monthly Budget Request with a branded one-page PDF; Chance and John signed in", status:"Operational"},
       {when:"2026-09-24", what:"Bank Transactions easier to read and filter — rows named by vendor or memo, compact filters with removable chips, short dates, a one-click classification copy; three releases, amounts and records unchanged", status:"Operational"},
       {when:"2026-09-24", what:"The Patron Group's new public website live at thepatrongrp.com, designed by Nick with final language and feedback from Chance, who approved it; the old site kept for rollback, email and the employee app untouched", status:"Operational"},
       {when:"2026-09-22", what:"Avah onboarded and using Patron daily; first real residential records entered; same-day releases from her real use, including an app install option in Settings for iPhone and Android", status:"Production Ready"},
@@ -681,12 +685,12 @@ const DATA = {
   },
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
-    currentState:"The Patron Platform remains the company's system of record, in daily use by Avah and Eric. Bank Transactions is easier to read and work in after three small releases today. Separately, The Patron Group's new public website is live at thepatrongrp.com. No tenant or customer has access to the platform.",
-    whatChanged:"Bank Transactions: vendor and property choices that filter as you type when recording a transaction; one compact filter bar with removable filter chips and the match count and total beside them; each row named by its vendor or its own memo instead of a repeated \"entity > classification\"; short dates; a one-click copy of the entity and classification for Mercury; receipt shown as Uploaded or No receipt from the recorded status; and the property shown once. Each release was checked before it went out, and amounts, totals and records are unchanged. The new public website — designed by Nick Summerlin, with the final language and design feedback from Chance, who approved it — was published with Nick's authorization and replaced the old site at the company's address; the old site, email and the employee app were left untouched, and the old site is kept for rollback.",
-    whatChangedAlso:"",
-    whyItMatters:"Reviewing bank activity now reads like the bank's own list, so it takes less effort to spot what each transaction was and to copy its classification across. The public website now describes the company in its own published words.",
-    currentRisks:"The independent security review has not happened and is deferred by Nick for a few weeks; the platform is not described as independently reviewed. Production has daily backups without point-in-time recovery, and stored files are not in any backup yet. Many older transactions have no recorded vendor, so those rows show their entity until a vendor is entered.",
-    tomorrowFocus:"Eric's own check on his phone; Nick invites John himself next week and Jess once her workspace is ready; phones open Bank Transactions in the easier Record view; then the independent security review."
+    currentState:"The Patron Platform remains the company's system of record, in daily use by Avah and Eric. Chance, John, Jess and Matt have signed in with a second factor; Jess's first use went well with Nick, and Eric's use is accepted (Owner Reports). No tenant or customer has access to the platform. Production is unchanged since September 29.",
+    whatChanged:"Nick decided how project balance warnings work, and they were built and tested: each project's percentage remaining is measured against the balance it held when its current funding cycle began; below 40% shows amber Running low, below 20% red Critical, and zero or overdrawn red; Jess, John, Nick and Chance get one alert in their bell and Attention when a project first drops below 40% and another when it reaches zero, and each can clear their own. A fast review screen lets a person choose categories for many older expenses at once, saving only the ones they chose. Both passed every database, concurrency, rollback and screen test and are prepared as one release — not yet deployed.",
+    whatChangedAlso:"Atlas retired its old multi-agent routing: one main AI session now completes the work, while the independent security review stays required. Claude Code's latest updates were reviewed and accepted with no change to how Atlas runs.",
+    whyItMatters:"John hears early when a project is running low, before it is overdrawn, without waiting for anyone to collect original budgets for every project — and the warning never rewrites the financial history it reads. Older expenses can finally be categorized in minutes instead of opening each one, which completes the category totals in project reports.",
+    currentRisks:"The warnings and the review screen are not live until Nick approves the release. A project's warning starting balance is not Dave's approved budget, and Patron cannot yet record a new project with its approved budget. The independent security review has not happened and is deferred by Nick for a few weeks; Production has daily backups without point-in-time recovery, and stored files are not in any backup yet.",
+    tomorrowFocus:"Nick's release approval for the balance warnings and the review screen; categorizing older expenses in the new screen; report users' own first use; then the independent security review."
   },
 
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
@@ -710,10 +714,10 @@ const DATA = {
     pendingMeasurement:"No time-saved, hours, or dollar figures are claimed for these improvements yet — they are stakeholder-reported and workflow-analysis based. Formal before/after baselines (e.g. work-order preparation and dispatch time) remain to be captured before any quantified savings are reported. See the Workflow Baseline Metrics below (baselines not yet captured) and the Value Created categories, where Verified Savings remain empty until measured."
   },
   cards:[
-    {num:"One record", label:"POCC's work lives in Patron", sub:"Work orders, projects, bank transactions and reserves were imported and reconciled on September 23; the old interface and the Sheet are read-only history"},
-    {num:"Office and field", label:"Avah and Eric work in the same records", sub:"The office works residential and operations daily; the Field Lead sees every job and updates only the work assigned to him"},
-    {num:"Easier to scan", label:"Bank Transactions reads like the bank's list", sub:"Rows are named by vendor or memo, filters sit in one bar with removable chips, and a transaction's classification copies in one click — amounts and records unchanged"},
-    {num:"Live", label:"A new public website at thepatrongrp.com", sub:"Designed by Nick Summerlin, with final language and design feedback from Chance, who approved it; published with Nick's authorization. The old site is kept for rollback, and email and the employee app were untouched"}
+    {num:"Decided", label:"How project balance warnings work", sub:"Measured against each funding cycle's starting balance — amber below 40% remaining, red below 20%, at zero and when overdrawn; never an approved budget"},
+    {num:"Built & tested", label:"Warnings and a fast category review", sub:"Every database, concurrency, rollback and screen test passed; prepared as one release awaiting Nick's approval — not deployed"},
+    {num:"Accepted", label:"Jess's first use and Eric's use", sub:"Jess's went well with Nick walking her through; Eric's is accepted with no issues — Owner Reports"},
+    {num:"One session", label:"Atlas works in one main AI session", sub:"The old multi-agent routing is retired as policy; the independent security review stays required"}
   ],
   // Atlas Project History — told as skimmable chapters (era · period · narrative). Complete information preserved.
   execSummaryChapters:[
@@ -725,17 +729,17 @@ const DATA = {
     {era:"Field Operations, Reporting & an Expanded Role", period:"July 15–16, 2026", text:"The Eric Field Work Queue began synchronizing automatically in both directions between the office and the field (Milestone #008), and a control-driven Reporting System, a Financial Reserve Calculator, and a Protection-by-Default engineering standard were added (Milestone #009). John then formally expanded Nick into a right-hand project decision partner, adopting the Project Options Standard / Three-Option Rule (bring two or three decision-ready options for meaningful decisions). Nick went hands-on with finance — learning the Mercury ACH payment workflow and processing vendor payments, reconciling a project budget with accounting, and helping reallocate approved project funds — and the long-term Property Development Pipeline vision was documented as a separate future module that will hand stabilized properties into POCC."}
   ],
   today:[
-    "Released three Bank Transactions improvements, each checked before release: vendor and property choices that filter as you type; a compact filter bar with removable chips; rows named by vendor or memo with short dates, a one-click classification copy, receipt shown as Uploaded or No receipt, and the property shown once.",
-    "Published The Patron Group's new public website at thepatrongrp.com — designed by Nick Summerlin, with the final language and design feedback from Chance — after Chance's approval and Nick's authorization; the old site and its subscription were kept for rollback, and company email and the employee app were left untouched.",
-    "Reviewed the Claude Code 2.1.281 update and recorded Nick's acceptance; no routing, permission or configuration change.",
-    "Marked the operations command center and its web interface as superseded by Patron in the Atlas system map."
+    "Nick decided how project balance warnings work: a warning starting balance per funding cycle, Running low below 40% remaining, Critical below 20%, alerts to Jess, John, Nick and Chance, and a personal Clear alert.",
+    "Built and tested the warnings and a fast screen for choosing categories for many older expenses at once; both are prepared as one release awaiting Nick's approval.",
+    "Recorded Jess's first use and Eric's use as accepted (Owner Reports) and the new-project approval workflow: Dave approves a project and its amount, and a finance lead enters it.",
+    "Retired Atlas's old multi-agent routing as policy and accepted Claude Code's latest capability review with no change to how Atlas runs."
   ],
   priority:[
-    "Eric's own check on his phone — his workspace, notifications and what he can and cannot change, confirmed by him; an administrator's preview never counts.",
-    "John invited as Leadership by Nick himself next week; Jess once her workspace is linked to her confirmed address.",
-    "Phones open Bank Transactions in the easier Record view by default (the owner's decision; a small change).",
-    "The independent security review, deferred by Nick for a few weeks; its findings are fixed and retested. The platform is not described as independently reviewed.",
-    "Decide point-in-time recovery and a backup of uploaded files with Jess and the owner."
+    "Nick's single release approval: apply the database change, release the app, then switch the warnings on once — existing projects start at their current balance.",
+    "Categorize older expenses in the new review screen — by hand, choosing each one; nothing is guessed.",
+    "Report users' own first use of the project summary report.",
+    "Decide how new projects are entered with Dave's approved budget; Patron has no live way to add a project yet.",
+    "The independent security review, deferred by Nick for a few weeks; its findings are fixed and retested. The platform is not described as independently reviewed."
   ],
   /* Everything about creating, verifying, deploying and authorizing POCC Web in Production is FINISHED
      (2026-09-05) and now lives under Milestones. Do not reintroduce it here as future work. */
