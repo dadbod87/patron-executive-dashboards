@@ -610,9 +610,9 @@ const DATA = {
     lastReviewed:"2026-10-01",
     reviewOutcome:"Materially updated",
     lastMaterialUpdate:"2026-10-01",
-    phase:"The Patron Platform is the company's system of record. On October 1 Nick decided how project balance warnings work, and they were released the same day after his approval and switched on: each project is measured against the balance it held when its current funding cycle began (a warning starting balance, not an approved budget), shown amber as Running low below 40% remaining, red as Critical below 20%, and red again at zero and when overdrawn. Jess, John, Nick and Chance are alerted in the app and each can clear their own alert; five projects started healthy and three overdrawn projects raised their first alerts. A fast screen for choosing categories for older expenses is live, and reserve expenses no longer take a category. Jess's first use went well with Nick walking her through, and Eric's use is accepted (both Owner Reports). Atlas now completes its work in one main AI session. Next: categorizing older expenses by hand, report users' own first use, and deciding how new projects are entered with Dave's approved budget. The independent security review is deferred by Nick for a few weeks and is still required.",
-    version:"v38 (2026-10-01)",
-    currentFocus:"Categorizing older expenses by hand; leadership using their balance alerts; report users' first use; how new projects are entered with Dave's approved budget; the independent security review, deferred a few weeks.",
+    phase:"The Patron Platform is the company's system of record. On October 1 five releases went out, each approved by Nick, checked before release and checked again live: project balance warnings were switched on (each project is measured against the balance it held when its current funding cycle began — a warning starting balance, not an approved budget — and Jess, John, Nick and Chance are alerted in the app); a fast screen for categorizing older expenses; a fifth expense category, Other; project reports that list only categories with spending; Bank Transactions exported to Excel with the register's filters, for Chance; and search that also finds words in a transaction's Store / Notes. Production's database now has point-in-time recovery for the last seven days. Recording refunds was built and independently reviewed but held back before release for one more correction, so nothing changed in Production; a central Reports page with a printable bank transactions report waits behind it. Jess's first use went well and Eric's use is accepted (both Owner Reports). Next: the refund correction, a fix so the W-9 report never shows an all-clear when its data fails to load, report users' own first use, and the independent security review, deferred by Nick for a few weeks and still required.",
+    version:"v39 (2026-10-01)",
+    currentFocus:"The refund correction; the W-9 report fix; the Reports page; report users' first use; categorizing older expenses by hand; the independent security review, deferred a few weeks.",
   },
   // ── Atlas System Map — a CURATED subset of the Atlas Living Brain canonical snapshot.
   // NOT a live read, NOT a copy of the file, NOT a second publication path for Brain data.
@@ -686,11 +686,11 @@ const DATA = {
   // Executive Brief — the 60-second read. A daily-CEO-update snapshot; historical narrative lives lower in "Atlas Project History."
   execBrief:{
     currentState:"The Patron Platform remains the company's system of record, in daily use by Avah and Eric. Chance, John, Jess and Matt have signed in with a second factor; Jess's first use went well with Nick, and Eric's use is accepted (Owner Reports). No tenant or customer has access to the platform.",
-    whatChanged:"Project balance warnings were released and switched on after Nick's approval: each project's percentage remaining is measured against the balance it held when its current funding cycle began; below 40% shows amber Running low, below 20% red Critical, and zero or overdrawn red. Five projects started healthy; three overdrawn projects sent their first alerts to Jess, John, Nick and Chance, who can each clear their own. A fast review screen now lets a person choose categories for many older expenses at once, and reserve expenses no longer take a category. Every database, concurrency, rollback and screen check passed before release, and the live pages were checked afterwards without changing anything.",
-    whatChangedAlso:"Atlas retired its old multi-agent routing: one main AI session now completes the work, while the independent security review stays required. Claude Code's latest updates were reviewed and accepted with no change to how Atlas runs.",
-    whyItMatters:"John and the leadership team now hear in the app when a project is running low or overdrawn, the moment a save causes it, without anyone first collecting original budgets for every project — and the warning never rewrites the financial history it reads. Older expenses can be categorized in one sitting, which completes the category totals in project reports.",
-    currentRisks:"A project's warning starting balance is not Dave's approved budget, and Patron cannot yet record a new project with its approved budget. Older expenses stay Uncategorized until someone reviews them by hand. The independent security review has not happened and is deferred by Nick for a few weeks; Production has daily backups without point-in-time recovery, and stored files are not in any backup yet.",
-    tomorrowFocus:"Categorizing older expenses by hand in the new screen; leadership using and clearing their own balance alerts; report users' own first use; deciding how new projects are entered with Dave's approved budget; then the independent security review."
+    whatChanged:"Five releases, each approved by Nick and checked before and after: project balance warnings switched on, with alerts to leadership in the app; a screen for categorizing many older expenses at once; Other as a fifth expense category; project reports that list only categories with spending; Bank Transactions exported to Excel with the same filters the register shows, for Chance, who confirmed the filtered totals in Excel; and search that also finds Store / Notes. Production's database gained point-in-time recovery: it can be returned to any moment in the last seven days (the window fills by October 8).",
+    whatChangedAlso:"Recording refunds — money back on an expense, kept with the right project or entity and carried forward as credit when it exceeds a month's obligation — was built, reviewed independently and approved, then held at the release check for one more correction to how a refund keeps its entity; nothing was released. A central Reports page with a printable Custom Bank Transactions Report waits behind it. An independent background review by Athena found three issues in these unreleased changes; each was confirmed and fixed before release.",
+    whyItMatters:"Leadership hears in the app when a project runs low or is overdrawn; the finance team exports exactly what it filtered instead of re-keying it; and the database can now be recovered to a recent moment instead of only to the last nightly copy. Holding the refund release until the correction is in keeps every credit with the entity that earned it.",
+    currentRisks:"Point-in-time recovery covers the database only — uploaded receipt files are not in any backup yet — and a restore has not been rehearsed. Refunds cannot be recorded in Patron until the held release is corrected and approved. The W-9 report can show an all-clear when its data fails to load; a fix is queued. A warning starting balance is not Dave's approved budget, and new projects cannot yet be recorded with their approved budget. The independent security review has not happened and is deferred by Nick for a few weeks.",
+    tomorrowFocus:"The refund correction and its release decision; then the Reports page; the W-9 report fix; report users' own first use; categorizing older expenses by hand; then the independent security review.",
   },
 
   // Executive Impact — deliberately separates what stakeholders OBSERVE from what has been MEASURED.
@@ -714,10 +714,10 @@ const DATA = {
     pendingMeasurement:"No time-saved, hours, or dollar figures are claimed for these improvements yet — they are stakeholder-reported and workflow-analysis based. Formal before/after baselines (e.g. work-order preparation and dispatch time) remain to be captured before any quantified savings are reported. See the Workflow Baseline Metrics below (baselines not yet captured) and the Value Created categories, where Verified Savings remain empty until measured."
   },
   cards:[
-    {num:"Live", label:"Project balance warnings", sub:"Measured against each funding cycle's starting balance — amber below 40% remaining, red below 20%, at zero and when overdrawn; released and switched on October 1"},
-    {num:"Live", label:"A fast category review", sub:"Older expenses categorized at once, by hand, nothing guessed; reserve expenses take no category"},
-    {num:"Accepted", label:"Jess's first use and Eric's use", sub:"Jess's went well with Nick walking her through; Eric's is accepted with no issues — Owner Reports"},
-    {num:"One session", label:"Atlas works in one main AI session", sub:"The old multi-agent routing is retired as policy; the independent security review stays required"}
+    {num:"Live", label:"Project balance warnings", sub:"Measured against each funding cycle's starting balance — amber below 40% remaining, red below 20%, at zero and when overdrawn; switched on October 1"},
+    {num:"Live", label:"Excel export and Store / Notes search", sub:"Bank Transactions export exactly what is filtered, and search finds words in Store / Notes — for the finance team"},
+    {num:"7 days", label:"Point-in-time recovery", sub:"Production's database can be returned to a recent moment; uploaded files are not yet backed up, and a restore is not rehearsed"},
+    {num:"Held", label:"Recording refunds", sub:"Built and independently reviewed; held before release for one more correction — nothing changed in Production"}
   ],
   // Atlas Project History — told as skimmable chapters (era · period · narrative). Complete information preserved.
   execSummaryChapters:[
@@ -729,17 +729,18 @@ const DATA = {
     {era:"Field Operations, Reporting & an Expanded Role", period:"July 15–16, 2026", text:"The Eric Field Work Queue began synchronizing automatically in both directions between the office and the field (Milestone #008), and a control-driven Reporting System, a Financial Reserve Calculator, and a Protection-by-Default engineering standard were added (Milestone #009). John then formally expanded Nick into a right-hand project decision partner, adopting the Project Options Standard / Three-Option Rule (bring two or three decision-ready options for meaningful decisions). Nick went hands-on with finance — learning the Mercury ACH payment workflow and processing vendor payments, reconciling a project budget with accounting, and helping reallocate approved project funds — and the long-term Property Development Pipeline vision was documented as a separate future module that will hand stabilized properties into POCC."}
   ],
   today:[
-    "Released and switched on project balance warnings after Nick's approval: five projects started healthy and three overdrawn projects alerted Jess, John, Nick and Chance in the app.",
-    "Released a fast screen for choosing categories for many older expenses at once, and stopped asking for a category on reserve expenses (Nick's correction).",
-    "Recorded Jess's first use and Eric's use as accepted (Owner Reports) and the new-project approval workflow: Dave approves a project and its amount, and a finance lead enters it.",
-    "Retired Atlas's old multi-agent routing as policy and accepted Claude Code's latest capability review with no change to how Atlas runs."
+    "Released and switched on project balance warnings after Nick's approval, with a fast screen for categorizing older expenses; reserve expenses take no category.",
+    "Released Other as a fifth expense category, reports that list only categories with spending, the Bank Transactions Excel export for Chance, and search across Store / Notes.",
+    "Turned on point-in-time recovery for Production's database (seven days), with Nick's approval.",
+    "Built and independently reviewed refund recording, then held it at the release check for one more correction; a Reports page with a printable bank transactions report waits behind it.",
+    "Recorded Jess's first use and Eric's use as accepted (Owner Reports), and an independent background review by Athena whose three findings were each confirmed and fixed before release."
   ],
   priority:[
-    "Categorize older expenses in the new review screen — by hand, choosing each one; nothing is guessed.",
-    "Leadership use their balance alerts — each person sees and clears their own; the project keeps its warning.",
-    "Report users' own first use of the project summary report.",
-    "Decide how new projects are entered with Dave's approved budget; Patron has no live way to add a project yet.",
-    "The independent security review, deferred by Nick for a few weeks; its findings are fixed and retested. The platform is not described as independently reviewed."
+    "Correct how a refund keeps its entity, review it independently again, and bring it back to Nick for release.",
+    "Fix the W-9 report so it shows an error and a retry — never an all-clear — when its data fails to load.",
+    "Release the Reports page and the printable bank transactions report after refunds.",
+    "Report users' own first use; leadership using their balance alerts; categorizing older expenses by hand.",
+    "The independent security review, deferred by Nick for a few weeks; the platform is not described as independently reviewed."
   ],
   /* Everything about creating, verifying, deploying and authorizing POCC Web in Production is FINISHED
      (2026-09-05) and now lives under Milestones. Do not reintroduce it here as future work. */
