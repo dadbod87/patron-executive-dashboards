@@ -187,6 +187,10 @@
   ol.timeline>li.day>details.entry+details.entry{margin-top:8px}
   .tag{font:650 12px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-text)}
   .tag small{display:block;text-transform:none;letter-spacing:0;font:400 12.5px/1.35 var(--sans);color:var(--muted);margin-top:2px}
+  .brainlink{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--line);border-left:3px solid var(--gold);background:var(--surface);border-radius:var(--r);padding:16px 20px;box-shadow:var(--shadow)}
+  .brainlink p{margin:0;color:var(--ink-2);min-width:0;flex:1 1 260px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font:650 14.5px/1 var(--sans);text-decoration:none;color:#fff;background:var(--ink);border-radius:10px;padding:12px 16px;white-space:nowrap}
+  .btn:hover{color:#fff;background:var(--ink-2)}
   footer{border-top:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:13px}
   footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 24px}
   .muted{color:var(--muted)}
@@ -277,6 +281,9 @@
   const plain = (html) => { const d = document.createElement("div"); d.innerHTML = html; return d.textContent; };
   const chapter = (c, lead, k) => block(c.title, lead, `<div class="card prose">${c.html}</div>`, "ch-" + c.id, k);
   const m = S.meta;
+  // The public Atlas Living Brain (canonical visitor address, knowledge/brain/BRAIN_CONTRACT.md); opens in a new tab.
+  const BRAIN_URL = "https://atlas.thepatrongrp.com/";
+  const brainLink = `<div class="brainlink"><p><strong>The Visual Brain.</strong> Explore how Patron's systems, goals, and decisions connect.</p><a class="btn" href="${BRAIN_URL}" target="_blank" rel="noopener">Explore the Visual Brain <span aria-hidden="true">↗</span><span class="sr">(opens in a new tab)</span></a></div>`;
 
   $("#sub").textContent = m.sub;
   $("#band").innerHTML = [
@@ -316,6 +323,7 @@
       <h4>The phase in one paragraph${kind("record")}</h4><p>${esc(m.phase)}</p>`;
     return `<div class="card intro block" id="about-patron-atlas"><h3 class="h">Patron and Atlas in brief</h3><div class="prose">${S.intro.short}</div>
         ${S.intro.more ? `<details class="inline"><summary>More about Patron, Atlas and how to read this page</summary><div class="prose">${S.intro.more}</div></details>` : ""}</div>
+      <div class="block">${brainLink}</div>
       <div class="grid g2 block">
         <div class="card">${h3("Live today", "status")}<ul class="tags">${live.map((a) => `<li>${esc(a.area)}</li>`).join("")}</ul>
           <p class="small muted">Not live as a daily tool: ${other.map((a) => `${esc(a.area)} (${esc(a.status.toLowerCase())})`).join(" · ")}.</p>${more("#platform", "Platform, area by area")}</div>
@@ -413,6 +421,7 @@
         <li>${kind("acceptance")} confirmed by the people who use it — reported by them, not measured.</li><li>${kind("plan")} intended next; not done.</li>
         <li>${kind("decision")} waiting on the person named.</li><li>${kind("status")} how things stand on the review date.</li>
         <li>${kind("record")} a reviewed record that states each item's status in its own words.</li></ul></div>`)}
+      ${block("The Visual Brain", "The complete, interactive map of the operation, kept by the Atlas Living Brain.", brainLink)}
       ${block("Earlier editions", "Nothing is discarded when an edition is replaced. Each archived copy is dated and lists exactly how it was adapted for this public page; the originals are kept unchanged in the Atlas repository.", `<div class="grid g2">${S.archives.map((a) => `<div class="card node"><div class="eyebrow">${esc(fmt(a.date))} · ${esc(a.edition)}</div><h5 style="margin-top:6px"><a href="${esc(a.out)}">${esc(a.title)} ${esc(a.edition)}</a></h5><p>${esc(a.provenance)}</p><p class="muted" style="margin-top:6px">Adapted for public archive: ${a.adaptations.map(esc).join(" ")}</p></div>`).join("")}</div>
         <div class="card prose" style="margin-top:14px"><p>Every published edition of the brief is also kept in the <a href="https://github.com/dadbod87/patron-executive-dashboards/commits/main" rel="noopener">publication history</a>. The binder's dated updates appear in full under <a href="#progress">Daily progress</a>, and its chapters under Goals & milestones, Platform and Onboarding.</p></div>`)}`;
   }
